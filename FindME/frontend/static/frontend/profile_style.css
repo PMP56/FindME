@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500&display=swap');
+
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Monument Extended", Arial, Helvetica, sans-serif;
+}
+
+body {
+    color: white;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+}
+
+header {
+    box-sizing: border-box;
+    min-height: 100vh;
+    position: relative;
+    transform-style: inherit;
+    width: 100vw;
+    text-align: center;
+    text-transform: uppercase;
+    scroll-snap-align: start;
+}
+
+header h3 {
+    margin: 0;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+header h1 {
+    margin: 0;
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 2px #000000;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+header img{
+    width: 125px;
+    height: 125px;
+    border-radius: 100px;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+header,
+header::before {
+    background: 50% 10% / cover;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: url(https://images4.alphacoders.com/100/1006074.jpg);
+    background-size: cover;
+    background-position-x: 50%;
+    transform-origin: center center 0;
+    transform: translateZ(-1px) scale(1.95, 1.85);
+    z-index: -1;
+    min-height: 100vh;
+}
+
+.container, .container2, .container3 {
+    
+    align-items: center;
+    z-index: 2;
+    position: absolute;
+    top: 100vh;
+    height: 100vh;
+    background: rgb(20, 20, 20);
+    line-height: 30px;
+    font-weight: lighter;
+    padding: 40px;
+    color: grey;
+    
+    scroll-snap-align: start;
+}
+
+.container2{
+    padding: 0;
+    top: 200vh;
+    width: 100%;
+}
+
+.container3{
+    top: 300vh;
+}
+
+
+#p1, #p2{
+    text-align: center;
+    position: relative;
+    color: white;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1;
+    opacity: 0;
+    margin: 10px;
+}
+
+
+#p1.viewtrue, #p2.viewtrue{
+    animation-name: enlarge;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+#p2.viewtrue{
+    font-size: 32px;
+    font-family: 'Baloo Da 2', sans-serif;
+    animation-delay: 0.3s;
+}
+
+.about{
+    text-align: justify;
+    margin: 10px;
+    margin-top: 40px;
+}
+
+#title {
+    text-align: left;
+    position: relative;
+    color: white;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1;
+    margin: 10vw;
+    margin-bottom: 5vw;
+}
+
+.skill-image{
+    width: 80%;
+    text-align: center;
+}
+
+.skill-set{
+    align-items: center;
+    width: 80vw;
+    margin: 10vw;
+}
+
+.back-bar{
+    background-color: rgb(78, 78, 78);
+    display: block;
+    border-radius: 5px;
+    height: 6px;
+    overflow: hidden;
+}
+
+#viewtrue.front-bar{
+    background-color: rgb(255, 255, 255);
+    display: block;
+    border-radius: 5px;
+    height: 6px;
+    overflow: hidden;
+    animation-name: skillValue;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+.css{--skill: 90%;}
+.react{--skill: 70%;}
+.django{--skill: 55%;}
+.flutter{--skill: 80%;}
+
+@keyframes skillValue{
+    from{
+        width: 0%;
+    }
+    to{
+        width: var(--skill, 100%);
+    }
+}
+
+
+@keyframes enlarge{
+    0%{
+        opacity: 0;
+        transform: translateY(300%) scale(0);
+    }
+    50%{
+        opacity: 0.75;
+        transform: translateY(50%) scale(2);
+    }
+   
+    100%{
+        opacity: 1;
+        transform: translateY(50%) scale(1);
+    }
+}
+
+@media(min-width: 560px){
+    header img{
+        top: 38%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+    }
+
+    header h1 {
+        top: 67%;
+        left: 50%;
+        font-size: 36px;
+        font-weight: 800;
+    }
+
+    header h3 {
+        
+        top: 58%;
+        left: 50%;
+        font-size: 28px;
+    }
+
+    header::before {
+        transform: translateZ(-1px) scale(2);
+    }
+    
+    #p1{
+        font-size: 32px;
+        margin: 30px;
+    }
+
+    #p2.viewtrue{
+        
+        margin: 30px;
+        font-size: 64px;
+    }
+
+    .about{
+        text-align: justify;
+        font-size: 20px;
+        margin: 80px;
+        margin-top: 40px;
+    }
+
+}
