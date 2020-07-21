@@ -2,10 +2,15 @@
 Create your own designer portfolio
 
 ### Install Python
--> Install python-3.7.2 and python-pip. Follow the steps from the below reference document based on your Operating System. Reference: https://docs.python-guide.org/starting/installation/
+-> Install python-3 and python-pip. Follow the steps from below:
+
+-> pip install pipenv
+-> pipenv shell
+-> pipenv install django djangorestframework django-rest-know
 
 ### Install PostgreSQL
 -> Install PostgreSQL (latest version) from https://www.postgresql.org/download/
+-> Create a new database in your Postgres server and name it FindME.
 
 ### Edit Database configurations with your PostgreSQL configurations.
 ```
@@ -20,6 +25,7 @@ DATABASES = {
     }
 }
 ```
+
 
 ### Run the server
   * Make migrations
