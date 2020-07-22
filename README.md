@@ -8,7 +8,7 @@ Create your own designer portfolio
 
 -> pipenv shell
 
--> pipenv install django djangorestframework django-rest-know
+-> pipenv install django djangorestframework django-rest-knox
 
 ### Install PostgreSQL
 -> Install PostgreSQL (latest version) from https://www.postgresql.org/download/
