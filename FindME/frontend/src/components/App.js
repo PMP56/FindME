@@ -1,21 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter as Router } from "react-router-dom";
 
-import Header from './layouts/headers';
-import Landing from './layouts/landing';
-import Footer from './layouts/footer';
+import LandingPage from './layouts/landing';
 
-class App extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Header />
-                <Landing />
-                <Footer />
-            </Fragment>
-        );
-        //<Header />
-    }
-}
+const App = () => {
+    return (
+        <Router>
+            <LandingPage />
+        </Router>
+    );
+};
 
 ReactDOM.render(<App />, document.getElementById('app'));
