@@ -148,6 +148,10 @@
     color: white;
 }
 
+.bg-common{
+    background-color: rgb(24, 24, 24);
+}
+
 @media(min-width: 560px){
     .landing-image{
         transform:scale(-1, 1);
