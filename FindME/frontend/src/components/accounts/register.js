@@ -1,7 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
+import { RegisterUser } from '../../utils/auth';
+
 const Register = () => {
+    const [samePassword, setSamePassword] = useState(true);
     const [cred, setCred] = useState({
         username: '',
         email: '',
@@ -11,7 +14,11 @@ const Register = () => {
 
     const formSubmit = e => {
         e.preventDefault();
-        console.log(cred);
+        if (cred.password == cred.password2) {
+            RegisterUser({ username: cred.username, email: cred.email, password: cred.password });
+        } else {
+            setSamePassword(false);
+        }
     }
 
     const formChange = e => {
@@ -45,8 +52,12 @@ const Register = () => {
                             <div className='form-group pt-2'>
                                 <label>Password 2</label>
                                 <input className='border border-dark rounded form-control' required type='password' name='password2' placeholder='Password Again' onChange={formChange} value={cred.password2} />
+                                {
+                                    !samePassword ?
+                                        <label className='mt-1 text-danger'>Two passwords doen't match</label> : <label></label>
+                                }
                             </div>
-                            <div className='form-group pt-2 text-center'>
+                            <div className='form-group pt-1 text-center'>
                                 <button type='submit' className='border border-white rounded btn btn-primary px-5 py-2'>Submit</button>
                             </div><br />
                             <p className='text-center pr-3 text-muted'>Already Have an Account?  <Link className='text-white fw-800' to='/login'>Login</Link> </p>

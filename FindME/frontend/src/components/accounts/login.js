@@ -1,15 +1,18 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { LoginUser } from '../../utils/auth';
+
 const Login = () => {
     const [cred, setCred] = useState({
-        email: '',
+        username: '',
         password: '',
     });
 
     const formSubmit = e => {
         e.preventDefault();
-        console.log(cred);
+        LoginUser(cred);
+        //console.log(cred);
     }
 
     const formChange = e => {
@@ -26,11 +29,11 @@ const Login = () => {
             <div className='pt-5 vh-100' style={{ backgroundColor: 'rgb(10, 10, 10)' }}>
                 <div className='col-md-4 m-auto' style={{ backgroundColor: 'rgb(20, 20, 20)' }}>
                     <div className='card card-body mt-5 text-white' style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
-                        <h2 className='text-center text-white'>Register</h2><br />
+                        <h2 className='text-center text-white'>Login</h2><br />
                         <form onSubmit={formSubmit}>
                             <div className='form-group pt-2'>
-                                <label>Email</label>
-                                <input className='border border-dark rounded form-control' required name='email' placeholder='Email' onChange={formChange} value={cred.email} />
+                                <label>Username</label>
+                                <input className='border border-dark rounded form-control' required name='username' placeholder='Username' onChange={formChange} value={cred.username} />
                             </div>
                             <div className='form-group pt-2'>
                                 <label>Password</label>
