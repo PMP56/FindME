@@ -1,5 +1,6 @@
 import React, { useContext, Fragment } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
+import { AuthContext } from '../../utils/userContext';
 
 import Header from './headers';
 import LandingBody from './landing_body';
@@ -10,6 +11,10 @@ import Register from '../accounts/register';
 
 
 const LandingPage = () => {
+    const { currentUser } = useContext(AuthContext);
+    if (currentUser) {
+        return <Redirect to="/" />;
+    }
     return (
         <Fragment>
             <Header />
