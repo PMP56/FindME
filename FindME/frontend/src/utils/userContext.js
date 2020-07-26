@@ -1,11 +1,9 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
-
 import { authStateChange } from './auth';
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [userToken, setUserToken] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
 
     let user = localStorage.getItem('currentUserInfo');

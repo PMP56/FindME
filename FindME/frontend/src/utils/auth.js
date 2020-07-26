@@ -17,7 +17,7 @@ export const authStateChange = (token) => {
                 console.log("Logged in with", result.data);
                 localStorage.setItem('currentUserToken', token);
                 localStorage.setItem('currentUserInfo', JSON.stringify(result.data));
-
+                location.replace('/');
             }
         ).catch(
             err => {
@@ -25,10 +25,6 @@ export const authStateChange = (token) => {
             }
         );
 }
-
-//Return User if exist
-export const getUser = () => { }
-
 
 //Login User from backend
 export const LoginUser = (creds) => {
@@ -63,7 +59,11 @@ export const RegisterUser = (creds) => {
 
     const body = JSON.stringify(creds);
     axios.post('/api/auth/register', body, config).then(
-        result => { console.log(result.data) }
+        result => {
+            let token = result.data.token;
+            //console.log(token);
+            authStateChange(result.data.token);
+        }
     ).catch(
         err => {
             if (err.response.data['username']) {
@@ -74,4 +74,27 @@ export const RegisterUser = (creds) => {
             }
         }
     );
+}
+
+//LogOut User and flush token
+export const LogOut = (token) => {
+    console.log(token);
+    const config = {
+        headers: {
+            'Authorization': `Token ${token}`,
+        }
+    };
+    axios.post('/api/auth/logout', null, config).
+        then(
+            result => {
+                console.log("Logged Out", result.data);
+                localStorage.removeItem('currentUserToken');
+                localStorage.removeItem('currentUserInfo');
+                location.replace('/');
+            }
+        ).catch(
+            err => {
+                console.log(err.response.data);
+            }
+        );
 }
