@@ -42,7 +42,7 @@ const Login = () => {
                             <div className='form-group pt-2 text-center'>
                                 <button type='submit' className='border border-white rounded btn btn-primary px-5 py-2'>Submit</button>
                             </div><br />
-                            <p className='text-center pr-3 text-muted'>Already Have an Account?  <Link className='text-white fw-800' to='/login'>Login</Link> </p>
+                            <p className='text-center pr-3 text-muted'>Already Have an Account?  <Link className='text-white fw-800' to='/register'>Register</Link> </p>
 
                         </form>
                     </div>

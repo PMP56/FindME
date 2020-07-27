@@ -102,16 +102,17 @@
 .d1, .d3{
     margin-right: 5%;
     background-color: #262730;
-    border-radius: 0px 100px 100px 0px;
+    border-radius: 0px 50px 50px 0px;
 }
 .d2{
     margin-left: 5%;
     
-    border-radius: 100px 0px 0px 100px;
+    border-radius: 50px 0px 0px 50px;
     background-color: #6b6f85;
 }
 
 .description p{
+    display: none;
     font-size: 10px;
     color: white;
     text-align: justify;
@@ -121,7 +122,7 @@
 .description h2{
     font-size: 15px;
     color: white;
-    margin: 0px 5px;
+    margin: 0px 10px;
     
 }
 .description img{
@@ -169,13 +170,12 @@
     }
 
     .landing-header{
-        
         line-height: 3.5rem;
         left: 7%;
         top: 30%;
         color: #0b0b0e;
         text-shadow: 0px 0px 0px #303030;
-        font-size: 98px;
+        font-size: 112px;
         font-family: 'Tangerine';
     }
     
@@ -214,11 +214,14 @@
 
     .d1, .d3{
         margin-right: 10%;
+        border-radius: 0px 100px 100px 0px;
     }
     .d2{
         margin-left: 10%;
+        border-radius: 100px 0px 0px 100px;
     }
     .description p{
+        display: block;
         font-size: 16px;
         color: white;
     }

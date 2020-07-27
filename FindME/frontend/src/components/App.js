@@ -10,10 +10,10 @@ import PrivateRoute from '../routes/PrivateRoutes';
 const App = () => {
     return (
         <AuthProvider>
-            <BrowserRouter>
+            <Router>
                 <PrivateRoute path="/" component={UserPage} />
                 <LandingPage />
-            </BrowserRouter>
+            </Router>
         </AuthProvider>
     );
 };
