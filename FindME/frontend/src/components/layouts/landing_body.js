@@ -6,7 +6,7 @@ const Landing = () => {
     useEffect(() => {
         let options = {
             root: null,
-            rootMargin: '10px',
+            rootMargin: '20px',
             threshold: 0
         };
         let observer = new IntersectionObserver(callbackFunc, options);
@@ -23,10 +23,10 @@ const Landing = () => {
                 //document.getElementById(entry.target.id).className = txt;
             });
         }
-        // observer1.observe(document.querySelector('.d1'));
+        observer.observe(document.querySelector('.d1'));
         // observer2.observe(document.querySelector('.d2'));
         // observer3.observe(document.querySelector('.d3'));
-        [...document.querySelectorAll('.description')].map((each) => { observer.observe(each); });
+        //[...document.querySelectorAll('.description')].map((each) => { observer.observe(each); });
 
     }, []);
 
@@ -38,9 +38,9 @@ const Landing = () => {
                 <img className='landing-background' src={"/static/frontend/portfolio7.png"} />
                 <p className="landing-header">Amazing Portfolios</p>
                 <ul className="landing-subheader">
-                    <li>Create your designer portfolio</li>
-                    <li>Connect with professionals</li>
-                    <li>Showcase your work</li>
+                    <li className='li1'>Create your designer portfolio</li>
+                    <li className='li2'>Connect with professionals</li>
+                    <li className='li3'>Showcase your work</li>
                 </ul>
                 <Link to='/register'><button className="landing-button">Get Started</button></Link>
             </div>
