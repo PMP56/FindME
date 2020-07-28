@@ -28,7 +28,7 @@ const Landing = () => {
         // observer3.observe(document.querySelector('.d3'));
         //[...document.querySelectorAll('.description')].map((each) => { observer.observe(each); });
 
-    }, []);
+    }, [0]);
 
 
     return (

@@ -92,6 +92,7 @@
     font-size: 14px;
     font-weight: 600;
     top: 65%;
+    left: 7%;
     transition-duration: 0.4s;
     outline: none !important;
     --delay: 1s;
@@ -200,7 +201,7 @@
 
 @keyframes textSlide{
     from{
-        transform: translate(-500px, 25px);
+        transform: translate(-500px, 50px);
     }
     to{
         transform: translate(0px, 0px);
