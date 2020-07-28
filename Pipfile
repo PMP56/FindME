@@ -12,6 +12,7 @@ django = "*"
 djangorestframework = "*"
 django-rest-knox = "*"
 psycopg2 = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.8"
