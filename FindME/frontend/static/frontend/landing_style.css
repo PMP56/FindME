@@ -99,14 +99,24 @@
     box-shadow: 20px 20px 15px #8a8a8a;
 }
 
+#viewed{
+    animation-name: slide;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
 .d1, .d3{
+    --slide-small: -300px;
+    --slide-large: -900px;
     margin-right: 5%;
     background-color: #262730;
     border-radius: 0px 50px 50px 0px;
 }
 .d2{
+    --slide-small: 300px;
+    --slide-large: 900px;
     margin-left: 5%;
-    
     border-radius: 50px 0px 0px 50px;
     background-color: #6b6f85;
 }
@@ -151,6 +161,15 @@
 
 .bg-common{
     background-color: rgb(24, 24, 24);
+}
+
+@keyframes slide{
+    from{
+        transform: translateX(var(--slide-small, 100px));
+    }
+    to{
+        transform: translateX(0px);
+    }
 }
 
 @media(min-width: 560px){
@@ -235,4 +254,14 @@
         border-radius: 25px;
         height: 80%;
     }
+
+    @keyframes slide{
+        from{
+            transform: translateX(var(--slide-large, 100px));
+        }
+        to{
+            transform: translateX(0px);
+        }
+    }
+    
 }
