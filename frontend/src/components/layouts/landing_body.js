@@ -34,7 +34,8 @@ const Landing = () => {
     return (
         <div className='landingBody'>
             <div className="landing-top">
-                <img className='landing-image' src={"/static/frontend/portfolio5.png"} />
+                <img className='landing-image' src={"/static/frontend/portfolio7.png"} />
+                <div className='landing-image-overlay'></div>
                 <img className='landing-background' src={"/static/frontend/portfolio7.png"} />
                 <p className="landing-header">Amazing Portfolios</p>
                 <ul className="landing-subheader">
