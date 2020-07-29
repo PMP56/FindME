@@ -1,6 +1,8 @@
 # FindME
 Create your own designer portfolio
 
+Running site at: https://find--me.herokuapp.com/
+
 ### Install Python
 -> Install python-3 and python-pip. Follow the steps from below:
 
