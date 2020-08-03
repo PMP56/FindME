@@ -14,11 +14,11 @@ export const authStateChange = (token, loginType) => {
     axios.get('/api/auth/user', config).
         then(
             result => {
-                console.log("Logged in with", result.data);
+                //console.log("Logged in with", result.data);
                 localStorage.setItem('currentUserToken', token);
                 localStorage.setItem('currentUserInfo', JSON.stringify(result.data));
                 if (loginType == 'register') {
-                    location.replace('/get_started');
+                    location.replace('/');
                 } else {
                     location.replace('/');
                 }
@@ -90,7 +90,7 @@ export const LogOut = (token) => {
     axios.post('/api/auth/logout', null, config).
         then(
             result => {
-                console.log("Logged Out", result.data);
+                //console.log("Logged Out", result.data);
                 localStorage.removeItem('currentUserToken');
                 localStorage.removeItem('currentUserInfo');
                 location.replace('/');
