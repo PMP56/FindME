@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
 //Auth State
-export const authStateChange = (token) => {
+export const authStateChange = (token, loginType) => {
     //console.log(token);
     const config = {
         headers: {
@@ -17,7 +17,11 @@ export const authStateChange = (token) => {
                 console.log("Logged in with", result.data);
                 localStorage.setItem('currentUserToken', token);
                 localStorage.setItem('currentUserInfo', JSON.stringify(result.data));
-                location.replace('/');
+                if (loginType == 'register') {
+                    location.replace('/get_started');
+                } else {
+                    location.replace('/');
+                }
             }
         ).catch(
             err => {
@@ -39,7 +43,7 @@ export const LoginUser = (creds) => {
             (result) => {
                 let token = result.data.token;
                 //console.log(token);
-                authStateChange(result.data.token);
+                authStateChange(result.data.token, 'login');
             }
         ).catch(
             err => {
@@ -61,8 +65,7 @@ export const RegisterUser = (creds) => {
     axios.post('/api/auth/register', body, config).then(
         result => {
             let token = result.data.token;
-            //console.log(token);
-            authStateChange(result.data.token);
+            authStateChange(result.data.token, 'register');
         }
     ).catch(
         err => {

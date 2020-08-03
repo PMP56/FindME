@@ -1,14 +1,20 @@
 import React, { Component, Fragment, useContext } from 'react';
-import { AuthContext } from '../../utils/userContext';
-import { LogOut } from '../../utils/auth';
+import { Route } from 'react-router-dom';
+
+import Home from './home';
+import GetStarted from './get_started';
 
 const UserPage = () => {
-    const { currentUser } = useContext(AuthContext);
-    let userToken = localStorage.getItem('currentUserToken');
     return (
         <Fragment>
-            <h1>Hellow, {currentUser.username}. This is userpage</h1><br />
-            <button onClick={() => LogOut(userToken)}>LogOut</button>
+            <Route exact path="/">
+                <Home />
+            </Route>
+
+            <Route path="/get_started">
+                <GetStarted />
+            </Route>
+
         </Fragment>
     );
 }
