@@ -51,34 +51,47 @@ const styles = makeStyles({
         padding: '8px 20px',
         margin: '0px 10px',
         borderStyle: 'none',
-        backgroundColor: '#008080',
-        color: 'white',
-        border: 2,
-        borderColor: 'white',
+        background: 'linear-gradient(45deg, #016666 70%, transparent 50%)',
+        backgroundPosition: '100%',
+        backgroundSize: '400%',
+        color: '#016666',
+        border: '2px',
+        borderStyle: 'solid',
+        borderColor: '#016666 !important',
         borderRadius: 5,
         fontSize: 14,
+        fontWeight: '600',
         transitionDuration: '0.4s',
+        outline: 'none !important',
         "&:hover": {
-            backgroundColor: '#016666',
+
+            backgroundPosition: '0',
+            color: 'white',
         }
     },
     button2: {
         padding: '8px 20px',
         borderStyle: 'none',
-        backgroundColor: '#ff5e6c',
-        color: 'white',
-        border: 2,
-        borderColor: 'white',
+        background: 'linear-gradient(45deg, #ff4050 70%, transparent 50%)',
+        backgroundPosition: '100%',
+        backgroundSize: '400%',
+        color: '#ff4050',
+        border: '2px',
+        borderStyle: 'solid',
+        borderColor: '#ff4050 !important',
         borderRadius: 5,
         fontSize: 14,
+        fontWeight: '600',
         transitionDuration: '0.4s',
+        outline: 'none !important',
         "&:hover": {
-            backgroundColor: '#ff4050',
+            backgroundPosition: '0',
+            color: 'white',
         }
     },
     "@media (min-width:560px)": {
         inner: {
-            width: '75vw',
+            width: '80vw',
             height: '85vh',
         },
         header: {
@@ -95,13 +108,11 @@ const styles = makeStyles({
             padding: '10px 25px',
             margin: '0px 10px',
             fontSize: 16,
-            borderRadius: 10,
         },
         button2: {
             padding: '10px 25px',
             margin: '0px 10px',
             fontSize: 16,
-            borderRadius: 10,
         },
         image: {
             width: '70%'
@@ -118,8 +129,8 @@ const GetStarted = () => {
                 <h4 className={classes.subheader}> Start creating your portfolio.</h4>
                 <img src={'/static/frontend/landing/des-3.png'} className={classes.image} />
                 <div className={classes.buttons}>
-                    <button className={classes.button2}><Link to='/' style={{ color: 'white' }}>Not now</Link></button>
-                    <button className={classes.button1}>Get Started</button>
+                    <Link to='/'><button className={classes.button2}>Not now</button></Link>
+                    <Link to='/profile'><button className={classes.button1}>Get Started</button></Link>
                 </div>
             </div>
         </div>
