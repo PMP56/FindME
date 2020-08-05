@@ -51,13 +51,14 @@ const styles = makeStyles({
 
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
-        gridTemplateAreas: 'nav-area nav-area left-area right-area',
+        gridTemplateAreas: `${'"nav-area nav-area"'} ${'"left-area right-area"'}`,
     },
     navwrapper: {
         borderRadius: '5px 5px 0 0',
         gridArea: 'nav-area',
         borderBottom: '1px solid var(--borderColor)',
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'var(--mainColor)',
@@ -66,18 +67,20 @@ const styles = makeStyles({
     navigation: {
         margin: 0,
         padding: 10,
-        li: {
-            display: 'inline-block',
-            marginLeft: '5px',
-            marginRight: '5px',
-        },
-        a: {
-            color: 'var(--mainText)',
-        }
+    },
+
+    navLi: {
+        display: 'inline-block',
+        marginLeft: '5px',
+        marginRight: '5px',
+    },
+    navLink: {
+        color: 'var(--mainText)',
     },
     dotswrapper: {
         display: 'flex',
         padding: '10px',
+        cursor: 'pointer',
     },
 
     dot1: {
@@ -92,7 +95,6 @@ const styles = makeStyles({
         backgroundColor: '#fc6058',
     },
     browserdot: {
-        backgroundColor: 'black',
         height: '15px',
         width: '15px',
         borderRadius: '50%',
@@ -100,7 +102,7 @@ const styles = makeStyles({
         boxShadow: '-1px 1px 3px -1px rgba(0, 0, 0, 0.75)',
     },
     leftcolumn: {
-        gridArea: 'left-area',
+        gridArea: '"left-area"',
         paddingTop: '50px',
         paddingBottom: '50px',
     },
@@ -108,14 +110,16 @@ const styles = makeStyles({
     profilepic: {
         display: 'block',
         margin: '0 auto',
+        marginBottom: '20px',
         height: '200px',
         width: '200px',
-        objectFit: 'cover',
+        objectFit: 'contain',
         border: '2px solid var(--borderColor)',
     },
 
     themeOptionWrapper: {
         display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
 
     },
@@ -132,6 +136,171 @@ const styles = makeStyles({
             borderWidth: '5px',
         },
     },
+    lightMode: {
+        backgroundColor: '#fff',
+    },
+
+    blueMode: {
+        backgroundColor: '#192734',
+    },
+
+    greenMode: {
+        backgroundColor: '#123524',
+    },
+
+    purpleMode: {
+        backgroundColor: '#7E4C74',
+    },
+
+    blackMode: {
+        backgroundColor: '#010302',
+    },
+    settingsNote: {
+        fontSize: '12px',
+        fontStyle: 'italic',
+        textAlign: 'center',
+    },
+
+    rightColumn: {
+        gridArea: 'right-area',
+        display: 'grid',
+        alignContent: 'center',
+        paddingTop: '50px',
+        paddingBottom: '50px',
+    },
+    previewShadow: {
+        backgroundColor: 'var(--previewShadow)',
+        width: '300px',
+        height: '155px',
+        paddingLeft: '30px',
+        paddingTop: '30px',
+    },
+
+    preview: {
+        width: '300px',
+        border: '1.5px solid #17a2b8',
+        backgroundColor: 'var(--previewBg)',
+        padding: '15px',
+        position: 'relative',
+    },
+
+    corner: {
+        height: '7px',
+        width: '7px',
+        border: '1.5px solid #17a2b8',
+        backgroundColor: '#fff',
+        position: 'absolute',
+    },
+    tl: {
+        top: '-5px',
+        left: '-5px',
+    },
+
+    tr: {
+        top: -'5px',
+        right: -'5px',
+    },
+
+    bl: {
+        bottom: -'5px',
+        left: -'5px',
+    },
+
+    br: {
+        bottom: -'5px',
+        right: -'5px',
+    },
+    aboutWrapper: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px,1fr))',
+        paddingTop: '50px',
+        paddingBottom: '50px',
+        gap: '50px',
+    },
+
+    skills: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        backgroundColor: 'var(--previewShadow)',
+    },
+
+    socialLinks: {
+        display: 'grid',
+        alignContent: 'center',
+        textAlign: 'center',
+    },
+    socialImage: {
+        width: '100%',
+    },
+
+    contactForm: {
+        display: 'block',
+        maxWidth: '600px',
+        margin: '0 auto',
+        border: '1px solid var(--borderColor)',
+        padding: '15px',
+        borderRadius: '5px',
+        backgroundColor: 'var(--mainColor)',
+        marginBottom: '50px',
+    },
+
+    contactFormLabel: {
+        lineHeight: '2.7em',
+    },
+
+    contactFormTextArea: {
+        minHeight: '100px',
+        fontSize: '14px',
+    },
+
+    inputField: {
+        width: '100%',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        backgroundColor: 'var(--secondaryColor)',
+        borderRadius: '5px',
+        border: '1px solid var(--borderColor)',
+        fontSize: '14px',
+    },
+
+    submitBtn: {
+        marginTop: '10px',
+        width: '100%',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        color: '#fff',
+        backgroundColor: 'var(--buttonColor)',
+        border: 'none',
+    },
+    "@media (max-width:1200px)": {
+        maincontainer: {
+            width: '95%',
+        },
+    },
+    "@media (max-width: 800px)": {
+        introwrapper: {
+            gridTemplateColumns: '1fr',
+            gridTemplateAreas: '"nav-area" "left-area" "right-area"',
+        },
+
+        rightcolumn: {
+            justifyContent: 'center'
+        }
+    },
+    "@media (max-width: 400px)": {
+        previewshadow: {
+            maxWidth: '280px',
+            height: '180px',
+            paddingLeft: '10px',
+            paddingTop: '10px',
+        },
+
+        preview: {
+            width: '280px',
+
+        },
+
+    }
 });
 
 const Template1 = () => {
@@ -147,49 +316,46 @@ const Template1 = () => {
                     <div className={classes.introwrapper}>
                         <div className={classes.navwrapper}>
                             <ul className={classes.navigation}>
-                                <li>
-                                    <a href="index.html#contact">Contact</a>
+                                <li className={classes.navLi}>
+                                    <a className={classes.navLink} href="#">Contact</a>
                                 </li>
                             </ul>
-                            <a href="index.html">
-                                <div className={classes.dotswrapper}>
-                                    <div id={classes.dot1} className={classes.browserdot}></div>
-                                    <div id={classes.dot2} className={classes.browserdot}></div>
-                                    <div id={classes.dot3} className={classes.browserdot}></div>
-                                </div>
-                            </a>
+                            <div className={classes.dotswrapper}>
+                                <div className={`${classes.browserdot} ${classes.dot1}`}></div>
+                                <div className={`${classes.browserdot} ${classes.dot2}`}></div>
+                                <div className={`${classes.browserdot} ${classes.dot3}`}></div>
+                            </div>
                         </div>
 
                         <div className={classes.leftcolumn}>
-                            <img id={classes.profilepic} src="images/bibek.jpg" alt="Profile_pic" />
-                            <h5>
+                            <img className={classes.profilepic} src={'/static/frontend/landing/des-2.png'} alt="Profile_pic" />
+                            <h5 style={{ textAlign: 'center' }}>
                                 Personalize Theme
                             </h5>
-
-                            <div id={classes.themeOptionWrapper}>
-                                <div data-mode="light" id="light-mode" className={classes.themedot}></div>
-                                <div data-mode="blue" id="blue-mode" className={classes.themedot}></div>
-                                <div data-mode="green" id="green-mode" className={classes.themedot}></div>
-                                <div data-mode="purple" id="purple-mode" className={classes.themedot}></div>
-                                <div data-mode="black" id="black-mode" className={classes.themedot}></div>
+                            <div className={classes.themeOptionWrapper}>
+                                <div data-mode="light" className={`${classes.themedot} ${classes.lightMode}`}></div>
+                                <div data-mode="blue" className={`${classes.themedot} ${classes.blueMode}`}></div>
+                                <div data-mode="green" className={`${classes.themedot} ${classes.greenMode}`}></div>
+                                <div data-mode="purple" className={`${classes.themedot} ${classes.purpleMode}`}></div>
+                                <div data-mode="black" className={`${classes.themedot} ${classes.blackMode}`}></div>
                             </div>
 
-                            <p id="settings-note">
+                            <p className={classes.settingsNote}>
                                 Theme settings will be saved for next visit
                             </p>
                         </div>
 
-                        <div className={"right-column"}>
-                            <div id="preview-shadow">
-                                <div id="preview">
-                                    <div id="corner-tl" className={"corner"}></div>
-                                    <div id="corner-tr" className={"corner"}></div>
+                        <div className={classes.rightColumn}>
+                            <div className={classes.previewShadow}>
+                                <div className={classes.preview}>
+                                    <div className={`${classes.corner} ${classes.tl}`}></div>
+                                    <div className={`${classes.corner} ${classes.tr}`}></div>
                                     <h3>What do i do</h3>
                                     <p>
                                         I am a student based in Nepal and I enjoy programming.
                                     </p>
-                                    <div id="corner-bl" className={"corner"}></div>
-                                    <div id="corner-br" className={"corner"}></div>
+                                    <div className={`${classes.corner} ${classes.bl}`}></div>
+                                    <div className={`${classes.corner} ${classes.br}`}></div>
                                 </div>
                             </div>
                         </div>
@@ -198,8 +364,8 @@ const Template1 = () => {
             </section>
 
             <section className={classes.s2}>
-                <div className={"main-container"}>
-                    <div className={"about-wrapper"}>
+                <div className={classes.maincontainer}>
+                    <div className={classes.aboutWrapper}>
                         <div className={"about-me"}>
                             <h4>More about me</h4>
                             <p>
@@ -209,17 +375,17 @@ const Template1 = () => {
                             <p>
                                 Another line ###############################
                                 ######################################### of
-                                ############introductio
+                                ############ introduction
                             </p>
 
                             <hr />
                             <h4>TOP EXPERTISE</h4>
                             <p>
-                                Fullstack developer with primary focus on Django+ React:
+                                Fullstack developer with primary focus on Django + React:
                                 <a target="_blank" href="#">Download Resume</a>
                             </p>
 
-                            <div id="skills">
+                            <div className={classes.skills}>
                                 <ul>
                                     <li>Python</li>
                                     <li>Django</li>
@@ -238,8 +404,8 @@ const Template1 = () => {
                             </div>
                         </div>
 
-                        <div className={"social-links"}>
-                            <img id="social-image" src="images/Youtube.PNG" alt="twitter-ss" />
+                        <div className={classes.socialLinks}>
+                            <img className={classes.socialImage} src="images/Youtube.PNG" alt="twitter-ss" />
 
                             <h3>Find me on Twitter and Instagram</h3>
 
@@ -251,8 +417,8 @@ const Template1 = () => {
                 </div>
             </section>
 
-            <section className={"s1"}>
-                <div className={"main-container"}>
+            <section className={classes.s1}>
+                <div className={classes.maincontainer}>
                     <h2>
                         Past work and projects
                         Description
@@ -262,23 +428,23 @@ const Template1 = () => {
                 </div>
             </section>
 
-            <section className={"s2"}>
-                <div className={"main-container"}>
+            <section className={classes.s2}>
+                <div className={classes.maincontainer}>
                     <a href=""></a>
-                    <h3>Get In Touch</h3>
+                    <h3 style={{ textAlign: 'center' }}>Get In Touch</h3>
 
-                    <form id="contact-form">
+                    <form className={classes.contactForm}>
                         <a name="contact"></a>
-                        <label>Name</label>
-                        <input className={"input-field"} type="text" name="name" />
-                        <label>Subject</label>
-                        <input className={"input-field"} type="text" name="subject" />
-                        <label>Email</label>
-                        <input className={"input-field"} type="text" name="email" />
-                        <label>Message</label>
-                        <textarea className={"input-field"} name="message"></textarea>
+                        <label className={classes.contactFormLabel}>Name</label>
+                        <input className={classes.inputField} type="text" name="name" />
+                        <label className={classes.contactFormLabel}>Subject</label>
+                        <input className={classes.inputField} type="text" name="subject" />
+                        <label className={classes.contactFormLabel}>Email</label>
+                        <input className={classes.inputField} type="text" name="email" />
+                        <label className={classes.contactFormLabel}>Message</label>
+                        <textarea className={classes.inputField} name="message"></textarea>
 
-                        <input id="submit-btn" type="submit" value="send" />
+                        <input className={classes.submitBtn} type="submit" value="Send" />
                     </form>
                 </div>
             </section>
