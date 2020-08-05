@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
 
+import Template from './templates/template1';
+
 const Profile = () => {
     let { username } = useParams()
+
     return (
-        <h1>This is your profile {username}.</h1>
+        <Template />
     );
 }
 
