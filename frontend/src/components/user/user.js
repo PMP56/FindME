@@ -12,7 +12,7 @@ const UserPage = () => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/get_started" component={GetStarted} />
-                <Route exact path="/:username" component={Profile} />
+                <Route exact path="/edit/:username" component={Profile} />
             </Switch>
 
         </Fragment>

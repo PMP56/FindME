@@ -4,7 +4,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from '@material-ui/core';
 
-
+import ProjectCard from './utils/projectCard';
 
 const Template1 = () => {
     let currentTheme = localStorage.getItem("theme");
@@ -130,7 +130,14 @@ const Template1 = () => {
             margin: '0 auto',
             width: '1200px',
         },
-
+        maincontainer2: {
+            padding: '15px 30px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly'
+        },
         greetingwrapper: {
             display: 'grid',
             textAlign: 'center',
@@ -418,11 +425,11 @@ const Template1 = () => {
 
     const classes = styles();
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
-                        <h1 className={classes.mainText} style={{ fontSize: '56px' }}>Hi, I'm Bibek Mishra</h1>
+                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -540,13 +547,14 @@ const Template1 = () => {
             </section>
 
             <section className={classes.s1}>
-                <div className={classes.maincontainer}>
-                    <h2 className={classes.mainText}>
-                        Past work and projects
-                        Description
-                        Picture
-                    </h2>
+                <h2 className={classes.mainText} style={{ textAlign: 'center', marginTop: '15px', }}>
+                    Past work and projects
+                </h2>
+                <div className={classes.maincontainer2}>
 
+                    <ProjectCard data={null} />
+                    <ProjectCard data={null} />
+                    <ProjectCard data={null} />
                 </div>
             </section>
 
