@@ -2,9 +2,11 @@ import React, { Component, Fragment, useState, useEffect } from 'react';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { makeStyles } from '@material-ui/core';
 
 import ProjectCard from './utils/projectCard';
+import SocialLinks from './utils/socialLink';
 
 const Template1 = () => {
     let currentTheme = localStorage.getItem("theme");
@@ -139,10 +141,20 @@ const Template1 = () => {
             justifyContent: 'space-evenly'
         },
         greetingwrapper: {
-            display: 'grid',
+            display: 'flex',
             textAlign: 'center',
+            justifyContent: 'center',
             alignContent: 'center',
+            alignItems: 'center',
             minHeight: '10em',
+        },
+
+        saveButton: {
+            margin: '0px 25px',
+            float: 'right',
+            fontSize: '30px',
+            textAlign: 'right',
+            color: 'var(--primaryText)'
         },
 
         introwrapper: {
@@ -430,6 +442,7 @@ const Template1 = () => {
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
                         <h1 className={classes.mainText} style={{ fontSize: '56px' }} contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
+                        <SaveOutlinedIcon className={classes.saveButton} />
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -458,9 +471,6 @@ const Template1 = () => {
                                 <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
                             </div>
 
-                            <p className={`${classes.settingsNote} ${classes.secondaryText}`}>
-                                Theme settings will be saved for next visit
-                            </p>
                         </div>
 
                         <div className={classes.rightColumn}>
@@ -469,7 +479,7 @@ const Template1 = () => {
                                     <div className={`${classes.corner} ${classes.tl}`}></div>
                                     <div className={`${classes.corner} ${classes.tr}`}></div>
                                     <h3 className={classes.mainText}>What do i do</h3>
-                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }}>
+                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} contentEditable suppressContentEditableWarning>
                                         I am a student based in Nepal and I enjoy programming.
                                     </p>
                                     <div className={`${classes.corner} ${classes.bl}`}></div>
@@ -486,25 +496,25 @@ const Template1 = () => {
                     <div className={classes.aboutWrapper}>
                         <div className={"about-me"}>
                             <h4 className={classes.mainText}>More about me</h4>
-                            <p className={`${classes.secondaryText}`}>
-                                Short ######################################
-                                ##################### Introduction
+                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
+                                Short Introduction <br />
+                                ######################################
                             </p>
-                            <p className={`${classes.secondaryText}`}>
-                                Another line ###############################
-                                ######################################### of
-                                ############ introduction
+                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
+                                Another line of Introduction <br />
+                                #########################################
+                                #########################################
                             </p>
 
                             <hr />
                             <h4 className={classes.mainText}>TOP EXPERTISE</h4>
-                            <p className={`${classes.secondaryText}`}>
+                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
                                 Fullstack developer with primary focus on Django + React:
                                 <a className={classes.secondaryText} target="_blank" href="#">Download Resume</a>
                             </p>
 
                             <div className={classes.skills}>
-                                <ul className={classes.secondaryText}>
+                                <ul className={classes.secondaryText} contentEditable suppressContentEditableWarning>
                                     <li>Python</li>
                                     <li>Django</li>
                                     <li>Javascript</li>
@@ -523,24 +533,8 @@ const Template1 = () => {
                         </div>
 
                         <div className={classes.socialLinks}>
-                            {/*<img className={classes.socialImage} src="images/Youtube.PNG" alt="twitter-ss" />*/}
-
-                            <h5 className={classes.mainText}>Find me on Twitter and Instagram</h5>
-                            <div>
-                                <InstagramIcon className={classes.socialIcon} style={{ color: '#E1306C' }} />
-                                <a className={classes.secondaryText} target="_blank" href="#">@BibekM</a>
-
-                            </div><br />
-                            <div>
-                                <TwitterIcon className={classes.socialIcon} color='primary' />
-                                <a className={classes.secondaryText} target="_blank" href="#">@Bibek222</a>
-
-                            </div><br />
-                            <div>
-                                <GitHubIcon className={classes.socialIcon} />
-                                <a className={classes.secondaryText} target="_blank" href="#">@BibekGit</a>
-
-                            </div>
+                            <h5 className={classes.mainText}>Find me on Social Media</h5>
+                            <SocialLinks data={{ 'github': 'https://github.com', 'facebook': 'https://facebook.com', 'instagram': 'https://instagram.com' }} />
                         </div>
                     </div>
                 </div>
