@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'leads',
     'frontend',
     'accounts',
+    'database',
     'rest_framework',
     'knox',
 ]
