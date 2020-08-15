@@ -20,6 +20,32 @@ const Template1 = () => {
         buttonColor: "black",
     });
 
+    const [data, setData] = useState({
+        userName: 'Bibek',
+        theme: 'white',
+        profilePicture: '',
+        shadowText: '',
+        firstIntro: '###########################',
+        secondIntro: '###############################',
+        skills: [],
+        socialLinks: [],
+        projects: [],
+    });
+
+    const formChange = e => {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value
+        })
+        );
+    }
+
+    const update = () => {
+        console.log(data);
+    }
+
+
     const changeTheme = (mode) => {
         console.log(mode);
         if (mode == 'white') {
@@ -81,13 +107,13 @@ const Template1 = () => {
     return (
         <ThemeChanger theme={theme}>
             <div className={classes.optionBox}>
-                <SaveOutlinedIcon className={classes.optionButton} />
+                <button onClick={update} ><SaveOutlinedIcon className={classes.optionButton} /></button>
                 <CloseIcon className={classes.optionButton} />
             </div>
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
-                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
+                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" value={data.userName} onChange={formChange} contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -124,7 +150,7 @@ const Template1 = () => {
                                     <div className={`${classes.corner} ${classes.tl}`}></div>
                                     <div className={`${classes.corner} ${classes.tr}`}></div>
                                     <h3 className={classes.mainText}>What do i do</h3>
-                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} contentEditable suppressContentEditableWarning>
+                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" value={data.shadowText} onChange={formChange} contentEditable suppressContentEditableWarning>
                                         I am a student based in Nepal and I enjoy programming.
                                     </p>
                                     <div className={`${classes.corner} ${classes.bl}`}></div>
@@ -141,11 +167,11 @@ const Template1 = () => {
                     <div className={classes.aboutWrapper}>
                         <div className={"about-me"}>
                             <h4 className={classes.mainText}>More about me</h4>
-                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
+                            <p className={`${classes.secondaryText}`} name="firstIntro" value={data.firstIntro} onChange={formChange} contentEditable suppressContentEditableWarning>
                                 Short Introduction <br />
                                 ######################################
                             </p>
-                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
+                            <p className={`${classes.secondaryText}`} name="secondIntro" value={data.secondIntro} onChange={formChange} contentEditable suppressContentEditableWarning>
                                 Another line of Introduction <br />
                                 #########################################
                                 #########################################
@@ -153,12 +179,11 @@ const Template1 = () => {
 
                             <hr />
                             <h4 className={classes.mainText}>TOP EXPERTISE</h4>
-                            <p className={`${classes.secondaryText}`} contentEditable suppressContentEditableWarning>
-                                Fullstack developer with primary focus on Django + React:
-                                <a className={classes.secondaryText} target="_blank" href="#">Download Resume</a>
+                            <p className={`${classes.secondaryText}`}>
+                                These are some of my fields of expertise:
                             </p>
 
-                            <div className={classes.skills} contentEditable suppressContentEditableWarning>
+                            <div className={classes.skills} name="skills" value={data.skills} onChange={formChange} contentEditable suppressContentEditableWarning>
                                 <ul className={classes.secondaryText} >
                                     <li>Python</li>
                                     <li>Django</li>
@@ -166,7 +191,6 @@ const Template1 = () => {
                                     <li>React</li>
                                     <li>Postgres</li>
                                 </ul>
-
                                 <ul className={classes.secondaryText}>
                                     <li>Google Maps API</li>
                                     <li>JS Charts</li>
