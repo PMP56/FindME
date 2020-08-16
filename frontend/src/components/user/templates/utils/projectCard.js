@@ -36,10 +36,10 @@ const ProjectCard = (props) => {
                     image={details.image}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2" contentEditable suppressContentEditableWarning>
+                    <Typography gutterBottom variant="h5" component="h2" name='projects' contentEditable suppressContentEditableWarning>
                         {details.title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" contentEditable suppressContentEditableWarning>
+                    <Typography variant="body2" color="textSecondary" component="p" name='projects' contentEditable suppressContentEditableWarning>
                         {details.description}
                     </Typography>
                 </CardContent>

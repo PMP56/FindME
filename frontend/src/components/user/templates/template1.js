@@ -22,12 +22,12 @@ const Template1 = () => {
 
     const [data, setData] = useState({
         userName: 'Bibek',
-        theme: 'white',
-        profilePicture: '',
         shadowText: '',
         firstIntro: '###########################',
         secondIntro: '###############################',
         skills: [],
+        theme: 'white',
+        profilePicture: '',
         socialLinks: [],
         projects: [],
     });
@@ -42,6 +42,33 @@ const Template1 = () => {
     }
 
     const update = () => {
+        /*var tags = document.querySelectorAll('[contenteditable]');
+        for (var i = tags.length - 1; i >= 0; i--) if (typeof (tags[i].onblur) != 'function') {
+            tags[i].onfocus = function () {
+                this.data_orig = this.innerHTML;
+            };
+            tags[i].onblur = function () {
+                if (this.innerHTML != this.data_orig)
+                    formChange;
+                delete this.data_orig;
+            };
+        }
+        console.log(data);*/
+
+        var tags = document.querySelectorAll('[contenteditable]');
+        //console.log(tags);
+
+        for (var i = 0; i <= tags.length - 1; i++) {
+            var currentTag = tags[i].getAttribute("name");
+            var currentTagVal = tags[i].innerText;
+            console.log(currentTag, currentTagVal);
+            if (tags[i].getAttribute("name") in data)
+                setData((prevData) => ({
+                    ...prevData,
+                    [currentTag]: currentTagVal
+                }));
+
+        }
         console.log(data);
     }
 
@@ -100,20 +127,19 @@ const Template1 = () => {
                 buttonColor: "#8534a3",
             });
         }
-        localStorage.setItem("theme", mode);
     };
 
     const classes = styles();
     return (
         <ThemeChanger theme={theme}>
             <div className={classes.optionBox}>
-                <button onClick={update} ><SaveOutlinedIcon className={classes.optionButton} /></button>
+                <SaveOutlinedIcon className={classes.optionButton} onClick={update} />
                 <CloseIcon className={classes.optionButton} />
             </div>
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
-                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" value={data.userName} onChange={formChange} contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
+                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -150,7 +176,7 @@ const Template1 = () => {
                                     <div className={`${classes.corner} ${classes.tl}`}></div>
                                     <div className={`${classes.corner} ${classes.tr}`}></div>
                                     <h3 className={classes.mainText}>What do i do</h3>
-                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" value={data.shadowText} onChange={formChange} contentEditable suppressContentEditableWarning>
+                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" contentEditable suppressContentEditableWarning>
                                         I am a student based in Nepal and I enjoy programming.
                                     </p>
                                     <div className={`${classes.corner} ${classes.bl}`}></div>
@@ -167,14 +193,14 @@ const Template1 = () => {
                     <div className={classes.aboutWrapper}>
                         <div className={"about-me"}>
                             <h4 className={classes.mainText}>More about me</h4>
-                            <p className={`${classes.secondaryText}`} name="firstIntro" value={data.firstIntro} onChange={formChange} contentEditable suppressContentEditableWarning>
+                            <p className={`${classes.secondaryText}`} name="firstIntro" contentEditable suppressContentEditableWarning>
                                 Short Introduction <br />
-                                ######################################
+                                ##############################
                             </p>
-                            <p className={`${classes.secondaryText}`} name="secondIntro" value={data.secondIntro} onChange={formChange} contentEditable suppressContentEditableWarning>
+                            <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
                                 Another line of Introduction <br />
-                                #########################################
-                                #########################################
+                                ##############################
+                                ##############################
                             </p>
 
                             <hr />
@@ -183,7 +209,7 @@ const Template1 = () => {
                                 These are some of my fields of expertise:
                             </p>
 
-                            <div className={classes.skills} name="skills" value={data.skills} onChange={formChange} contentEditable suppressContentEditableWarning>
+                            <div className={classes.skills} name="skills" contentEditable suppressContentEditableWarning>
                                 <ul className={classes.secondaryText} >
                                     <li>Python</li>
                                     <li>Django</li>
