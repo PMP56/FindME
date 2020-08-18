@@ -3,7 +3,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { styles } from './utils/styles';
-import { updateData } from '../../../utils/database';
+import { addData } from '../../../utils/database';
 import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import ProjectCard from './utils/projectCard';
@@ -69,7 +69,7 @@ const Template1 = () => {
                 }));
             }
         });
-        setTimeout(updateData(data), 3000);
+        setTimeout(addData(data), 3000);
 
     }
 
