@@ -1,13 +1,16 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
+import React, { Component, Fragment, useState, useContext } from 'react';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { styles } from './utils/styles';
+import { updateData } from '../../../utils/database';
+import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
 
 const Template1 = () => {
+    const { currentUser } = useContext(AuthContext);
     const [theme, setTheme] = useState({
         mainColor: '#eaeaea',
         secondaryColor: "#fff",
@@ -21,41 +24,53 @@ const Template1 = () => {
     });
 
     const [data, setData] = useState({
+        id: currentUser.id,
         userName: 'Bibek',
         shadowText: '',
         firstIntro: '###########################',
         secondIntro: '###############################',
         skills: [],
         theme: 'white',
-        profilePicture: '',
+        profilePicture: 'https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png',
         socialLinks: [],
         projects: [],
     });
 
-    const formChange = e => {
-        const { name, value } = e.target;
-        setData((prevData) => ({
-            ...prevData,
-            [name]: value
-        })
-        );
-    }
-
     const update = () => {
-
         var tags = document.querySelectorAll('[contenteditable]');
-
         tags.forEach(tag => {
             let currentTag = tag.getAttribute("name");
             let currentTagVal = tag.innerText;
-            setData(prevData => ({
-                ...prevData,
-                [currentTag]: currentTagVal
-            }));
-        });
+            if (currentTag == 'skills') {
+                let skills = currentTagVal.split("\n");
+                setData(prevData => ({
+                    ...prevData,
 
-        console.log(data);
-        //console.log(tempData);
+                    [currentTag]: skills
+                }));
+            } else if (currentTag == 'projects') {
+                setData(prevData => ({
+                    ...prevData,
+
+                    [currentTag]: [["Projects"]]
+                }));
+            } else if (currentTag == 'socialLinks') {
+                setData(prevData => ({
+                    ...prevData,
+
+                    [currentTag]: 'Socail Links'
+                }));
+            }
+            else {
+                setData(prevData => ({
+                    ...prevData,
+
+                    [currentTag]: currentTagVal
+                }));
+            }
+        });
+        setTimeout(updateData(data), 3000);
+
     }
 
 
