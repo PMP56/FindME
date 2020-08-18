@@ -42,34 +42,20 @@ const Template1 = () => {
     }
 
     const update = () => {
-        /*var tags = document.querySelectorAll('[contenteditable]');
-        for (var i = tags.length - 1; i >= 0; i--) if (typeof (tags[i].onblur) != 'function') {
-            tags[i].onfocus = function () {
-                this.data_orig = this.innerHTML;
-            };
-            tags[i].onblur = function () {
-                if (this.innerHTML != this.data_orig)
-                    formChange;
-                delete this.data_orig;
-            };
-        }
-        console.log(data);*/
 
         var tags = document.querySelectorAll('[contenteditable]');
-        //console.log(tags);
 
-        for (var i = 0; i <= tags.length - 1; i++) {
-            var currentTag = tags[i].getAttribute("name");
-            var currentTagVal = tags[i].innerText;
-            console.log(currentTag, currentTagVal);
-            if (tags[i].getAttribute("name") in data)
-                setData((prevData) => ({
-                    ...prevData,
-                    [currentTag]: currentTagVal
-                }));
+        tags.forEach(tag => {
+            let currentTag = tag.getAttribute("name");
+            let currentTagVal = tag.innerText;
+            setData(prevData => ({
+                ...prevData,
+                [currentTag]: currentTagVal
+            }));
+        });
 
-        }
         console.log(data);
+        //console.log(tempData);
     }
 
 
@@ -193,7 +179,7 @@ const Template1 = () => {
                     <div className={classes.aboutWrapper}>
                         <div className={"about-me"}>
                             <h4 className={classes.mainText}>More about me</h4>
-                            <p className={`${classes.secondaryText}`} name="firstIntro" contentEditable suppressContentEditableWarning>
+                            <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" contentEditable suppressContentEditableWarning>
                                 Short Introduction <br />
                                 ##############################
                             </p>
@@ -209,7 +195,7 @@ const Template1 = () => {
                                 These are some of my fields of expertise:
                             </p>
 
-                            <div className={classes.skills} name="skills" contentEditable suppressContentEditableWarning>
+                            <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
                                 <ul className={classes.secondaryText} >
                                     <li>Python</li>
                                     <li>Django</li>
