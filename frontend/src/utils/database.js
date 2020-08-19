@@ -18,7 +18,7 @@ const addDataSeparately = (data) => {
     const body = JSON.stringify(data);
     return axios.post('/api/database/', body, config)
         .then(
-            (result) => console.log('Data added')
+            (result) => { console.log('Data added'); /*console.clear()*/ }
         ).catch(err => console.log(err.response.data))
 }
 
@@ -50,5 +50,11 @@ export const getData = async (id) => {
     };
     return await axios.get(`/api/database/${id}`, config)
         .then((result) => result)
-        .catch(err => console.log(err.response.data));
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+
+            }
+        });
 }

@@ -9,22 +9,45 @@ import ThemeChanger from './utils/themeChanger';
 import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
 import { useEffect } from 'react';
+import { values } from 'regenerator-runtime';
 
 const Template1 = () => {
     const { currentUser } = useContext(AuthContext);
     const id = currentUser.id;
-    const [database, setDatabase] = useState();
+    const [loaded, setLoaded] = useState(false);
+    const [database, setDatabase] = useState({});
 
     useEffect(() => {
         //getData(id);
         async function fetchData() {
             await getData(id).then(result => {
-                setDatabase(result.data);
-                console.log(result.data);
+
+                if (result != null) {
+                    changeTheme(result.data.theme);
+                    setDatabase(result.data);
+                    setLoaded(true);
+
+                    //console.log(result.data);
+                } else {
+                    changeTheme('white');
+                    setDatabase({
+                        id: currentUser.id,
+                        userName: `Hi I'm ${currentUser.username}`,
+                        shadowText: 'I am a student/ professional/ designer/ ..................',
+                        firstIntro: 'Short Introduction \n ###########################',
+                        secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
+                        skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
+                        theme: 'white',
+                        profilePicture: 'https://lh3.googleusercontent.com/proxy/jEjqWQqw-sgTUvjstpJUYPoEeSdx3UXSyP3ns0LRpaakSTsa8XZiSHJm5WyfM3OAEqs2p2vzhTpwzLSXFqOnrklRCZIFBhICGLZwGntvb8rLJpN9OSe6_FpxpkEcH12pPEqSqkKQ7-rhqGQ',
+                        socialLinks: [["Social Links"]],
+                        projects: [["Projects"]],
+                    });
+                }
             });
         }
         fetchData();
     }, []);
+
 
     const [theme, setTheme] = useState({
         mainColor: '#eaeaea',
@@ -52,45 +75,48 @@ const Template1 = () => {
     });
 
     const update = () => {
-        console.log("database", database);
+        //console.log("database", database);
         var tags = document.querySelectorAll('[contenteditable]');
         tags.forEach(tag => {
             let currentTag = tag.getAttribute("name");
             let currentTagVal = tag.innerText;
             if (currentTag == 'skills') {
                 let skills = currentTagVal.split("\n");
-                setData(prevData => ({
+                setDatabase(prevData => ({
                     ...prevData,
 
                     [currentTag]: skills
                 }));
             } else if (currentTag == 'projects') {
-                setData(prevData => ({
+                setDatabase(prevData => ({
                     ...prevData,
 
                     [currentTag]: [["Projects"]]
                 }));
             } else if (currentTag == 'socialLinks') {
-                setData(prevData => ({
+                setDatabase(prevData => ({
                     ...prevData,
 
                     [currentTag]: 'Socail Links'
                 }));
             }
             else {
-                setData(prevData => ({
+                setDatabase(prevData => ({
                     ...prevData,
 
                     [currentTag]: currentTagVal
                 }));
             }
         });
-        setTimeout(addData(data), 5000);
-
+        console.log(database);
+        addData(database);
     }
 
 
     const changeTheme = (mode) => {
+        console.log(mode);
+        setDatabase({ ...database, theme: mode });
+        //console.log(database);
         if (mode == 'white') {
             setTheme({
                 mainColor: '#eaeaea',
@@ -149,13 +175,13 @@ const Template1 = () => {
     return (
         <ThemeChanger theme={theme}>
             <div className={classes.optionBox}>
-                <SaveOutlinedIcon className={classes.optionButton} onClick={update} />
+                <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); }} />
                 <CloseIcon className={classes.optionButton} />
             </div>
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
-                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>Hi, I'm Bibek Mishra</h1>
+                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -173,7 +199,7 @@ const Template1 = () => {
                         </div>
 
                         <div className={classes.leftcolumn}>
-                            <img className={classes.profilepic} src={data.profilePicture} alt="Profile_pic" />
+                            <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" />
                             <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
                                 Personalize Theme
                             </h5>
@@ -193,7 +219,7 @@ const Template1 = () => {
                                     <div className={`${classes.corner} ${classes.tr}`}></div>
                                     <h3 className={classes.mainText}>What do i do</h3>
                                     <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" contentEditable suppressContentEditableWarning>
-                                        I am a student based in Nepal and I enjoy programming.
+                                        {database.shadowText}
                                     </p>
                                     <div className={`${classes.corner} ${classes.bl}`}></div>
                                     <div className={`${classes.corner} ${classes.br}`}></div>
@@ -210,13 +236,10 @@ const Template1 = () => {
                         <div className={"about-me"}>
                             <h4 className={classes.mainText}>More about me</h4>
                             <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" contentEditable suppressContentEditableWarning>
-                                Short Introduction <br />
-                                ##############################
+                                {database.firstIntro}
                             </p>
                             <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
-                                Another line of Introduction <br />
-                                ##############################
-                                ##############################
+                                {database.secondIntro}
                             </p>
 
                             <hr />
@@ -227,18 +250,7 @@ const Template1 = () => {
 
                             <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
                                 <ul className={classes.secondaryText} >
-                                    <li>Python</li>
-                                    <li>Django</li>
-                                    <li>Javascript</li>
-                                    <li>React</li>
-                                    <li>Postgres</li>
-                                </ul>
-                                <ul className={classes.secondaryText}>
-                                    <li>Google Maps API</li>
-                                    <li>JS Charts</li>
-                                    <li>AWS (RDS/S3)</li>
-                                    <li>Heroku</li>
-                                    <li>HTML/CSS</li>
+                                    {!loaded ? database.skills : database.skills.map((skill) => <li key={skill}>{skill}</li>)}
                                 </ul>
                             </div>
                         </div>
