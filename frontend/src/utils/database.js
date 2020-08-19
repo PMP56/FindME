@@ -42,16 +42,13 @@ export const addData = (data) => {
         });
 }
 
-export const getData = (id) => {
+export const getData = async (id) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
-    const body = JSON.stringify(data);
-    axios.get(`/api/database/${id}`, config)
-        .then(
-            (result) => console.log(result)
-        )
-        .catch(err => console.log(err));
+    return await axios.get(`/api/database/${id}`, config)
+        .then((result) => result)
+        .catch(err => console.log(err.response.data));
 }

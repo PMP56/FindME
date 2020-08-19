@@ -3,14 +3,29 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { styles } from './utils/styles';
-import { addData } from '../../../utils/database';
+import { addData, getData } from '../../../utils/database';
 import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
+import { useEffect } from 'react';
 
 const Template1 = () => {
     const { currentUser } = useContext(AuthContext);
+    const id = currentUser.id;
+    const [database, setDatabase] = useState();
+
+    useEffect(() => {
+        //getData(id);
+        async function fetchData() {
+            await getData(id).then(result => {
+                setDatabase(result.data);
+                console.log(result.data);
+            });
+        }
+        fetchData();
+    }, []);
+
     const [theme, setTheme] = useState({
         mainColor: '#eaeaea',
         secondaryColor: "#fff",
@@ -31,12 +46,13 @@ const Template1 = () => {
         secondIntro: '###############################',
         skills: [],
         theme: 'white',
-        profilePicture: 'https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png',
+        profilePicture: 'https://lh3.googleusercontent.com/proxy/jEjqWQqw-sgTUvjstpJUYPoEeSdx3UXSyP3ns0LRpaakSTsa8XZiSHJm5WyfM3OAEqs2p2vzhTpwzLSXFqOnrklRCZIFBhICGLZwGntvb8rLJpN9OSe6_FpxpkEcH12pPEqSqkKQ7-rhqGQ',
         socialLinks: [],
         projects: [],
     });
 
     const update = () => {
+        console.log("database", database);
         var tags = document.querySelectorAll('[contenteditable]');
         tags.forEach(tag => {
             let currentTag = tag.getAttribute("name");
@@ -69,13 +85,12 @@ const Template1 = () => {
                 }));
             }
         });
-        setTimeout(addData(data), 3000);
+        setTimeout(addData(data), 5000);
 
     }
 
 
     const changeTheme = (mode) => {
-        console.log(mode);
         if (mode == 'white') {
             setTheme({
                 mainColor: '#eaeaea',
@@ -158,7 +173,7 @@ const Template1 = () => {
                         </div>
 
                         <div className={classes.leftcolumn}>
-                            <img className={classes.profilepic} src={'/static/frontend/landing/des-2.png'} alt="Profile_pic" />
+                            <img className={classes.profilepic} src={data.profilePicture} alt="Profile_pic" />
                             <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
                                 Personalize Theme
                             </h5>
