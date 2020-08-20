@@ -8,6 +8,7 @@ import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
+import CircularProgressIndicator from './utils/circularProgress';
 import { useEffect } from 'react';
 import { values } from 'regenerator-runtime';
 
@@ -38,10 +39,11 @@ const Template1 = () => {
                         secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
                         skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
                         theme: 'white',
-                        profilePicture: 'https://lh3.googleusercontent.com/proxy/jEjqWQqw-sgTUvjstpJUYPoEeSdx3UXSyP3ns0LRpaakSTsa8XZiSHJm5WyfM3OAEqs2p2vzhTpwzLSXFqOnrklRCZIFBhICGLZwGntvb8rLJpN9OSe6_FpxpkEcH12pPEqSqkKQ7-rhqGQ',
+                        profilePicture: 'https://i.pinimg.com/originals/de/47/a0/de47a0e11249f07f733e3664efd38d05.png',
                         socialLinks: [["Social Links"]],
                         projects: [["Projects"]],
                     });
+                    setLoaded(true);
                 }
             });
         }
@@ -173,129 +175,133 @@ const Template1 = () => {
 
     const classes = styles();
     return (
-        <ThemeChanger theme={theme}>
-            <div className={classes.optionBox}>
-                <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); }} />
-                <CloseIcon className={classes.optionButton} />
-            </div>
-            <section className={classes.s1}>
-                <div className={classes.maincontainer}>
-                    <div className={classes.greetingwrapper}>
-                        <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
+        <Fragment>
+            {(!loaded) ? <CircularProgressIndicator /> :
+                <ThemeChanger theme={theme}>
+                    <div className={classes.optionBox}>
+                        <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); }} />
+                        <CloseIcon className={classes.optionButton} />
                     </div>
-
-                    <div className={classes.introwrapper}>
-                        <div className={classes.navwrapper}>
-                            <ul className={classes.navigation}>
-                                <li className={classes.navLi}>
-                                    <a className={`${classes.navLink} ${classes.secondaryText}`} href="#">Contact</a>
-                                </li>
-                            </ul>
-                            <div className={classes.dotswrapper}>
-                                <div className={`${classes.browserdot} ${classes.dot1}`}></div>
-                                <div className={`${classes.browserdot} ${classes.dot2}`}></div>
-                                <div className={`${classes.browserdot} ${classes.dot3}`}></div>
+                    <section className={classes.s1}>
+                        <div className={classes.maincontainer}>
+                            <div className={classes.greetingwrapper}>
+                                <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
                             </div>
-                        </div>
 
-                        <div className={classes.leftcolumn}>
-                            <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" />
-                            <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
-                                Personalize Theme
+                            <div className={classes.introwrapper}>
+                                <div className={classes.navwrapper}>
+                                    <ul className={classes.navigation}>
+                                        <li className={classes.navLi}>
+                                            <a className={`${classes.navLink} ${classes.secondaryText}`} href="#">Contact</a>
+                                        </li>
+                                    </ul>
+                                    <div className={classes.dotswrapper}>
+                                        <div className={`${classes.browserdot} ${classes.dot1}`}></div>
+                                        <div className={`${classes.browserdot} ${classes.dot2}`}></div>
+                                        <div className={`${classes.browserdot} ${classes.dot3}`}></div>
+                                    </div>
+                                </div>
+
+                                <div className={classes.leftcolumn}>
+                                    <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" />
+                                    <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
+                                        Personalize Theme
                             </h5>
-                            <div className={classes.themeOptionWrapper}>
-                                <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
-                                <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
-                                <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
-                                <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
-                            </div>
+                                    <div className={classes.themeOptionWrapper}>
+                                        <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
+                                        <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
+                                        <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
+                                        <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
+                                    </div>
 
-                        </div>
+                                </div>
 
-                        <div className={classes.rightColumn}>
-                            <div className={classes.previewShadow}>
-                                <div className={classes.preview}>
-                                    <div className={`${classes.corner} ${classes.tl}`}></div>
-                                    <div className={`${classes.corner} ${classes.tr}`}></div>
-                                    <h3 className={classes.mainText}>What do i do</h3>
-                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" contentEditable suppressContentEditableWarning>
-                                        {database.shadowText}
-                                    </p>
-                                    <div className={`${classes.corner} ${classes.bl}`}></div>
-                                    <div className={`${classes.corner} ${classes.br}`}></div>
+                                <div className={classes.rightColumn}>
+                                    <div className={classes.previewShadow}>
+                                        <div className={classes.preview}>
+                                            <div className={`${classes.corner} ${classes.tl}`}></div>
+                                            <div className={`${classes.corner} ${classes.tr}`}></div>
+                                            <h3 className={classes.mainText}>What do i do</h3>
+                                            <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" contentEditable suppressContentEditableWarning>
+                                                {database.shadowText}
+                                            </p>
+                                            <div className={`${classes.corner} ${classes.bl}`}></div>
+                                            <div className={`${classes.corner} ${classes.br}`}></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <section className={classes.s2}>
-                <div className={classes.maincontainer}>
-                    <div className={classes.aboutWrapper}>
-                        <div className={"about-me"}>
-                            <h4 className={classes.mainText}>More about me</h4>
-                            <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" contentEditable suppressContentEditableWarning>
-                                {database.firstIntro}
-                            </p>
-                            <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
-                                {database.secondIntro}
-                            </p>
+                    <section className={classes.s2}>
+                        <div className={classes.maincontainer}>
+                            <div className={classes.aboutWrapper}>
+                                <div className={"about-me"}>
+                                    <h4 className={classes.mainText}>More about me</h4>
+                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" contentEditable suppressContentEditableWarning>
+                                        {database.firstIntro}
+                                    </p>
+                                    <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
+                                        {database.secondIntro}
+                                    </p>
 
-                            <hr />
-                            <h4 className={classes.mainText}>TOP EXPERTISE</h4>
-                            <p className={`${classes.secondaryText}`}>
-                                These are some of my fields of expertise:
+                                    <hr />
+                                    <h4 className={classes.mainText}>TOP EXPERTISE</h4>
+                                    <p className={`${classes.secondaryText}`}>
+                                        These are some of my fields of expertise:
                             </p>
 
-                            <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
-                                <ul className={classes.secondaryText} >
-                                    {!loaded ? database.skills : database.skills.map((skill) => <li key={skill}>{skill}</li>)}
-                                </ul>
+                                    <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
+                                        <ul className={classes.secondaryText} >
+                                            {!loaded ? database.skills : database.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className={classes.socialLinks}>
+                                    <h5 className={classes.mainText}>Find me on Social Media</h5>
+                                    <SocialLinks data={{ 'github': 'https://github.com', 'facebook': 'https://facebook.com', 'instagram': 'https://instagram.com' }} />
+                                </div>
                             </div>
                         </div>
+                    </section>
 
-                        <div className={classes.socialLinks}>
-                            <h5 className={classes.mainText}>Find me on Social Media</h5>
-                            <SocialLinks data={{ 'github': 'https://github.com', 'facebook': 'https://facebook.com', 'instagram': 'https://instagram.com' }} />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className={classes.s1}>
-                <h2 className={classes.mainText} style={{ textAlign: 'center', marginTop: '15px', }}>
-                    Past work and projects
+                    <section className={classes.s1}>
+                        <h2 className={classes.mainText} style={{ textAlign: 'center', marginTop: '15px', }}>
+                            Past work and projects
                 </h2>
-                <div className={classes.maincontainer2}>
+                        <div className={classes.maincontainer2}>
 
-                    <ProjectCard data={null} />
-                    <ProjectCard data={null} />
-                    <ProjectCard data={null} />
-                </div>
-            </section>
+                            <ProjectCard data={null} />
+                            <ProjectCard data={null} />
+                            <ProjectCard data={null} />
+                        </div>
+                    </section>
 
-            <section className={classes.s2}>
-                <div className={classes.maincontainer}>
-                    <a className={classes.secondaryText} href=""></a>
-                    <h3 style={{ textAlign: 'center' }} className={classes.mainText}>Get In Touch</h3>
+                    <section className={classes.s2}>
+                        <div className={classes.maincontainer}>
+                            <a className={classes.secondaryText} href=""></a>
+                            <h3 style={{ textAlign: 'center' }} className={classes.mainText}>Get In Touch</h3>
 
-                    <form className={classes.contactForm}>
-                        <a name="contact"></a>
-                        <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Name</label>
-                        <input className={classes.inputField} type="text" name="name" />
-                        <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Subject</label>
-                        <input className={classes.inputField} type="text" name="subject" />
-                        <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Email</label>
-                        <input className={classes.inputField} type="text" name="email" />
-                        <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Message</label>
-                        <textarea className={classes.inputField} name="message"></textarea>
+                            <form className={classes.contactForm}>
+                                <a name="contact"></a>
+                                <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Name</label>
+                                <input className={classes.inputField} type="text" name="name" />
+                                <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Subject</label>
+                                <input className={classes.inputField} type="text" name="subject" />
+                                <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Email</label>
+                                <input className={classes.inputField} type="text" name="email" />
+                                <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Message</label>
+                                <textarea className={classes.inputField} name="message"></textarea>
 
-                        <input className={classes.submitBtn} type="submit" value="Send" />
-                    </form>
-                </div>
-            </section>
-        </ThemeChanger>
+                                <input className={classes.submitBtn} type="submit" value="Send" />
+                            </form>
+                        </div>
+                    </section>
+                </ThemeChanger>
+            }
+        </Fragment>
     );
 }
 

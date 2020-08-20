@@ -97,6 +97,9 @@ export const LogOut = (token) => {
         ).catch(
             err => {
                 console.log(err.response.data);
+                localStorage.removeItem('currentUserToken');
+                localStorage.removeItem('currentUserInfo');
+                location.replace('/');
             }
         );
 }
