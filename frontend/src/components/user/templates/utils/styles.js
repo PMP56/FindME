@@ -4,10 +4,14 @@ import { makeStyles } from '@material-ui/core';
 const styles = makeStyles({
 
     optionBox: {
-        position: 'absolute',
+        zIndex: '100',
+        padding: '15px 15px',
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+        position: 'fixed',
         top: 15,
-        right: 15,
-        display: 'flex'
+        right: 0,
+        display: 'flex',
+        borderRadius: '15px 0px 0px 15px'
     },
     optionButton: {
         transitionDuration: '0.4s',
@@ -15,10 +19,10 @@ const styles = makeStyles({
         fontSize: '30px',
         justifyContent: 'center',
         textAlign: 'center',
-        color: 'var(--mainText)',
+        color: 'white',
         cursor: 'pointer',
         '&:hover': {
-            color: 'var(--secondaryText)',
+            color: 'cyan',
         }
     },
     mainText: {
@@ -48,6 +52,11 @@ const styles = makeStyles({
         margin: '0 auto',
         width: '1200px',
     },
+
+    userName: {
+        fontSize: '56px',
+    },
+
     maincontainer2: {
         padding: '15px 30px',
         width: '100%',
@@ -250,6 +259,7 @@ const styles = makeStyles({
 
     skills: {
         transitionDuration: '0.4s',
+        padding: '10px 5px',
         display: 'flex',
         justifyContent: 'space-evenly',
         alignItems: 'center',
@@ -317,7 +327,29 @@ const styles = makeStyles({
 
         rightcolumn: {
             justifyContent: 'center'
-        }
+        },
+        optionBox: {
+            zIndex: '100',
+            padding: '15px 15px',
+            backgroundColor: 'rgba(0, 0, 0, 1)',
+            position: 'fixed',
+            top: 15,
+            right: 0,
+            display: 'flex',
+            borderRadius: '15px 0px 0px 15px'
+        },
+        optionButton: {
+            transitionDuration: '0.4s',
+            margin: '0px 5px',
+            fontSize: '30px',
+            justifyContent: 'center',
+            textAlign: 'center',
+            color: 'white',
+            cursor: 'pointer',
+            '&:hover': {
+                color: 'cyan',
+            }
+        },
     },
     "@media (max-width: 400px)": {
         previewshadow: {
@@ -329,6 +361,24 @@ const styles = makeStyles({
         preview: {
             width: '280px',
 
+        },
+        userName: {
+            fontSize: '44px',
+        },
+
+        optionBox: {
+            padding: '10px 10px',
+            top: 10,
+            right: 0,
+        },
+        optionButton: {
+            margin: '0px 3px',
+            fontSize: '24px',
+            color: 'white',
+            cursor: 'pointer',
+            '&:hover': {
+                color: 'cyan',
+            }
         },
 
     }

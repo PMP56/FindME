@@ -39,7 +39,7 @@ const Template1 = () => {
                         secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
                         skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
                         theme: 'white',
-                        profilePicture: 'https://i.pinimg.com/originals/de/47/a0/de47a0e11249f07f733e3664efd38d05.png',
+                        profilePicture: '/static/frontend/user.png',
                         socialLinks: [["Social Links"]],
                         projects: [["Projects"]],
                     });
@@ -63,18 +63,9 @@ const Template1 = () => {
         buttonColor: "black",
     });
 
-    const [data, setData] = useState({
-        id: currentUser.id,
-        userName: 'Bibek',
-        shadowText: '',
-        firstIntro: '###########################',
-        secondIntro: '###############################',
-        skills: [],
-        theme: 'white',
-        profilePicture: 'https://lh3.googleusercontent.com/proxy/jEjqWQqw-sgTUvjstpJUYPoEeSdx3UXSyP3ns0LRpaakSTsa8XZiSHJm5WyfM3OAEqs2p2vzhTpwzLSXFqOnrklRCZIFBhICGLZwGntvb8rLJpN9OSe6_FpxpkEcH12pPEqSqkKQ7-rhqGQ',
-        socialLinks: [],
-        projects: [],
-    });
+    const publish = (database) => {
+        addData(database);
+    }
 
     const update = () => {
         //console.log("database", database);
@@ -185,7 +176,7 @@ const Template1 = () => {
                     <section className={classes.s1}>
                         <div className={classes.maincontainer}>
                             <div className={classes.greetingwrapper}>
-                                <h1 className={classes.mainText} style={{ fontSize: '56px' }} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
+                                <h1 className={`${classes.mainText} ${classes.userName}`} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
                             </div>
 
                             <div className={classes.introwrapper}>
@@ -254,7 +245,10 @@ const Template1 = () => {
 
                                     <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
                                         <ul className={classes.secondaryText} >
-                                            {!loaded ? database.skills : database.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                                            {database.skills.slice(database.skills.length / 2, database.skills.length).map((skill) => <li key={skill}>{skill}</li>)}
+                                        </ul>
+                                        <ul className={classes.secondaryText} >
+                                            {database.skills.slice(0, database.skills.length / 2).map((skill) => <li key={skill}>{skill}</li>)}
                                         </ul>
                                     </div>
                                 </div>
