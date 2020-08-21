@@ -102,14 +102,13 @@ const Template1 = () => {
             }
         });
         console.log(database);
-        addData(database);
+        //addData(database);
     }
 
 
     const changeTheme = (mode) => {
-        console.log(mode);
         setDatabase({ ...database, theme: mode });
-        //console.log(database);
+
         if (mode == 'white') {
             setTheme({
                 mainColor: '#eaeaea',
@@ -170,13 +169,13 @@ const Template1 = () => {
             {(!loaded) ? <CircularProgressIndicator /> :
                 <ThemeChanger theme={theme}>
                     <div className={classes.optionBox}>
-                        <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); }} />
+                        <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); publish(database); }} />
                         <CloseIcon className={classes.optionButton} />
                     </div>
                     <section className={classes.s1}>
                         <div className={classes.maincontainer}>
                             <div className={classes.greetingwrapper}>
-                                <h1 className={`${classes.mainText} ${classes.userName}`} name="userName" contentEditable suppressContentEditableWarning>{database.userName}</h1>
+                                <h1 className={`${classes.mainText} ${classes.userName}`} name="userName" onBlur={update} contentEditable suppressContentEditableWarning>{database.userName}</h1>
                             </div>
 
                             <div className={classes.introwrapper}>
@@ -213,7 +212,7 @@ const Template1 = () => {
                                             <div className={`${classes.corner} ${classes.tl}`}></div>
                                             <div className={`${classes.corner} ${classes.tr}`}></div>
                                             <h3 className={classes.mainText}>What do i do</h3>
-                                            <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" contentEditable suppressContentEditableWarning>
+                                            <p className={`${classes.secondaryText}`} style={{ fontSize: '16px', textAlign: 'justify', lineHeight: '25px' }} name="shadowText" onBlur={update} contentEditable suppressContentEditableWarning>
                                                 {database.shadowText}
                                             </p>
                                             <div className={`${classes.corner} ${classes.bl}`}></div>
@@ -230,7 +229,7 @@ const Template1 = () => {
                             <div className={classes.aboutWrapper}>
                                 <div className={"about-me"}>
                                     <h4 className={classes.mainText}>More about me</h4>
-                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" contentEditable suppressContentEditableWarning>
+                                    <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" onBlur={update} contentEditable suppressContentEditableWarning>
                                         {database.firstIntro}
                                     </p>
                                     <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
@@ -243,7 +242,7 @@ const Template1 = () => {
                                         These are some of my fields of expertise:
                             </p>
 
-                                    <div className={classes.skills} name='skills' contentEditable suppressContentEditableWarning>
+                                    <div className={classes.skills} name='skills' onBlur={update} contentEditable suppressContentEditableWarning>
                                         <ul className={classes.secondaryText} >
                                             {database.skills.slice(database.skills.length / 2, database.skills.length).map((skill) => <li key={skill}>{skill}</li>)}
                                         </ul>
