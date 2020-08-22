@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 
 
 class UserData(models.Model):
-    id = models.IntegerField(primary_key=True, unique=True)
-    userName = models.CharField(max_length=100)
+    id = models.IntegerField(unique=True)
+    userName = models.CharField(max_length=100, primary_key=True)
+    userHeader = models.CharField(max_length=100)
     theme = models.CharField(max_length=10, blank=True)
     profilePicture = models.CharField(max_length=250)
     shadowText = models.CharField(max_length=100)

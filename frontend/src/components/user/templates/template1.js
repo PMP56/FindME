@@ -10,9 +10,11 @@ import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
 import CircularProgressIndicator from './utils/circularProgress';
 import { useEffect } from 'react';
-import { values } from 'regenerator-runtime';
+//import { values } from 'regenerator-runtime';
 
-const Template1 = () => {
+const Template1 = (props) => {
+    const editable = props.edit;
+    const user = props.username;
     const { currentUser } = useContext(AuthContext);
     const id = currentUser.id;
     const [loaded, setLoaded] = useState(false);
@@ -21,7 +23,7 @@ const Template1 = () => {
     useEffect(() => {
         //getData(id);
         async function fetchData() {
-            await getData(id).then(result => {
+            await getData(user).then(result => {
 
                 if (result != null) {
                     changeTheme(result.data.theme);
@@ -33,7 +35,8 @@ const Template1 = () => {
                     changeTheme('white');
                     setDatabase({
                         id: currentUser.id,
-                        userName: `Hi I'm ${currentUser.username}`,
+                        userName: currentUser.username,
+                        userHeader: `Hi I'm ${currentUser.username}`,
                         shadowText: 'I am a student/ professional/ designer/ ..................',
                         firstIntro: 'Short Introduction \n ###########################',
                         secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
@@ -48,6 +51,7 @@ const Template1 = () => {
             });
         }
         fetchData();
+        console.log("Edit = ", props.edit)
     }, []);
 
 
@@ -175,7 +179,7 @@ const Template1 = () => {
                     <section className={classes.s1}>
                         <div className={classes.maincontainer}>
                             <div className={classes.greetingwrapper}>
-                                <h1 className={`${classes.mainText} ${classes.userName}`} name="userName" onBlur={update} contentEditable suppressContentEditableWarning>{database.userName}</h1>
+                                <h1 className={`${classes.mainText} ${classes.userName}`} name="userHeader" onBlur={update} contentEditable suppressContentEditableWarning>{database.userHeader}</h1>
                             </div>
 
                             <div className={classes.introwrapper}>
@@ -194,16 +198,22 @@ const Template1 = () => {
 
                                 <div className={classes.leftcolumn}>
                                     <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" />
-                                    <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
-                                        Personalize Theme
-                            </h5>
-                                    <div className={classes.themeOptionWrapper}>
-                                        <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
-                                        <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
-                                        <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
-                                        <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
-                                    </div>
-
+                                    {!editable ?
+                                        <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
+                                            Personalize Theme
+                                        </h5> :
+                                        <Fragment>
+                                            <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
+                                                Personalize Theme
+                                            </h5>
+                                            <div className={classes.themeOptionWrapper}>
+                                                <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
+                                                <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
+                                                <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
+                                                <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
+                                            </div>
+                                        </Fragment>
+                                    }
                                 </div>
 
                                 <div className={classes.rightColumn}>

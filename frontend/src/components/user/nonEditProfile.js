@@ -1,13 +1,13 @@
-import React, { Component, useContext } from 'react';
+import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../utils/userContext';
-import WarningIcon from '@material-ui/icons/Warning';
 
-import Template from './templates/template1';
+import { getData } from '../../utils/database';
 
-const Profile = (props) => {
+
+const NonEditProfile = (props) => {
     const { currentUser } = useContext(AuthContext);
-    let { username } = useParams()
+    let { username } = useParams();
 
     return (
         (currentUser.username == username) ?
@@ -23,4 +23,4 @@ const Profile = (props) => {
     );
 }
 
-export default Profile;
+export default NonEditProfile;

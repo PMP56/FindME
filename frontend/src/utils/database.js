@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const deleteData = (id) => {
+const deleteData = (username) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
-    return axios.delete(`/api/database/${id}`, config).then((result) => console.log("Deleted")).catch(err => console.log(err.response.data));
+    return axios.delete(`/api/database/${username}`, config).then((result) => console.log("Deleted")).catch(err => console.log(err.response.data));
 }
 
 const addDataSeparately = (data) => {
@@ -36,19 +36,19 @@ export const addData = (data) => {
         )
         .catch(err => {
             console.log(err.response.data);
-            if (err.response.data['id']) {
-                deleteData(data.id).then((result) => addDataSeparately(data)).catch(err => console.log(err.response.data))
+            if (err.response.data['id'] || err.response.data['userName']) {
+                deleteData(data.userName).then((result) => addDataSeparately(data)).catch(err => console.log(err.response.data))
             }
         });
 }
 
-export const getData = async (id) => {
+export const getData = async (username) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
-    return await axios.get(`/api/database/${id}`, config)
+    return await axios.get(`/api/database/${username}`, config)
         .then((result) => result)
         .catch(err => {
             if (err.response.data['detail'] = "Not found.") {
