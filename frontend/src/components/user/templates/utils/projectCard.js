@@ -11,17 +11,40 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = makeStyles({
     root: {
-        maxWidth: 275,
+        maxWidth: 300,
         margin: '20px 20px',
+        backgroundColor: 'var(--previewBg)',
     },
     media: {
-        height: 140,
+        margin: 10,
+        padding: 10,
+        height: 240,
+        border: '3px solid var(--previewShadow)'
     },
+    mainText: {
+        letterSpacing: '0.5px',
+        transitionDuration: '0.4s',
+        fontWeight: '600',
+        fontFamily: 'Russo One',
+        color: 'var(--mainText)',
+    },
+    secondaryText: {
+        letterSpacing: '0.75px',
+        transitionDuration: '0.4s',
+        color: 'var(--secondaryText)',
+    },
+    button: {
+        backgroundColor: 'var(--mainColor)',
+        color: 'var(--mainText)',
+        "&:hover": {
+            backgroundColor: 'var(--secondaryColor)',
+        },
+    }
 });
 
 const ProjectCard = (props) => {
     const [details, setDetails] = useState((props.data != null) ? props : {
-        image: '/static/frontend/landing/des-3.png',
+        image: '/static/frontend/landing/des-2.png',
         title: 'Project Title',
         description: 'Project Description here. Make it short to look beautiful.',
         link: 'Project Link',
@@ -36,17 +59,17 @@ const ProjectCard = (props) => {
                     image={details.image}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2" name='projects' contentEditable suppressContentEditableWarning>
+                    <Typography gutterBottom variant="h5" component="h2" className={classes.mainText} name='projects' contentEditable suppressContentEditableWarning>
                         {details.title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" name='projects' contentEditable suppressContentEditableWarning>
+                    <Typography variant="body2" color="textSecondary" component="p" className={classes.secondaryText} name='projects' contentEditable suppressContentEditableWarning>
                         {details.description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
-                    <a href={details.link} target='_blank'>Link</a>
+                <Button size="medium" className={classes.button}>
+                    <a href={details.link} className={classes.secondaryText} target='_blank'>Link</a>
                 </Button>
             </CardActions>
         </Card>

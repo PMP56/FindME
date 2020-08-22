@@ -232,7 +232,7 @@ const Template1 = () => {
                                     <p className={`${classes.secondaryText}`} style={{ fontSize: '14px' }} name="firstIntro" onBlur={update} contentEditable suppressContentEditableWarning>
                                         {database.firstIntro}
                                     </p>
-                                    <p className={`${classes.secondaryText}`} name="secondIntro" contentEditable suppressContentEditableWarning>
+                                    <p className={`${classes.secondaryText}`} name="secondIntro" onBlur={update} contentEditable suppressContentEditableWarning>
                                         {database.secondIntro}
                                     </p>
 
@@ -243,12 +243,9 @@ const Template1 = () => {
                             </p>
 
                                     <div className={classes.skills} name='skills' onBlur={update} contentEditable suppressContentEditableWarning>
-                                        <ul className={classes.secondaryText} >
-                                            {database.skills.slice(database.skills.length / 2, database.skills.length).map((skill) => <li key={skill}>{skill}</li>)}
-                                        </ul>
-                                        <ul className={classes.secondaryText} >
-                                            {database.skills.slice(0, database.skills.length / 2).map((skill) => <li key={skill}>{skill}</li>)}
-                                        </ul>
+                                        <div className={classes.secondaryText} >
+                                            {database.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -274,9 +271,8 @@ const Template1 = () => {
 
                     <section className={classes.s2}>
                         <div className={classes.maincontainer}>
-                            <a className={classes.secondaryText} href=""></a>
+                            <br />
                             <h3 style={{ textAlign: 'center' }} className={classes.mainText}>Get In Touch</h3>
-
                             <form className={classes.contactForm}>
                                 <a name="contact"></a>
                                 <label style={{ color: 'var(--secondaryText)' }} className={classes.contactFormLabel}>Name</label>

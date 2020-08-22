@@ -28,7 +28,7 @@ const styles = makeStyles({
     mainText: {
         transitionDuration: '0.4s',
         fontWeight: '800',
-        fontFamily: 'Cambria',
+        fontFamily: 'Russo One',
         color: 'var(--mainText)',
     },
     secondaryText: {
@@ -282,6 +282,7 @@ const styles = makeStyles({
         borderRadius: '5px',
         backgroundColor: 'var(--mainColor)',
         marginBottom: '50px',
+        color: 'var(--mainText)'
     },
 
     contactFormLabel: {
@@ -302,6 +303,7 @@ const styles = makeStyles({
         borderRadius: '5px',
         border: '1px solid var(--borderColor)',
         fontSize: '14px',
+        color: 'var(--mainText)'
     },
 
     submitBtn: {
