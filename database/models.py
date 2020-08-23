@@ -31,6 +31,7 @@ class UserData(models.Model):
         ),
         blank=True
     )
+    visit = models.IntegerField(default=0)
 
     def __str__(self):
         return self.userName

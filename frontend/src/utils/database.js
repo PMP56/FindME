@@ -1,5 +1,19 @@
 import axios from 'axios';
 
+
+export const updateData = async (username, data) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    const body = JSON.stringify(data);
+    return axios.put(`/api/database/${username}/`, body, config)
+        .then(
+            (result) => { console.log('Data updated'); /*console.clear()*/ }
+        ).catch(err => console.log(err.response.data))
+}
+
 const deleteData = (username) => {
     const config = {
         headers: {
@@ -37,7 +51,8 @@ export const addData = (data) => {
         .catch(err => {
             console.log(err.response.data);
             if (err.response.data['id'] || err.response.data['userName']) {
-                deleteData(data.userName).then((result) => addDataSeparately(data)).catch(err => console.log(err.response.data))
+                updateData(data.userName, data);
+                //deleteData(data.userName).then((result) => addDataSeparately(data)).catch(err => console.log(err.response.data))
             }
         });
 }

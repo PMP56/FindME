@@ -59,10 +59,10 @@ const ProjectCard = (props) => {
                     image={details.image}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2" className={classes.mainText} name='projects' contentEditable suppressContentEditableWarning>
+                    <Typography gutterBottom variant="h5" component="h2" className={classes.mainText} name='projects' contentEditable={props.edit} suppressContentEditableWarning>
                         {details.title}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.secondaryText} name='projects' contentEditable suppressContentEditableWarning>
+                    <Typography variant="body2" color="textSecondary" component="p" className={classes.secondaryText} name='projects' contentEditable={props.edit} suppressContentEditableWarning>
                         {details.description}
                     </Typography>
                 </CardContent>
