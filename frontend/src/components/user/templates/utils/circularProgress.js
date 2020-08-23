@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 
 const styles = makeStyles({
@@ -12,7 +12,6 @@ const styles = makeStyles({
 const CircularProgessIndicator = () => {
     const classes = styles();
     return (
-
         <CircularProgress className={classes.alignCenter} color="secondary" />
     );
 }

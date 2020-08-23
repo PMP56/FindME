@@ -78,7 +78,6 @@ const Template1 = (props) => {
             }
         });
         console.log(database);
-        //addData(database);
     }
 
 
@@ -233,7 +232,7 @@ const Template1 = (props) => {
 
                         <div className={classes.socialLinks}>
                             <h5 className={classes.mainText}>Find me on Social Media</h5>
-                            <SocialLinks data={{ 'github': 'https://github.com', 'facebook': 'https://facebook.com', 'instagram': 'https://instagram.com' }} />
+                            <SocialLinks data={database.socialLinks} edit={editable} />
                         </div>
                     </div>
                 </div>
