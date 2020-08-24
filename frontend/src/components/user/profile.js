@@ -32,7 +32,7 @@ const Profile = (props) => {
                     skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
                     theme: 'white',
                     profilePicture: '/static/frontend/user.png',
-                    socialLinks: [["Social Links"]],
+                    socialLinks: [],
                     projects: [["Projects"]],
                     visits: 0,
                 });

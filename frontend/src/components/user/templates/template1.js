@@ -46,7 +46,7 @@ const Template1 = (props) => {
     const publish = (database) => {
         addData(database);
         setSaving(true);
-        setInterval(() => { setSaving(false); location.replace(`/#/${database.userName}`); }, 2000);
+        setInterval(() => { setSaving(false); location.reload(); }, 2000);
 
     }
 
