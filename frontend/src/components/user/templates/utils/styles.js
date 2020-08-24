@@ -35,6 +35,18 @@ const styles = makeStyles({
         transitionDuration: '0.4s',
         color: 'var(--secondaryText)',
     },
+    saveBox: {
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        overflow: 'hidden',
+        zIndex: '100',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     s1: {
         transitionDuration: '0.4s',
         backgroundColor: 'var(--mainColor)',

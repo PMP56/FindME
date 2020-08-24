@@ -12,7 +12,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -222,12 +221,14 @@ const SocialLink = (props) => {
                 :
                 (props.data).map((link, index) => <Links key={index} icon={link[0]} val={link[1]} />)
             }
-            <div className='d-flex justify-content-center'>
-                <div className={classes.addButton} onClick={handleClickOpen} >
-                    <AddBoxIcon className='d-inline' style={{ color: 'var(--secondaryText)', fontSize: '30px' }} />
-                    <h6 className='ml-3 d-inline' style={{ color: 'var(--secondaryText)' }}>Add/Edit social links</h6>
-                </div>
-            </div>
+            {(props.edit) ?
+                <div className='d-flex justify-content-center'>
+                    <div className={classes.addButton} onClick={handleClickOpen} >
+                        <AddBoxIcon className='d-inline' style={{ color: 'var(--secondaryText)', fontSize: '30px' }} />
+                        <h6 className='ml-3 d-inline' style={{ color: 'var(--secondaryText)' }}>Add/Edit social links</h6>
+                    </div>
+                </div> : <Fragment />
+            }
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add Social Links</DialogTitle>
                 <DialogContent>

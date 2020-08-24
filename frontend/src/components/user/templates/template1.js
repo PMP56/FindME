@@ -10,15 +10,19 @@ import ProjectCard from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
 import CircularProgressIndicator from './utils/circularProgress';
 import { useEffect } from 'react';
+import { CircularProgress } from '@material-ui/core';
 //import { values } from 'regenerator-runtime';
 
 const Template1 = (props) => {
+    const classes = styles();
     //const user = props.username;
     //const id = currentUser.id;
     const editable = props.edit;
     const { currentUser } = useContext(AuthContext);
     const [database, setDatabase] = useState(props.data);
     const visit = database.visit + 1;
+
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         changeTheme(database.theme);
@@ -41,10 +45,12 @@ const Template1 = (props) => {
 
     const publish = (database) => {
         addData(database);
+        setSaving(true);
+        setInterval(() => { setSaving(false); location.replace(`/#/${database.userName}`); }, 2000);
+
     }
 
     const update = () => {
-        //console.log("database", database);
         var tags = document.querySelectorAll('[contenteditable]');
         tags.forEach(tag => {
             let currentTag = tag.getAttribute("name");
@@ -141,7 +147,16 @@ const Template1 = (props) => {
         }
     };
 
-    const classes = styles();
+    const SaveProgess = () => {
+        return (
+
+            <div className={classes.saveBox}>
+                <CircularProgress color='secondary' />
+                <h6 className='mt-3' style={{ color: 'white', }}>Saving</h6>
+            </div>
+        );
+    }
+
     return (
         <ThemeChanger theme={theme}>
             {editable ?
@@ -152,6 +167,7 @@ const Template1 = (props) => {
                 :
                 <Fragment />
             }
+            {saving ? <SaveProgess /> : <Fragment />}
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
