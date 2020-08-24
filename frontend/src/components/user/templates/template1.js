@@ -80,6 +80,9 @@ const Template1 = (props) => {
         console.log(database);
     }
 
+    const changeSocialLinks = (data) => {
+        setDatabase({ ...database, socialLinks: data });
+    }
 
     const changeTheme = (mode) => {
         setDatabase({ ...database, theme: mode });
@@ -232,7 +235,7 @@ const Template1 = (props) => {
 
                         <div className={classes.socialLinks}>
                             <h5 className={classes.mainText}>Find me on Social Media</h5>
-                            <SocialLinks data={database.socialLinks} edit={editable} />
+                            <SocialLinks data={database.socialLinks} edit={editable} changeLinks={changeSocialLinks} />
                         </div>
                     </div>
                 </div>

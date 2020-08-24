@@ -6,8 +6,10 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import RedditIcon from '@material-ui/icons/Reddit';
+import PublicIcon from '@material-ui/icons/Public';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import ClearIcon from '@material-ui/icons/Clear';
+import AddIcon from '@material-ui/icons/Add';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -67,36 +69,43 @@ const styles = makeStyles({
         borderRadius: '5px',
         backgroundColor: '#ededed',
         boxShadow: '0 0 5px 3px #aaaaaa',
+        transitionDuration: '0.2s',
     },
     tileBox: {
         paddingLeft: '10px',
         width: '100%',
         borderWidth: '0px',
-        backgroundColor: '#fafafa',
+        backgroundColor: 'transparent',
+        outline: 'none !important'
     },
 });
 const SocialLink = (props) => {
     const classes = styles();
     const [tempData, setTempData] = useState(props.data);
+    const [currentIcon, setCurrentIcon] = useState("github");
+    const [currentValue, setCurrentValue] = useState("http://");
     const [open, setOpen] = useState(false);
 
     const IconButtons = () => {
         return (
             <div className={classes.iconContainer}>
                 <div className={classes.iconBox}>
-                    <FacebookIcon style={{ fontSize: '32px' }} />
+                    <FacebookIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('facebook')} />
                 </div>
                 <div className={classes.iconBox}>
-                    <InstagramIcon style={{ fontSize: '32px' }} />
+                    <InstagramIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('instagram')} />
                 </div>
                 <div className={classes.iconBox}>
-                    <GitHubIcon style={{ fontSize: '32px' }} />
+                    <GitHubIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('github')} />
                 </div>
                 <div className={classes.iconBox}>
-                    <TwitterIcon style={{ fontSize: '32px' }} />
+                    <TwitterIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('twitter')} />
                 </div>
                 <div className={classes.iconBox}>
-                    <RedditIcon style={{ fontSize: '32px' }} />
+                    <RedditIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('reddit')} />
+                </div>
+                <div className={classes.iconBox}>
+                    <PublicIcon style={{ fontSize: '32px' }} onClick={() => addNewLink('website')} />
                 </div>
             </div>
         );
@@ -105,6 +114,7 @@ const SocialLink = (props) => {
     const Tile = (props) => {
         const key = props.icon;
         const val = props.val;
+        const index = props.index;
         return (
             <div className={classes.tileContainer}>
                 {(key == 'github') ? <GitHubIcon style={{ margin: '5px 10px' }} /> :
@@ -112,11 +122,28 @@ const SocialLink = (props) => {
                         (key == 'facebook') ? <FacebookIcon color='primary' style={{ margin: '5px 10px' }} /> :
                             (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C', margin: '5px 10px' }} /> :
                                 (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
-                                    <Fragment />
+                                    <PublicIcon style={{ margin: '5px 10px' }} />
                 }
-                <input className={classes.tileBox} type='text' placeholder='Address' value={val} onChange={() => { }}></input>
-                <ClearIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={() => deleteLink([key, val])} />
-            </div>
+                <input className={classes.tileBox} readOnly type='text' placeholder='Address' value={val} index={index}></input>
+                <ClearIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={() => { deleteLink(index); }} />
+            </div >
+        );
+    }
+
+    const EditableTile = () => {
+        const key = currentIcon;
+        return (
+            <div className={classes.tileContainer}>
+                {(key == 'github') ? <GitHubIcon style={{ margin: '5px 10px' }} /> :
+                    (key == 'twitter') ? <TwitterIcon color='primary' style={{ margin: '5px 10px' }} /> :
+                        (key == 'facebook') ? <FacebookIcon color='primary' style={{ margin: '5px 10px' }} /> :
+                            (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C', margin: '5px 10px' }} /> :
+                                (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
+                                    <PublicIcon style={{ margin: '5px 10px' }} />
+                }
+                <input className={classes.tileBox} autoFocus type='text' placeholder='Address' value={currentValue} onChange={linkChange}></input>
+                <AddIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={addLink} />
+            </div >
         );
     }
 
@@ -139,28 +166,53 @@ const SocialLink = (props) => {
                         (key == 'facebook') ? <FacebookIcon color='primary' /> :
                             (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C' }} /> :
                                 (key == 'reddit') ? <RedditIcon color='secondary' /> :
-                                    <Fragment />
+                                    <PublicIcon />
                 }
                 <a style={{ margin: '0px 20px', color: 'var(--secondaryText)', fontSize: '14px' }} target="_blank" href={val}>{key.toUpperCase()}</a>
             </div>
         );
     }
 
+    //Open and close for dialog
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
+        console.log(tempData);
     };
 
-    const deleteLink = (arr) => {
-        console.log(arr);
-        // const index = tempData.findIndex(arr);
-        // console.log(index);
-        // if (index > -1) {
-        //     setTempData(tempData.splice(index, 1));
-        // }
-        // console.log(tempData);
+    //passing data to parent
+    const save = () => {
+        props.changeLinks(tempData);
+        handleClose();
+    }
+
+    const addNewLink = (key) => {
+        setCurrentIcon(key);
+    }
+
+    //Add option
+    const addLink = (key) => {
+        if (currentValue != "http://" || currentValue != null) {
+            setTempData([...tempData, [currentIcon, currentValue]]);
+            setCurrentValue("http://");
+        }
+    }
+
+    //delete option
+    const deleteLink = (index) => {
+        const temp = tempData;
+        if (index > -1) {
+            tempData.splice(index, 1);
+            setTempData([...tempData]);
+        }
+        //console.log(tempData);
+    }
+
+    const linkChange = (e) => {
+        const { value } = e.target;
+        setCurrentValue(value);
     }
 
     return (
@@ -168,7 +220,7 @@ const SocialLink = (props) => {
             {(props.data == null) ?
                 <NoLinks />
                 :
-                (props.data).map((link) => <Links key={link[0]} icon={link[0]} val={link[1]} />)
+                (props.data).map((link, index) => <Links key={index} icon={link[0]} val={link[1]} />)
             }
             <div className='d-flex justify-content-center'>
                 <div className={classes.addButton} onClick={handleClickOpen} >
@@ -183,13 +235,15 @@ const SocialLink = (props) => {
                         Add your social media links so that people can connect with you more often.
                     </DialogContentText>
                     <IconButtons />
-                    {(tempData).map((link) => <Tile key={link[0]} icon={link[0]} val={link[1]} style={{ marginBottom: '5px' }} />)}
+                    <EditableTile />
+                    <hr />
+                    {(tempData).map((link, index) => <Tile key={index} icon={link[0]} val={link[1]} index={index} style={{ marginBottom: '5px' }} />)}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
                 </Button>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={save} color="primary">
                         Submit
                 </Button>
                 </DialogActions>
