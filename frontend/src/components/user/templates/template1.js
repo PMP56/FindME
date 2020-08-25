@@ -6,7 +6,7 @@ import { styles } from './utils/styles';
 import { addData, getData, updateData } from '../../../utils/database';
 import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
-import ProjectCard from './utils/projectCard';
+import Projects from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
 import CircularProgressIndicator from './utils/circularProgress';
 import { useEffect } from 'react';
@@ -263,9 +263,9 @@ const Template1 = (props) => {
                 </h2>
                 <div className={classes.maincontainer2}>
 
-                    <ProjectCard data={null} edit={editable} />
-                    <ProjectCard data={null} edit={editable} />
-                    <ProjectCard data={null} edit={editable} />
+                    <Projects data={database.projects} edit={editable} />
+                    {/*<ProjectCard data={null} edit={editable} />
+                    <ProjectCard data={null} edit={editable} /> */}
                 </div>
             </section>
 

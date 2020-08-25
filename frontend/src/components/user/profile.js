@@ -33,7 +33,7 @@ const Profile = (props) => {
                     theme: 'white',
                     profilePicture: '/static/frontend/user.png',
                     socialLinks: [],
-                    projects: [["Projects"]],
+                    projects: [["Title", "Image Link", "Description", "Link"]],
                     visits: 0,
                 });
                 setLoaded(true);
