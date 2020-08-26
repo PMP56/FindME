@@ -9,6 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import AddIcon from '@material-ui/icons/Add';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -81,6 +83,16 @@ const styles = makeStyles({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
+    uploadBox: {
+        padding: '10px',
+        margin: '20px 0px',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        border: '2px dashed rgba(0, 0, 0, 0.5)',
+        borderRadius: '10px',
+        height: '200px',
+        alignItems: 'center',
+        textAlign: 'center'
+    },
     "@media (max-width: 900px)": {
         gridContainer: {
             gridTemplateColumns: 'auto auto',
@@ -104,7 +116,8 @@ const ProjectCard = (props) => {
     const [details, setDetails] = useState(props.data);
     const [dialogInfo, setDialogInfo] = useState({});
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [addOpen, setAddOpen] = useState(false);
 
     const handleClickOpen = (data) => {
         setDialogInfo({
@@ -115,9 +128,18 @@ const ProjectCard = (props) => {
         })
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
+    };
+
+    //--------------------------------
+    const handleAddClickOpen = () => {
+        console.log('hgsdhfshg');
+        setAddOpen(true);
+    };
+
+    const handleAddClose = () => {
+        setAddOpen(false);
     };
 
     const Tile = (props) => {
@@ -134,7 +156,9 @@ const ProjectCard = (props) => {
         return (
             <div className={classes.gridContainer}>
                 {(details).map((data, index) => <Tile key={index} data={data} />)}
-
+                <div className={`${classes.gridTiles} d-flex justify-content-center`} onClick={handleAddClickOpen}>
+                    <AddIcon style={{ fontSize: '100px', color: 'var(--secondaryText)', textAlign: 'center' }} />
+                </div>
             </div>
         )
     }
@@ -149,6 +173,44 @@ const ProjectCard = (props) => {
                         {dialogInfo.description}
                     </DialogContentText>
                 </DialogContent>
+            </Dialog>
+        );
+    }
+
+    const AddDescription = () => {
+        return (
+            <Dialog open={addOpen} onClose={handleAddClose} aria-labelledby="form-dialog-title" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
+                <DialogTitle id="form-dialog-title" className={classes.dialogTitle}><span style={{ color: 'white', fontSize: '20px' }}>Add Project</span></DialogTitle>
+                <DialogContent className={classes.dialog}>
+                    <h5 style={{ color: 'white', marginLeft: '10px' }}>
+                        Title:
+                        </h5>
+                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }} type='text' name='title' placeholder='Title' onChange={() => { }}></input>
+                    <div className={classes.uploadBox}>
+                        <div>
+                            <AttachFileIcon style={{ color: 'grey', fontSize: '80px', textAlign: 'center', marging: '20px 10px' }} />
+                            <h6 style={{ color: 'grey', marginTop: '25px' }}>Drag and drop your image here</h6>
+                        </div>
+                    </div>
+                    <h5 style={{ color: 'white', marginLeft: '10px' }}>
+                        Description:
+                        </h5>
+                    <textarea className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', height: '100px' }} name='description' placeholder='Description' onChange={() => { }}></textarea>
+                    <br />
+                    <h5 style={{ color: 'white', marginLeft: '10px' }}>
+                        Link:
+                        </h5>
+                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }} type='text' name='link' placeholder='Link' onChange={() => { }}></input>
+
+                </DialogContent>
+                <DialogActions style={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}>
+                    <Button onClick={handleAddClose} color="primary">
+                        <h4 style={{ color: 'white', fontFamily: 'monospace', fontWeight: 'normal', letterSpacing: 0.25 }}>Cancel</h4>
+                    </Button>
+                    <Button color="primary">
+                        <h4 style={{ color: 'white', fontFamily: 'monospace', fontWeight: 'normal', letterSpacing: 0.25 }}>Submit</h4>
+                    </Button>
+                </DialogActions>
             </Dialog>
         );
     }
@@ -179,6 +241,7 @@ const ProjectCard = (props) => {
             </Card><br />*/}
             <ProjectGrid />
             <Description />
+            <AddDescription />
         </Fragment>
     );
 }
