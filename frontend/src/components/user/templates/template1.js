@@ -8,7 +8,6 @@ import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import Projects from './utils/projectCard';
 import SocialLinks from './utils/socialLink';
-import CircularProgressIndicator from './utils/circularProgress';
 import { useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 //import { values } from 'regenerator-runtime';
@@ -90,6 +89,10 @@ const Template1 = (props) => {
         setDatabase({ ...database, socialLinks: data });
     }
 
+    const changeProjects = (data) => {
+        setDatabase({ ...database, projects: data });
+    }
+
     const changeTheme = (mode) => {
         setDatabase({ ...database, theme: mode });
 
@@ -162,7 +165,7 @@ const Template1 = (props) => {
             {editable ?
                 <div className={classes.optionBox}>
                     <SaveOutlinedIcon className={classes.optionButton} onClick={() => { update(); publish(database); }} />
-                    <CloseIcon className={classes.optionButton} />
+                    <CloseIcon className={classes.optionButton} onClick={() => { location.reload(); }} />
                 </div>
                 :
                 <Fragment />
@@ -171,7 +174,7 @@ const Template1 = (props) => {
             <section className={classes.s1}>
                 <div className={classes.maincontainer}>
                     <div className={classes.greetingwrapper}>
-                        <h1 className={`${classes.mainText} ${classes.userName}`} name="userHeader" onBlur={update} contentEditable={editable} suppressContentEditableWarning>{database.userHeader}</h1>
+                        <h1 className={`${classes.mainText} ${classes.userName}`} name="userHeader" onBlur={update} spellCheck={false} contentEditable={editable} suppressContentEditableWarning>{database.userHeader}</h1>
                     </div>
 
                     <div className={classes.introwrapper}>
@@ -244,7 +247,7 @@ const Template1 = (props) => {
 
                             <div className={classes.skills} name='skills' onBlur={update} contentEditable={editable} suppressContentEditableWarning>
                                 <div className={classes.secondaryText} >
-                                    {database.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                                    {database.skills.map((skill, index) => <li key={index}>{skill}</li>)}
                                 </div>
                             </div>
                         </div>
@@ -258,14 +261,13 @@ const Template1 = (props) => {
             </section>
 
             <section className={classes.s1}>
+                <br />
                 <h2 className={classes.mainText} style={{ textAlign: 'center', marginTop: '15px', }}>
                     Past work and projects
                 </h2>
                 <div className={classes.maincontainer2}>
 
-                    <Projects data={database.projects} edit={editable} />
-                    {/*<ProjectCard data={null} edit={editable} />
-                    <ProjectCard data={null} edit={editable} /> */}
+                    <Projects data={database.projects} edit={editable} changeProjects={changeProjects} />
                 </div>
             </section>
 

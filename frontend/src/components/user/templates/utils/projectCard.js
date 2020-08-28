@@ -8,8 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -54,6 +56,7 @@ const styles = makeStyles({
         padding: '15px',
     },
     gridTiles: {
+        position: 'relative',
         textAlign: 'center',
         fontFamily: 'Monospace',
         margin: '5px',
@@ -64,6 +67,23 @@ const styles = makeStyles({
         cursor: 'pointer',
         "&:hover": {
             backgroundColor: 'teal',
+
+        },
+        "&:hover $tileButton": {
+            display: 'block'
+        }
+    },
+    tileButton: {
+        fontSize: '24px',
+        position: 'absolute',
+        top: '10px',
+        right: '10px',
+        zIndex: '100',
+        color: 'var(--mainText)',
+        display: 'none',
+        transitionDuration: '0.3s',
+        '&:hover': {
+            fontSize: '28px'
         }
     },
     dialog: {
@@ -111,13 +131,18 @@ const styles = makeStyles({
 });
 
 
-
 const ProjectCard = (props) => {
-    const [details, setDetails] = useState(props.data);
     const [dialogInfo, setDialogInfo] = useState({});
-
     const [open, setOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const [deleteIndex, setDeleteIndex] = useState();
+    const [newProject, setNewProject] = useState({
+        title: "",
+        imageLink: "",
+        description: "",
+        link: ""
+    });
 
     const handleClickOpen = (data) => {
         setDialogInfo({
@@ -134,7 +159,6 @@ const ProjectCard = (props) => {
 
     //--------------------------------
     const handleAddClickOpen = () => {
-        console.log('hgsdhfshg');
         setAddOpen(true);
     };
 
@@ -142,12 +166,53 @@ const ProjectCard = (props) => {
         setAddOpen(false);
     };
 
+    //--------------------------------
+    const handleDeleteClickOpen = (index) => {
+        setDeleteIndex(index);
+        setDeleteOpen(true);
+    };
+
+    const handleDeleteClose = () => {
+        setDeleteOpen(false);
+    };
+
+    //--------------------------------
+
+    const formChange = e => {
+        const { name, value } = e.target;
+        setNewProject({
+            ...newProject,
+            [name]: value
+        })
+    }
+
+    const submitForm = () => {
+        const project = [newProject.title, newProject.imageLink, newProject.description, newProject.link];
+        if (project[0].length != 0) {
+            props.changeProjects([...props.data, project]);
+            handleAddClose();
+            setNewProject({
+                title: "",
+                imageLink: "",
+                description: "",
+                link: ""
+            });
+        }
+    }
+
+    const deleteTile = (index) => {
+        props.data.splice(index, 1);
+        handleDeleteClose();
+    }
+
     const Tile = (props) => {
-        const data = props.data
+        const data = props.data;
+        const index = props.index;
         return (
-            <div className={classes.gridTiles} onClick={() => handleClickOpen(data)} alt={data[0]}>
-                <h1 style={{ color: 'var(--secondaryText)', fontSize: '36px', textAlign: 'center' }}>{data[0]}</h1>
-                <img src='/static/frontend/landing/des-1.png' style={{ height: '65%' }} />
+            <div className={classes.gridTiles} alt={data[0]}>
+                <h1 style={{ color: 'var(--secondaryText)', fontSize: '24px', textAlign: 'center' }}>{data[0]}</h1>
+                <img src='/static/frontend/landing/des-1.png' style={{ height: '65%' }} onClick={() => handleClickOpen(data)} />
+                <DeleteIcon className={classes.tileButton} onClick={handleDeleteClickOpen} />
             </div>
         );
     }
@@ -155,12 +220,36 @@ const ProjectCard = (props) => {
     const ProjectGrid = () => {
         return (
             <div className={classes.gridContainer}>
-                {(details).map((data, index) => <Tile key={index} data={data} />)}
-                <div className={`${classes.gridTiles} d-flex justify-content-center`} onClick={handleAddClickOpen}>
-                    <AddIcon style={{ fontSize: '100px', color: 'var(--secondaryText)', textAlign: 'center' }} />
-                </div>
+                {(props.data).map((data, index) => <Tile key={index} data={data} index={index} />)}
+                {(!props.edit) ? <Fragment /> :
+
+                    <div className={`${classes.gridTiles} d-flex justify-content-center`} onClick={handleAddClickOpen}>
+                        <AddIcon style={{ fontSize: '100px', color: 'var(--secondaryText)', textAlign: 'center', position: 'absolute', top: '25%' }} />
+                    </div>
+                }
             </div>
         )
+    }
+
+    const Delete = () => {
+        return (
+            <Dialog open={deleteOpen} onClose={handleDeleteClose} aria-labelledby="form-dialog-title" >
+                <DialogTitle id="form-dialog-title">Delete</DialogTitle>
+                <DialogContent>
+                    <DialogContentText style={{ textAlign: 'center' }}>
+                        Are you sure you want to delete this project?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDeleteClose} color="primary">
+                        Cancle
+                    </Button>
+                    <Button color="primary" type='submit' onClick={() => deleteTile(deleteIndex)}>
+                        Yes, delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        );
     }
 
     const Description = () => {
@@ -177,15 +266,21 @@ const ProjectCard = (props) => {
         );
     }
 
-    const AddDescription = () => {
-        return (
+    const classes = styles();
+    return (
+        <Fragment>
+            <ProjectGrid />
+            <Description />
+
+            <Delete />
             <Dialog open={addOpen} onClose={handleAddClose} aria-labelledby="form-dialog-title" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
                 <DialogTitle id="form-dialog-title" className={classes.dialogTitle}><span style={{ color: 'white', fontSize: '20px' }}>Add Project</span></DialogTitle>
                 <DialogContent className={classes.dialog}>
+
                     <h5 style={{ color: 'white', marginLeft: '10px' }}>
                         Title:
                         </h5>
-                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }} type='text' name='title' placeholder='Title' onChange={() => { }}></input>
+                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: 'white' }} autoFocus name='title' placeholder='Title' value={newProject.title} onChange={formChange} />
                     <div className={classes.uploadBox}>
                         <div>
                             <AttachFileIcon style={{ color: 'grey', fontSize: '80px', textAlign: 'center', marging: '20px 10px' }} />
@@ -195,53 +290,23 @@ const ProjectCard = (props) => {
                     <h5 style={{ color: 'white', marginLeft: '10px' }}>
                         Description:
                         </h5>
-                    <textarea className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', height: '100px' }} name='description' placeholder='Description' onChange={() => { }}></textarea>
+                    <textarea className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: 'white', height: '100px' }} name='description' placeholder='Description' value={newProject.description} onChange={formChange}></textarea>
                     <br />
                     <h5 style={{ color: 'white', marginLeft: '10px' }}>
                         Link:
                         </h5>
-                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }} type='text' name='link' placeholder='Link' onChange={() => { }}></input>
+                    <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: 'white' }} type='text' name='link' placeholder='Link' value={newProject.link} onChange={formChange}></input>
 
                 </DialogContent>
                 <DialogActions style={{ backgroundColor: 'rgba(0, 0, 0, 0.9)' }}>
                     <Button onClick={handleAddClose} color="primary">
                         <h4 style={{ color: 'white', fontFamily: 'monospace', fontWeight: 'normal', letterSpacing: 0.25 }}>Cancel</h4>
                     </Button>
-                    <Button color="primary">
+                    <Button color="primary" type='submit' onClick={submitForm}>
                         <h4 style={{ color: 'white', fontFamily: 'monospace', fontWeight: 'normal', letterSpacing: 0.25 }}>Submit</h4>
                     </Button>
                 </DialogActions>
             </Dialog>
-        );
-    }
-
-    const classes = styles();
-    return (
-        <Fragment>
-            {/*<Card className={classes.root}>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.media}
-                        image={details.image}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2" className={classes.mainText} name='projects' contentEditable={props.edit} suppressContentEditableWarning>
-                            {details.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p" className={classes.secondaryText} name='projects' contentEditable={props.edit} suppressContentEditableWarning>
-                            {details.description}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <Button size="medium" className={classes.button}>
-                        <a href={details.link} className={classes.secondaryText} target='_blank'>Link</a>
-                    </Button>
-                </CardActions>
-            </Card><br />*/}
-            <ProjectGrid />
-            <Description />
-            <AddDescription />
         </Fragment>
     );
 }

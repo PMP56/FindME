@@ -34,12 +34,13 @@ const styles = makeStyles({
     secondaryText: {
         transitionDuration: '0.4s',
         color: 'var(--secondaryText)',
+        padding: '7.5px 10px',
     },
     saveBox: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         width: '100%',
         height: '100%',
-        position: 'absolute',
+        position: 'fixed',
         overflow: 'hidden',
         zIndex: '100',
         display: 'flex',
@@ -66,6 +67,7 @@ const styles = makeStyles({
     },
 
     userName: {
+        padding: '5px 30px',
         fontSize: '56px',
     },
 

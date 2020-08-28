@@ -123,7 +123,7 @@ const SocialLink = (props) => {
                                 (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
                                     <PublicIcon style={{ margin: '5px 10px' }} />
                 }
-                <input className={classes.tileBox} readOnly type='text' placeholder='Address' value={val} index={index}></input>
+                <input className={classes.tileBox} style={{ color: '#555', cursor: 'pointer' }} readOnly type='text' placeholder='Address' value={val} index={index}></input>
                 <ClearIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={() => { deleteLink(index); }} />
             </div >
         );
@@ -140,7 +140,7 @@ const SocialLink = (props) => {
                                 (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
                                     <PublicIcon style={{ margin: '5px 10px' }} />
                 }
-                <input className={classes.tileBox} autoFocus type='text' placeholder='Address' value={currentValue} onChange={linkChange}></input>
+                <input className={classes.tileBox} autoFocus spellCheck={false} type='text' placeholder='Address' value={currentValue} onChange={linkChange}></input>
                 <AddIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={addLink} />
             </div >
         );
@@ -188,6 +188,12 @@ const SocialLink = (props) => {
     }
 
     const addNewLink = (key) => {
+        if (key != 'website') {
+            setCurrentValue(`http://www.${key}.com/`);
+        } else {
+
+            setCurrentValue(`http://www.`);
+        }
         setCurrentIcon(key);
     }
 
