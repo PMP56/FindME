@@ -208,12 +208,16 @@ const Template1 = (props) => {
                         <div className={classes.leftcolumn}>
                             <div className={classes.ppContainer}>
                                 <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" onClick={() => console.log(database)} />
-                                <button className={classes.uploadButton} onClick={handleUploadClick}>
-                                    <AddPhotoAlternateIcon style={{ margin: '0px 5px' }} />
-                                    Update
-                                </button>
-                                <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp" style={{ display: 'none' }} ref={hiddenFileInput} onChange={uploadProfileChange} />
+                                {!editable ? <Fragment /> :
+                                    <Fragment>
+                                        <button className={classes.uploadButton} onClick={handleUploadClick}>
+                                            <AddPhotoAlternateIcon style={{ margin: '0px 5px' }} />
+                                            Update
+                                        </button>
+                                        <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp" style={{ display: 'none' }} ref={hiddenFileInput} onChange={uploadProfileChange} />
 
+                                    </Fragment>
+                                }
                             </div>
                             {!editable ?
                                 <Fragment /> :
