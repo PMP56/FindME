@@ -26,6 +26,7 @@
     "@material-ui/icons": "^4.9.1",
     "async": "^3.2.0",
     "axios": "^0.19.2",
+    "firebase": "^7.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

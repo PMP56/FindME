@@ -155,15 +155,45 @@ const styles = makeStyles({
         paddingBottom: '50px',
     },
 
+    ppContainer: {
+        display: 'block',
+        margin: '0 auto',
+        height: '200px',
+        width: '200px',
+        marginBottom: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        overflow: 'hidden',
+        '&:hover $uploadButton': {
+            opacity: '90%',
+        }
+    },
+
     profilepic: {
         transitionDuration: '0.4s',
         display: 'block',
         margin: '0 auto',
-        marginBottom: '20px',
         height: '200px',
         width: '200px',
-        objectFit: 'contain',
+        objectFit: 'cover',
+        border: '3px solid var(--borderColor)',
+    },
+
+    uploadButton: {
+        position: 'absolute',
+        height: '40px',
+        width: '200px',
+        alignSelf: 'center',
+        color: 'var(--secondaryText)',
+        opacity: '0%',
+        backgroundColor: 'var(--secondaryColor)',
         border: '2px solid var(--borderColor)',
+        transitionDuration: '0.3s',
+        '&:hover': {
+            backgroundColor: 'var(--mainColor)',
+            border: '2px solid var(--borderColor)',
+        }
     },
 
     themeOptionWrapper: {

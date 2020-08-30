@@ -1,6 +1,9 @@
-import React, { Component, Fragment, useState, useContext } from 'react';
+import React, { Component, Fragment, useState, useContext, useRef } from 'react';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CloseIcon from '@material-ui/icons/Close';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+
+import { uploadPicture } from '../../../utils/firebase_storage';
 
 import { styles } from './utils/styles';
 import { addData, getData, updateData } from '../../../utils/database';
@@ -14,6 +17,7 @@ import { CircularProgress } from '@material-ui/core';
 
 const Template1 = (props) => {
     const classes = styles();
+    const hiddenFileInput = useRef(null);
     //const user = props.username;
     //const id = currentUser.id;
     const editable = props.edit;
@@ -46,7 +50,17 @@ const Template1 = (props) => {
         addData(database);
         setSaving(true);
         setInterval(() => { setSaving(false); location.reload(); }, 2000);
+    }
 
+    const uploadProfileChange = async e => {
+        console.log(e.target.files[0])
+        const url = await uploadPicture(database.userName, e.target.files[0]);
+        setDatabase({ ...database, profilePicture: url });
+        //console.log(url);
+    }
+
+    const handleUploadClick = (e) => {
+        hiddenFileInput.current.click();
     }
 
     const update = () => {
@@ -192,9 +206,17 @@ const Template1 = (props) => {
                         </div>
 
                         <div className={classes.leftcolumn}>
-                            <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" onClick={() => console.log(database)} />
+                            <div className={classes.ppContainer}>
+                                <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" onClick={() => console.log(database)} />
+                                <button className={classes.uploadButton} onClick={handleUploadClick}>
+                                    <AddPhotoAlternateIcon style={{ margin: '0px 5px' }} />
+                                    Update
+                                </button>
+                                <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp" style={{ display: 'none' }} ref={hiddenFileInput} onChange={uploadProfileChange} />
+
+                            </div>
                             {!editable ?
-                                <Fragment></Fragment> :
+                                <Fragment /> :
                                 <Fragment>
                                     <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
                                         Personalize Theme

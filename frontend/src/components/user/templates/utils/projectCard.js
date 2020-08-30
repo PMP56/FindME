@@ -56,6 +56,10 @@ const styles = makeStyles({
         padding: '15px',
     },
     gridTiles: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'relative',
         textAlign: 'center',
         fontFamily: 'Monospace',
@@ -65,26 +69,43 @@ const styles = makeStyles({
         backgroundColor: 'var(--secondaryColor)',
         transitionDuration: '0.3s',
         cursor: 'pointer',
+        overflow: 'hidden',
         "&:hover": {
-            backgroundColor: 'teal',
-
+            backgroundColor: '#004040',
         },
         "&:hover $tileButton": {
-            display: 'block'
+            right: '10px',
+        },
+        '&:hover $tileImage': {
+            height: '95%',
+        },
+        '&:hover $tileText': {
+            top: '0px',
         }
+    },
+    tileText: {
+        color: 'var(--secondaryText)',
+        fontSize: '28px',
+        fontFamily: 'Monospace',
+        textAlign: 'center',
+        position: 'absolute',
+        transitionDuration: '0.2s',
+        top: '-50px',
     },
     tileButton: {
         fontSize: '24px',
         position: 'absolute',
         top: '10px',
-        right: '10px',
-        zIndex: '100',
-        color: 'var(--mainText)',
-        display: 'none',
-        transitionDuration: '0.3s',
+        right: '-50px',
+        color: 'var(--secondaryText)',
+        transitionDuration: '10s',
         '&:hover': {
             fontSize: '28px'
         }
+    },
+    tileImage: {
+        height: '80%',
+        transitionDuration: '0.3s',
     },
     dialog: {
         alignItems: 'center',
@@ -205,14 +226,16 @@ const ProjectCard = (props) => {
         handleDeleteClose();
     }
 
-    const Tile = (props) => {
-        const data = props.data;
-        const index = props.index;
+    const Tile = (prop) => {
+        const data = prop.data;
+        const index = prop.index;
         return (
             <div className={classes.gridTiles} alt={data[0]}>
-                <h1 style={{ color: 'var(--secondaryText)', fontSize: '24px', textAlign: 'center' }}>{data[0]}</h1>
-                <img src='/static/frontend/landing/des-1.png' style={{ height: '65%' }} onClick={() => handleClickOpen(data)} />
-                <DeleteIcon className={classes.tileButton} onClick={handleDeleteClickOpen} />
+                <h1 className={classes.tileText}>{data[0]}</h1>
+                <img src='/static/frontend/landing/des-1.png' className={classes.tileImage} alt={data[0]} onClick={() => handleClickOpen(data)} />
+                {(!props.edit) ? <Fragment /> :
+                    <DeleteIcon className={classes.tileButton} onClick={handleDeleteClickOpen} />
+                }
             </div>
         );
     }
@@ -224,7 +247,7 @@ const ProjectCard = (props) => {
                 {(!props.edit) ? <Fragment /> :
 
                     <div className={`${classes.gridTiles} d-flex justify-content-center`} onClick={handleAddClickOpen}>
-                        <AddIcon style={{ fontSize: '100px', color: 'var(--secondaryText)', textAlign: 'center', position: 'absolute', top: '25%' }} />
+                        <AddIcon className={classes.tileImage} style={{ fontSize: '100px', color: 'var(--secondaryText)', textAlign: 'center' }} />
                     </div>
                 }
             </div>
