@@ -77,26 +77,28 @@ const styles = makeStyles({
             backgroundColor: '#004040',
         },
         "&:hover $tileButton": {
-            right: '20px',
+            right: '10px',
         },
         '&:hover $tileImage': {
             height: '115%',
         },
         '&:hover $tileText': {
-            right: '10px',
+            right: '0px',
         }
     },
     tileText: {
-        color: '#222',
-        fontSize: '28px',
+        backgroundColor: '#222',
+        borderRadius: '7.5px 0px 0px 7.5px',
+        padding: '7.5px 15px',
+        color: 'white',
+        fontSize: '18px',
         fontFamily: 'Monospace',
         textAlign: 'center',
         position: 'absolute',
         transitionDuration: '0.3s',
-        bottom: '0px',
+        bottom: '-10px',
         right: '-200px',
-        letterSpacing: '0px',
-        textShadow: '2px 2px 4px #ccc'
+        letterSpacing: '0.5px',
     },
     tileButton: {
         fontSize: '24px',
@@ -126,7 +128,7 @@ const styles = makeStyles({
     dialogImage: {
         display: 'block',
         contain: 'cover',
-        width: '50%',
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
     },
@@ -263,6 +265,7 @@ const ProjectCard = (props) => {
     }
 
     const deleteTile = (index) => {
+        console.log(index);
         props.data.splice(index, 1);
         handleDeleteClose();
     }
@@ -275,7 +278,7 @@ const ProjectCard = (props) => {
                 <h1 className={classes.tileText}>{data[0]}</h1>
                 <img src={data[1]} className={classes.tileImage} alt={data[0]} onClick={() => handleClickOpen(data)} />
                 {(!props.edit) ? <Fragment /> :
-                    <DeleteIcon className={classes.tileButton} onClick={handleDeleteClickOpen} />
+                    <DeleteIcon className={classes.tileButton} onClick={() => handleDeleteClickOpen(index)} />
                 }
             </div>
         );

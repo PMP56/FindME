@@ -121,7 +121,7 @@ const SocialLink = (props) => {
                         (key == 'facebook') ? <FacebookIcon color='primary' style={{ margin: '5px 10px' }} /> :
                             (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C', margin: '5px 10px' }} /> :
                                 (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
-                                    <PublicIcon style={{ margin: '5px 10px' }} />
+                                    <PublicIcon style={{ margin: '5px 10px', color: 'black' }} />
                 }
                 <input className={classes.tileBox} style={{ color: '#555', cursor: 'pointer' }} readOnly type='text' placeholder='Address' value={val} index={index}></input>
                 <ClearIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={() => { deleteLink(index); }} />
@@ -138,7 +138,7 @@ const SocialLink = (props) => {
                         (key == 'facebook') ? <FacebookIcon color='primary' style={{ margin: '5px 10px' }} /> :
                             (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C', margin: '5px 10px' }} /> :
                                 (key == 'reddit') ? <RedditIcon color='secondary' style={{ margin: '5px 10px' }} /> :
-                                    <PublicIcon style={{ margin: '5px 10px' }} />
+                                    <PublicIcon style={{ margin: '5px 10px', color: 'black' }} />
                 }
                 <input className={classes.tileBox} autoFocus spellCheck={false} type='text' placeholder='Address' value={currentValue} onChange={linkChange}></input>
                 <AddIcon style={{ margin: '5px 5px', cursor: 'pointer' }} onClick={addLink} />
@@ -165,7 +165,7 @@ const SocialLink = (props) => {
                         (key == 'facebook') ? <FacebookIcon color='primary' /> :
                             (key == 'instagram') ? <InstagramIcon style={{ color: '#E1306C' }} /> :
                                 (key == 'reddit') ? <RedditIcon color='secondary' /> :
-                                    <PublicIcon />
+                                    <PublicIcon style={{ color: 'var(--mainText)' }} />
                 }
                 <a style={{ margin: '0px 20px', color: 'var(--secondaryText)', fontSize: '14px' }} target="_blank" href={val}>{key.toUpperCase()}</a>
             </div>
