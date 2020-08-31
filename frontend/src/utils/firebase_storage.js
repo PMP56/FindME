@@ -10,3 +10,9 @@ export const uploadPicture = async (username, file) => {
     return uploadTask;
 
 }
+
+export const uploadProjectPicture = async (username, index, file) => {
+    const uploadTask = await Storage.ref(`${username}/projects/${index}.jpg`).put(file)
+        .then((snapshot) => snapshot.ref.getDownloadURL()).catch(err => console.log(err.response.data));
+    return uploadTask;
+}

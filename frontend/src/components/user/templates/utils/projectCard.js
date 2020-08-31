@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment, useState, useRef } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -19,9 +19,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import CircularProgress from './circularProgress';
+import { uploadProjectPicture } from '../../../../utils/firebase_storage';
+
 const styles = makeStyles({
     root: {
-        maxWidth: 300,
+        width: '400px',
         margin: '20px 20px',
         backgroundColor: 'var(--previewBg)',
     },
@@ -74,23 +77,26 @@ const styles = makeStyles({
             backgroundColor: '#004040',
         },
         "&:hover $tileButton": {
-            right: '10px',
+            right: '20px',
         },
         '&:hover $tileImage': {
-            height: '95%',
+            height: '115%',
         },
         '&:hover $tileText': {
-            top: '0px',
+            right: '10px',
         }
     },
     tileText: {
-        color: 'var(--secondaryText)',
+        color: '#222',
         fontSize: '28px',
         fontFamily: 'Monospace',
         textAlign: 'center',
         position: 'absolute',
-        transitionDuration: '0.2s',
-        top: '-50px',
+        transitionDuration: '0.3s',
+        bottom: '0px',
+        right: '-200px',
+        letterSpacing: '0px',
+        textShadow: '2px 2px 4px #ccc'
     },
     tileButton: {
         fontSize: '24px',
@@ -104,8 +110,8 @@ const styles = makeStyles({
         }
     },
     tileImage: {
-        height: '80%',
-        transitionDuration: '0.3s',
+        height: '100%',
+        transitionDuration: '0.4s',
     },
     dialog: {
         alignItems: 'center',
@@ -126,13 +132,25 @@ const styles = makeStyles({
     },
     uploadBox: {
         padding: '10px',
-        margin: '20px 0px',
+        margin: '20px 40px',
         backgroundColor: 'rgba(0, 0, 0, 0)',
         border: '2px dashed rgba(0, 0, 0, 0.5)',
         borderRadius: '10px',
         height: '200px',
         alignItems: 'center',
         textAlign: 'center'
+    },
+
+    uploadButton: {
+        height: '40px',
+        width: '160px',
+        marginTop: '20px',
+        alignSelf: 'center',
+        fontSize: '14px',
+        color: 'grey',
+        backgroundColor: 'transparent',
+        transitionDuration: '0.3s',
+        border: '2px solid grey'
     },
     "@media (max-width: 900px)": {
         gridContainer: {
@@ -153,6 +171,11 @@ const styles = makeStyles({
 
 
 const ProjectCard = (props) => {
+    const hiddenFileInput = useRef(null);
+    const [uploadImage, setUploadImage] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const user = props.user;
+
     const [dialogInfo, setDialogInfo] = useState({});
     const [open, setOpen] = useState(false);
     const [addOpen, setAddOpen] = useState(false);
@@ -160,10 +183,14 @@ const ProjectCard = (props) => {
     const [deleteIndex, setDeleteIndex] = useState();
     const [newProject, setNewProject] = useState({
         title: "",
-        imageLink: "",
+        imageLink: `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`,
         description: "",
         link: ""
     });
+
+    const handleUploadClick = (e) => {
+        hiddenFileInput.current.click();
+    }
 
     const handleClickOpen = (data) => {
         setDialogInfo({
@@ -207,14 +234,28 @@ const ProjectCard = (props) => {
         })
     }
 
-    const submitForm = () => {
-        const project = [newProject.title, newProject.imageLink, newProject.description, newProject.link];
+    const uploadPictureChange = e => {
+        //console.log(e.target.files[0])
+        setUploadImage(e.target.files[0]);
+        //setDatabase({ ...database, profilePicture: url });
+        //console.log(url);
+    }
+
+    const submitForm = async () => {
+        let project = [newProject.title, newProject.imageLink, newProject.description, newProject.link];
+        if (uploadImage != null) {
+            const url = await uploadProjectPicture(user, props.data.length, uploadImage);
+            project = [newProject.title, url, newProject.description, newProject.link];
+        } else {
+            project = [newProject.title, newProject.imageLink, newProject.description, newProject.link];
+        }
         if (project[0].length != 0) {
             props.changeProjects([...props.data, project]);
+
             handleAddClose();
             setNewProject({
                 title: "",
-                imageLink: "",
+                imageLink: `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`,
                 description: "",
                 link: ""
             });
@@ -232,7 +273,7 @@ const ProjectCard = (props) => {
         return (
             <div className={classes.gridTiles} alt={data[0]}>
                 <h1 className={classes.tileText}>{data[0]}</h1>
-                <img src='/static/frontend/landing/des-1.png' className={classes.tileImage} alt={data[0]} onClick={() => handleClickOpen(data)} />
+                <img src={data[1]} className={classes.tileImage} alt={data[0]} onClick={() => handleClickOpen(data)} />
                 {(!props.edit) ? <Fragment /> :
                     <DeleteIcon className={classes.tileButton} onClick={handleDeleteClickOpen} />
                 }
@@ -280,7 +321,7 @@ const ProjectCard = (props) => {
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
                 <DialogTitle id="form-dialog-title" className={classes.dialogTitle}><span style={{ color: 'white', fontSize: '28px' }}>{dialogInfo.title}</span></DialogTitle>
                 <DialogContent className={classes.dialog}>
-                    <img className={classes.dialogImage} src='/static/frontend/landing/des-1.png' />
+                    <img className={classes.dialogImage} src={dialogInfo.imagelink} />
                     <DialogContentText style={{ color: 'white', marginTop: '30px', textAlign: 'center' }}>
                         {dialogInfo.description}
                     </DialogContentText>
@@ -296,6 +337,7 @@ const ProjectCard = (props) => {
             <Description />
 
             <Delete />
+            {!uploading ? <Fragment /> : <CircularProgress style={{ position: 'fixed' }} />}
             <Dialog open={addOpen} onClose={handleAddClose} aria-labelledby="form-dialog-title" style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
                 <DialogTitle id="form-dialog-title" className={classes.dialogTitle}><span style={{ color: 'white', fontSize: '20px' }}>Add Project</span></DialogTitle>
                 <DialogContent className={classes.dialog}>
@@ -305,9 +347,14 @@ const ProjectCard = (props) => {
                         </h5>
                     <input className='form-control' style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: 'white' }} autoFocus name='title' placeholder='Title' value={newProject.title} onChange={formChange} />
                     <div className={classes.uploadBox}>
-                        <div>
-                            <AttachFileIcon style={{ color: 'grey', fontSize: '80px', textAlign: 'center', marging: '20px 10px' }} />
-                            <h6 style={{ color: 'grey', marginTop: '25px' }}>Drag and drop your image here</h6>
+                        <div className='d-flex flex-column '>
+                            <AttachFileIcon style={{ color: 'grey', fontSize: '80px', textAlign: 'center', marging: '20px 10px', alignSelf: 'center' }} />
+                            <button className={classes.uploadButton} onClick={handleUploadClick}>
+                                Upload image here
+                            </button>
+                            <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp" style={{ display: 'none' }} ref={hiddenFileInput} onChange={uploadPictureChange} />
+
+
                         </div>
                     </div>
                     <h5 style={{ color: 'white', marginLeft: '10px' }}>
@@ -330,7 +377,7 @@ const ProjectCard = (props) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Fragment>
+        </Fragment >
     );
 }
 

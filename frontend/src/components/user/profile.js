@@ -33,7 +33,7 @@ const Profile = (props) => {
                     theme: 'white',
                     profilePicture: '/static/frontend/user.png',
                     socialLinks: [],
-                    projects: [["Title", "Image Link", "Description", "Link"]],
+                    projects: [["Title", `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`, "Description", "Link"]],
                     visits: 0,
                 });
                 setLoaded(true);

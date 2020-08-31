@@ -293,7 +293,7 @@ const Template1 = (props) => {
                 </h2>
                 <div className={classes.maincontainer2}>
 
-                    <Projects data={database.projects} edit={editable} changeProjects={changeProjects} />
+                    <Projects data={database.projects} user={database.userName} edit={editable} changeProjects={changeProjects} />
                 </div>
             </section>
 
