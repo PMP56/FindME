@@ -27,6 +27,7 @@ const Template1 = (props) => {
 
     const [saving, setSaving] = useState(false);
 
+
     useEffect(() => {
         changeTheme(database.theme);
         if (!editable) {
@@ -94,6 +95,8 @@ const Template1 = (props) => {
 
                     [currentTag]: currentTagVal
                 }));
+                //XSS proof
+                //tag.innerHTML = currentTagVal;
             }
         });
         console.log(database);

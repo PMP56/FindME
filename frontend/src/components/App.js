@@ -12,12 +12,12 @@ import PrivateRoute from '../routes/PrivateRoutes';
 
 const App = () => {
     return (
-        <AuthProvider>
-            <Router>
+        <Router>
+            <AuthProvider>
                 <PrivateRoute path="/" component={UserPage} />
                 <LandingPage />
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>
     );
 };
 

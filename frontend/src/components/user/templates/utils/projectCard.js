@@ -88,7 +88,7 @@ const styles = makeStyles({
     },
     tileText: {
         backgroundColor: '#222',
-        borderRadius: '7.5px 0px 0px 7.5px',
+        borderRadius: '5px 0px 0px 5px',
         padding: '7.5px 15px',
         color: 'white',
         fontSize: '18px',
