@@ -1,6 +1,8 @@
 # FindME
 Create your own designer portfolio
 
+Example of portfolio made with FindME: https://find--me.herokuapp.com/#/pmp56
+
 Running site at: https://find--me.herokuapp.com/
 
 ### Install Python
