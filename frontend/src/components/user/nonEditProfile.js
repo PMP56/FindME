@@ -34,7 +34,6 @@ const NonEditProfile = (props) => {
 
     useEffect(() => {
         fetchData();
-
     }, []);
 
     return (

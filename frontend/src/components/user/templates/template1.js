@@ -210,7 +210,7 @@ const Template1 = (props) => {
 
                         <div className={classes.leftcolumn}>
                             <div className={classes.ppContainer}>
-                                <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" onClick={() => console.log(database)} />
+                                <img className={classes.profilepic} src={database.profilePicture} alt="Profile_pic" />
                                 {!editable ? <Fragment /> :
                                     <Fragment>
                                         <button className={classes.uploadButton} onClick={handleUploadClick}>

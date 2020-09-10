@@ -5,6 +5,7 @@ import { LogOut } from '../../utils/auth';
 
 import { getData } from '../../utils/database';
 
+
 const Home = () => {
     const [data, setData] = useState({});
     const [loaded, setLoaded] = useState(false);
@@ -30,7 +31,7 @@ const Home = () => {
     return (
         <Fragment>
             <div className='p-4 d-flex flex-row justify-content-between'>
-                <div>
+                <div className="box">
                     <h1>Hellow, {currentUser.username}. This is userpage</h1><br />
                     <button className='btn btn-success mr-3'>
                         <Link to={'/edit/' + currentUser.username}>Edit Profile</Link>
