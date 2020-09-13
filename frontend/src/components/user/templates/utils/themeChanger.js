@@ -7,6 +7,7 @@ const ThemeChanger = (props) => {
         root: {
             transitionDuration: '0.4s',
             '--mainColor': theme.mainColor,
+            '--navColor': theme.navColor,
             '--secondaryColor': theme.secondaryColor,
 
             '--borderColor': theme.borderColor,

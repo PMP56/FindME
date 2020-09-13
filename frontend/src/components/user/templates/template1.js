@@ -2,6 +2,8 @@ import React, { Component, Fragment, useState, useContext, useRef } from 'react'
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import { uploadPicture } from '../../../utils/firebase_storage';
 
@@ -26,7 +28,7 @@ const Template1 = (props) => {
     const visit = database.visit + 1;
 
     const [saving, setSaving] = useState(false);
-
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         changeTheme(database.theme);
@@ -37,6 +39,7 @@ const Template1 = (props) => {
 
     const [theme, setTheme] = useState({
         mainColor: '#eaeaea',
+        navColor: '#eaeaea',
         secondaryColor: "#fff",
         borderColor: "#c1c1c1",
         mainText: "black",
@@ -62,6 +65,18 @@ const Template1 = (props) => {
 
     const handleUploadClick = (e) => {
         hiddenFileInput.current.click();
+    }
+
+    const themeExpand = () => {
+        if (!expanded) {
+            document.querySelector('#themeBox').style.height = '60px';
+            document.querySelector('#themeOption2').style.opacity = 1;
+            setExpanded(true);
+        } else {
+            document.querySelector('#themeBox').style.height = '30px';
+            document.querySelector('#themeOption2').style.opacity = 0;
+            setExpanded(false);
+        }
     }
 
     const update = () => {
@@ -116,6 +131,7 @@ const Template1 = (props) => {
         if (mode == 'white') {
             setTheme({
                 mainColor: '#eaeaea',
+                navColor: '#eaeaea',
                 secondaryColor: "#fff",
                 borderColor: "#c1c1c1",
                 mainText: "black",
@@ -129,6 +145,7 @@ const Template1 = (props) => {
         else if (mode == 'blue') {
             setTheme({
                 mainColor: '#15202B',
+                navColor: '#15202B',
                 secondaryColor: "#192734",
                 borderColor: "#164D56",
                 mainText: "#fff",
@@ -142,6 +159,7 @@ const Template1 = (props) => {
         else if (mode == 'green') {
             setTheme({
                 mainColor: '#123524',
+                navColor: '#123524',
                 secondaryColor: "#004225",
                 borderColor: "#161914",
                 mainText: "#fff",
@@ -155,6 +173,7 @@ const Template1 = (props) => {
         else if (mode == 'purple') {
             setTheme({
                 mainColor: '#46344E',
+                navColor: '#46344E',
                 secondaryColor: "#382a3f",
                 borderColor: "#1d1520",
                 mainText: "#fff",
@@ -163,6 +182,62 @@ const Template1 = (props) => {
                 previewBg: "rgb(29, 21, 32, 0.8)",
                 previewShadow: '#2b202f',
                 buttonColor: "#8534a3",
+            });
+        }
+        else if (mode == 'cyan') {
+            setTheme({
+                mainColor: 'linear-gradient(to right, #003333, #005a5a, #003333)',
+                navColor: '#003333',
+                secondaryColor: "#004444",
+                borderColor: "#1d1520",
+                mainText: "#fff",
+                secondaryText: "#eeeeee",
+                themeDotBorder: "#FFF",
+                previewBg: "rgb(0, 13, 13, 0.8)",
+                previewShadow: '#001a1a',
+                buttonColor: "#006666",
+            });
+        }
+        else if (mode == 'brown') {
+            setTheme({
+                mainColor: '#422419',
+                navColor: '#401e11',
+                secondaryColor: "#111",
+                borderColor: "#2c1503",
+                mainText: "#fff",
+                secondaryText: "#eeeeee",
+                themeDotBorder: "#FFF",
+                previewBg: "rgb(23, 5, 0, 0.8)",
+                previewShadow: '#170500',
+                buttonColor: "#170500",
+            });
+        }
+        else if (mode == 'lime') {
+            setTheme({
+                mainColor: 'linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%)',
+                navColor: '#018068',
+                secondaryColor: "radial-gradient(#74EBD5 0%, #9FACE6 100%)",
+                borderColor: "#164D56",
+                mainText: "#000",
+                secondaryText: "#111",
+                themeDotBorder: "#FFF",
+                previewBg: "rgb(240,234,214, 0.8)",
+                previewShadow: '#d6f0e3',
+                buttonColor: "#170500",
+            });
+        }
+        else if (mode == 'teal') {
+            setTheme({
+                mainColor: 'radial-gradient( #30D2BE 0%, #3584A7 51%, #3b3f80 100%)',
+                navColor: '#0b121d',
+                secondaryColor: "rgba(21, 35, 56, 0.9)",
+                borderColor: "#164D56",
+                mainText: "#fff",
+                secondaryText: "#eee",
+                themeDotBorder: "#FFF",
+                previewBg: "rgb(16, 28, 48, 0.8)",
+                previewShadow: '#0b121d',
+                buttonColor: "#170500",
             });
         }
     };
@@ -228,11 +303,24 @@ const Template1 = (props) => {
                                     <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
                                         Personalize Theme
                                             </h5>
-                                    <div className={classes.themeOptionWrapper}>
-                                        <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
-                                        <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
-                                        <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
-                                        <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
+                                    <div id='themeBox' className={classes.themeOption}>
+                                        <div className={classes.themeOptionWrapper}>
+                                            <div data-mode="light" onClick={() => changeTheme('white')} className={`${classes.themedot} ${classes.lightMode}`}></div>
+                                            <div data-mode="blue" onClick={() => changeTheme('blue')} className={`${classes.themedot} ${classes.blueMode}`}></div>
+                                            <div data-mode="brown" onClick={() => changeTheme('brown')} className={`${classes.themedot} ${classes.brownMode}`}></div>
+                                            <div data-mode="cyan" onClick={() => changeTheme('cyan')} className={`${classes.themedot} ${classes.cyanMode}`}></div>
+                                            {!expanded ?
+                                                <ExpandMoreIcon className={classes.themeExpand} onClick={themeExpand} />
+                                                :
+                                                <ExpandLessIcon className={classes.themeExpand} onClick={themeExpand} />
+                                            }
+                                        </div>
+                                        <div id="themeOption2" className={classes.themeOptionWrapper2}>
+                                            <div data-mode="green" onClick={() => changeTheme('green')} className={`${classes.themedot} ${classes.greenMode}`}></div>
+                                            <div data-mode="purple" onClick={() => changeTheme('purple')} className={`${classes.themedot} ${classes.purpleMode}`}></div>
+                                            <div data-mode="lime" onClick={() => changeTheme('lime')} className={`${classes.themedot} ${classes.limeMode}`}></div>
+                                            <div data-mode="teal" onClick={() => changeTheme('teal')} className={`${classes.themedot} ${classes.tealMode}`}></div>
+                                        </div>
                                     </div>
                                 </Fragment>
                             }

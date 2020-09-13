@@ -6,7 +6,7 @@ const styles = makeStyles({
     optionBox: {
         zIndex: '100',
         padding: '15px 15px',
-        backgroundColor: 'rgba(0, 0, 0, 1)',
+        background: 'rgba(0, 0, 0, 1)',
         position: 'fixed',
         top: 15,
         right: 0,
@@ -37,7 +37,7 @@ const styles = makeStyles({
         padding: '7.5px 10px',
     },
     saveBox: {
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        background: 'rgba(0, 0, 0, 0.8)',
         width: '100%',
         height: '100%',
         position: 'fixed',
@@ -50,13 +50,13 @@ const styles = makeStyles({
     },
     s1: {
         transitionDuration: '0.4s',
-        backgroundColor: 'var(--mainColor)',
+        background: 'var(--mainColor)',
         borderBottom: '2px solid var(--borderColor)',
         overflow: 'auto',
     },
     s2: {
         transitionDuration: '0.4s',
-        backgroundColor: 'var(--secondaryColor)',
+        background: 'var(--secondaryColor)',
         borderBottom: '1px solid var(--borderColor)',
         overflow: 'auto',
     },
@@ -90,7 +90,7 @@ const styles = makeStyles({
 
     introwrapper: {
         transitionDuration: '0.4s',
-        backgroundColor: 'var(--secondaryColor)',
+        background: 'var(--secondaryColor)',
         border: '1px solid var(--borderColor)',
         borderRadius: '5px 5px 0 0',
         boxShadow: '-1px 1px 3px -1px rgba(0, 0, 0, 0.75)',
@@ -108,7 +108,7 @@ const styles = makeStyles({
         flexDirection: 'row-reverse',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'var(--mainColor)',
+        backgroundColor: 'var(--navColor)',
     },
 
     navigation: {
@@ -132,15 +132,15 @@ const styles = makeStyles({
     },
 
     dot1: {
-        backgroundColor: '#2aca3e',
+        background: '#2aca3e',
     },
 
     dot2: {
-        backgroundColor: '#fec02f',
+        background: '#fec02f',
     },
 
     dot3: {
-        backgroundColor: '#fc6058',
+        background: '#fc6058',
     },
     browserdot: {
         height: '15px',
@@ -187,14 +187,24 @@ const styles = makeStyles({
         alignSelf: 'center',
         color: 'var(--secondaryText)',
         opacity: '0%',
-        backgroundColor: 'var(--secondaryColor)',
+        background: 'var(--secondaryColor)',
         border: '2px solid var(--borderColor)',
         transitionDuration: '0.3s',
         '&:hover': {
-            backgroundColor: 'var(--mainColor)',
+            background: 'var(--mainColor)',
             border: '2px solid var(--borderColor)',
         }
     },
+
+    themeOption: {
+        height: '30px',
+        transitionDuration: '0.3s',
+
+        '&:onclick $themeOptionWrapper2': {
+            opacity: 1
+        },
+    },
+
 
     themeOptionWrapper: {
         display: 'flex',
@@ -202,11 +212,20 @@ const styles = makeStyles({
         justifyContent: 'center',
 
     },
+    themeOptionWrapper2: {
+        transitionDuration: '0.3s',
+        opacity: 0,
+        display: 'flex',
+        height: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        height: '0px'
+    },
     themedot: {
         transitionDuration: '0.4s',
         height: '30px',
         width: '30px',
-        backgroundColor: 'black',
+        background: 'black',
         borderRadius: '50%',
         border: '2px solid var(--themeDotBorder)',
         margin: '5px',
@@ -216,24 +235,43 @@ const styles = makeStyles({
             borderWidth: '5px',
         },
     },
+
+    themeExpand: {
+        color: 'var(--mainText)',
+        margin: '5px 10px',
+        cursor: 'pointer'
+    },
+
     lightMode: {
-        backgroundColor: '#fff',
+        background: '#fff',
     },
 
     blueMode: {
-        backgroundColor: '#192734',
+        background: '#192734',
     },
 
     greenMode: {
-        backgroundColor: '#123524',
+        background: '#123524',
     },
 
     purpleMode: {
-        backgroundColor: '#7E4C74',
+        background: '#7E4C74',
+    },
+    brownMode: {
+        background: '#422419',
+    },
+    cyanMode: {
+        background: '#003333',
+    },
+    limeMode: {
+        background: 'radial-gradient(#74EBD5 0%, #9FACE6 100%)',
+    },
+    tealMode: {
+        background: 'radial-gradient( #30D2BE 0%, #3584A7 51%, #3b3f80 100%)',
     },
 
     blackMode: {
-        backgroundColor: '#010302',
+        background: '#010302',
     },
     settingsNote: {
         fontSize: '12px',
@@ -251,7 +289,7 @@ const styles = makeStyles({
     },
     previewShadow: {
         transitionDuration: '0.4s',
-        backgroundColor: 'var(--previewShadow)',
+        background: 'var(--previewShadow)',
         width: '300px',
         height: '155px',
         paddingLeft: '30px',
@@ -262,7 +300,7 @@ const styles = makeStyles({
         transitionDuration: '0.4s',
         width: '300px',
         border: '1.5px solid #17a2b8',
-        backgroundColor: 'var(--previewBg)',
+        background: 'var(--previewBg)',
         padding: '15px',
         position: 'relative',
     },
@@ -271,7 +309,7 @@ const styles = makeStyles({
         height: '7px',
         width: '7px',
         border: '1.5px solid #17a2b8',
-        backgroundColor: '#fff',
+        background: '#fff',
         position: 'absolute',
     },
     tl: {
@@ -307,7 +345,7 @@ const styles = makeStyles({
         display: 'flex',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        backgroundColor: 'var(--previewShadow)',
+        background: 'var(--previewShadow)',
     },
 
     socialLinks: {
@@ -324,7 +362,7 @@ const styles = makeStyles({
         border: '1px solid var(--borderColor)',
         padding: '15px',
         borderRadius: '5px',
-        backgroundColor: 'var(--mainColor)',
+        background: 'var(--mainColor)',
         marginBottom: '50px',
         color: 'var(--mainText)'
     },
@@ -343,7 +381,7 @@ const styles = makeStyles({
         width: '100%',
         paddingTop: '10px',
         paddingBottom: '10px',
-        backgroundColor: 'var(--secondaryColor)',
+        background: 'var(--secondaryColor)',
         borderRadius: '5px',
         border: '1px solid var(--borderColor)',
         fontSize: '14px',
@@ -357,7 +395,7 @@ const styles = makeStyles({
         paddingTop: '10px',
         paddingBottom: '10px',
         color: '#fff',
-        backgroundColor: 'var(--buttonColor)',
+        background: 'var(--buttonColor)',
         border: 'none',
     },
     "@media (max-width:1200px)": {
@@ -377,7 +415,7 @@ const styles = makeStyles({
         optionBox: {
             zIndex: '100',
             padding: '15px 15px',
-            backgroundColor: 'rgba(0, 0, 0, 1)',
+            background: 'rgba(0, 0, 0, 1)',
             position: 'fixed',
             top: 15,
             right: 0,
