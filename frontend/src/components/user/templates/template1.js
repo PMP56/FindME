@@ -76,6 +76,7 @@ const Template1 = (props) => {
             document.querySelector('#themeBox').style.height = '30px';
             document.querySelector('#themeOption2').style.opacity = 0;
             setExpanded(false);
+            //Preview
         }
     }
 
