@@ -10,20 +10,14 @@ import LandingPage from './layouts/landing';
 import UserPage from '../components/user/user';
 import PrivateRoute from '../routes/PrivateRoutes';
 import NonEditProfile from './user/nonEditProfile';
-
 const App = () => {
     return (
-        <Router>
-            <Switch>
-                <AuthProvider>
-                    <PrivateRoute exact path="/" component={UserPage} />
-                    <LandingPage />
-                    <Route path="/:username" >
-                        <NonEditProfile edit={false} />
-                    </Route>
-                </AuthProvider>
-            </Switch>
-        </Router>
+        <AuthProvider>
+            <Router>
+                <PrivateRoute path="/" component={UserPage} />
+                <LandingPage />
+            </Router>
+        </AuthProvider>
     );
 };
 

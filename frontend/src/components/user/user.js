@@ -10,15 +10,16 @@ import NonEditProfile from './nonEditProfile';
 const UserPage = () => {
     return (
         <Fragment>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/get_started" component={GetStarted} />
-            <Route exact path="/edit/:username">
-                <Profile edit={true} />
-            </Route>
-            <Route exact path="/:username">
-                <NonEditProfile edit={false} />
-            </Route>
-
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/get_started" component={GetStarted} />
+                <Route exact path="/edit/:username">
+                    <Profile edit={true} />
+                </Route>
+                <Route exact path="/:username">
+                    <NonEditProfile edit={false} />
+                </Route>
+            </Switch>
         </Fragment>
     );
 }

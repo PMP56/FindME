@@ -1,5 +1,5 @@
 import React, { useContext, Fragment } from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, useParams } from "react-router-dom";
 import { AuthContext } from '../../utils/userContext';
 
 import Header from './headers';
@@ -23,6 +23,7 @@ const LandingPage = () => {
                 <LandingBody />
                 <Footer />
             </Route>
+
             <Switch>
                 <Route exact path="/contact">
                     <Header />
@@ -36,7 +37,9 @@ const LandingPage = () => {
                     <Header />
                     <Register />
                 </Route>
-
+                <Route exact path="/:username">
+                    <NonEditProfile edit={false} />
+                </Route>
             </Switch>
         </Fragment>
     );
