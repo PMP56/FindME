@@ -59,6 +59,7 @@ const styles = makeStyles({
         background: 'var(--secondaryColor)',
         borderBottom: '1px solid var(--borderColor)',
         overflow: 'auto',
+        padding: '20px 0px'
     },
 
     maincontainer: {

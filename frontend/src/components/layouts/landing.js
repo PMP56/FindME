@@ -1,5 +1,5 @@
 import React, { useContext, Fragment } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { AuthContext } from '../../utils/userContext';
 
 import Header from './headers';
@@ -20,29 +20,24 @@ const LandingPage = () => {
         <Fragment>
             <Route exact path="/">
                 <Header />
-            </Route>
-
-            <Route exact path="/">
                 <LandingBody />
-            </Route>
-            <Route exact path="/contact">
-                <Header />
-                <Contact />
-            </Route>
-            <Route exact path="/login">
-                <Header />
-                <Login />
-            </Route>
-            <Route exact path="/register">
-                <Header />
-                <Register />
-            </Route>
-            <Route exact path="/">
                 <Footer />
             </Route>
-            <Route exact path="/:username">
-                <NonEditProfile edit={false} />
-            </Route>
+            <Switch>
+                <Route exact path="/contact">
+                    <Header />
+                    <Contact />
+                </Route>
+                <Route exact path="/login">
+                    <Header />
+                    <Login />
+                </Route>
+                <Route exact path="/register">
+                    <Header />
+                    <Register />
+                </Route>
+
+            </Switch>
         </Fragment>
     );
 }

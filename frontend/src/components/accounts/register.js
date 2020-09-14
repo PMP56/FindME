@@ -32,7 +32,7 @@ const Register = () => {
 
     return (
         <Fragment>
-            <div className='pt-5 vh-100' style={{ backgroundColor: 'rgb(10, 10, 10)' }}>
+            <div className='pt-5' style={{ backgroundColor: 'rgb(10, 10, 10)' }}>
                 <div className='col-md-4 m-auto' style={{ backgroundColor: 'rgb(20, 20, 20)' }}>
                     <div className='card card-body mt-5 text-white' style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
                         <h2 className='text-center text-white'>Register</h2><br />
