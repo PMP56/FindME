@@ -4,24 +4,26 @@ import { Redirect, Link, NavLink } from 'react-router-dom';
 
 const styles = makeStyles({
     cardBody: {
-        margin: '25px 0px',
+        margin: '15px 0px',
         display: 'flex',
         flexDirection: 'row',
-        backgroundColor: '#ddd',
+        alignItems: 'center',
+        backgroundColor: '#eee',
         borderRadius: '10px',
-        boxShadow: '10px 10px 5px #aaaaaa',
-        cursor: 'pointer',
+        boxShadow: '4px 4px 2px #aaaaaa',
+        transitionDuration: '0.1s',
         '&:hover': {
             zIndex: 10,
+            boxShadow: '10px 10px 5px #aaaaaa',
         }
     },
 
     left: {
-        margin: '10px',
+        margin: '30px',
     },
 
     right: {
-        margin: '10px',
+        margin: '30px',
     },
 
     profilePicture: {
@@ -30,6 +32,16 @@ const styles = makeStyles({
         objectFit: 'cover',
         objectPosition: '50%',
     },
+    skillBox: {
+        display: 'flex'
+    },
+    skill: {
+        margin: '5px',
+        padding: '5px 10px',
+        backgroundColor: '#eee',
+        border: '1px solid #444',
+        borderRadius: '5px'
+    }
 });
 
 const ProfileCard = (props) => {
@@ -43,17 +55,23 @@ const ProfileCard = (props) => {
     }
 
     return (
-        <NavLink style={{ textDecoration: 'none' }} to={`/${props.data.userName}`}>
-            <div className={classes.cardBody}>
-                <div className={classes.left}>
-                    <img className={classes.profilePicture} src={props.data.profilePicture} />
-                </div>
-                <div className={classes.right}>
+
+        <div className={classes.cardBody}>
+            <div className={classes.left}>
+                <img className={classes.profilePicture} src={props.data.profilePicture} />
+            </div>
+            <div className={classes.right}>
+                <NavLink to={`/${props.data.userName}`}>
                     <h3>{props.data.userName}</h3>
-                    <p>{props.data.shadowText}</p>
+                </NavLink>
+                <p>{props.data.shadowText}</p>
+                <div className={classes.skillBox}>
+                    {
+                        (props.data.skills).map((skill, index) => <div className={classes.skill}><p style={{ margin: 0 }} key={index}>{skill}</p></div>)
+                    }
                 </div>
             </div>
-        </NavLink>
+        </div>
     );
 }
 

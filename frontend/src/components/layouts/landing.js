@@ -13,6 +13,7 @@ import NonEditProfile from '../user/nonEditProfile';
 
 const LandingPage = () => {
     const { currentUser } = useContext(AuthContext);
+    const { searchUser } = useParams();
     if (currentUser) {
         return <Redirect to="/" />;
     }
