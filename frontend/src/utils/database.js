@@ -73,3 +73,19 @@ export const getData = async (username) => {
             }
         });
 }
+
+export const getAllData = async () => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    return await axios.get(`/api/database/`, config)
+        .then((result) => result)
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+            }
+        });
+}
