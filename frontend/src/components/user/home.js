@@ -5,6 +5,7 @@ import { LogOut } from '../../utils/auth';
 
 import { getData, getAllData } from '../../utils/database';
 
+import NavBar from './home/navbar';
 import ProfileCard from './home/profileCard';
 
 const Home = () => {
@@ -28,7 +29,6 @@ const Home = () => {
                 setAllData(result.data);
             }
             setLoaded(true);
-            console.log(allData);
         });
 
     }
@@ -39,7 +39,8 @@ const Home = () => {
 
     return (
         <Fragment>
-            <div className='p-4 d-flex flex-row justify-content-between'>
+            <NavBar data={allData} />
+            <div className='p-4 w-100 d-flex flex-row justify-content-between'>
                 <div className="box">
                     <h1>Hellow, {currentUser.username}. This is userpage</h1><br />
                     <button className='btn btn-success mr-3'>

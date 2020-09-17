@@ -67,7 +67,7 @@ const ProfileCard = (props) => {
                 <p>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {
-                        (props.data.skills).map((skill, index) => <div className={classes.skill}><p style={{ margin: 0 }} key={index}>{skill}</p></div>)
+                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
                     }
                 </div>
             </div>

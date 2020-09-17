@@ -1,0 +1,37 @@
+.nav-container{
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.nav-container h3, h5{
+    color: white;
+}
+
+.search-box{
+    background-color: white;
+    padding: 5px 20px;
+    border-radius: 25px;
+    display: none;
+    justify-content: space-around;
+}
+
+.search-text-box{
+    width: 350px;
+    border-style: hidden;
+    outline: none !important;
+}
+
+.right-buttons{
+    color: white;
+}
+
+@media (min-width: 720px){
+    .search-box{
+        display: inline;
+    }
+}
