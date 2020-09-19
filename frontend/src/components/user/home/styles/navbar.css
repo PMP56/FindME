@@ -1,4 +1,6 @@
 .nav-container{
+    position: fixed;
+    top: 0;
     width: 100%;
     padding: 10px 20px;
     display: flex;
@@ -69,7 +71,37 @@
 }
 
 .right-buttons{
+    display: flex;
     color: white;
+}
+
+.right-nav-button{
+    margin: 0px 5px;
+    padding: 5px;
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.right-nav-button:hover{
+    background-color: white;
+    color: black;
+}
+
+.dropdown-menu li{
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.dropdown-menu a, span{
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu li:hover{
+    background-color: #ddd;
 }
 
 @media (min-width: 720px){

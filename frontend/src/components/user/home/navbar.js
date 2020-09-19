@@ -1,6 +1,14 @@
 import React, { Component, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+
+import { LogOut } from '../../../utils/auth';
+
 import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 import "./styles/navbar.css";
 
@@ -8,7 +16,9 @@ const NavBar = (props) => {
     const [searchText, setSearchText] = useState(null);
     const [alldata, setAllData] = useState(props.data);
 
-    const SearchResult = (props) => {
+    let userToken = localStorage.getItem('currentUserToken');
+
+    const SearchResult = () => {
         return (
             <div className="search-result-box">
                 {(alldata).map((data, index) =>
@@ -57,7 +67,18 @@ const NavBar = (props) => {
                 <SearchIcon style={{ color: "black" }} />
             </div>
             <div className="right-buttons">
-                <h5>Profile</h5>
+                <div className="right-nav-button">
+                    <NewReleasesIcon />
+                </div>
+                <div className="right-nav-button dropdown-toggle" data-toggle="dropdown">
+                    <PersonIcon />
+                </div>
+                <ul className="dropdown-menu">
+                    <li><VisibilityIcon style={{ marginRight: '15px' }} /><Link to={'/' + props.user.username}>{props.user.username.toUpperCase()}</Link></li>
+                    <li><LoyaltyIcon style={{ marginRight: '15px' }} /><Link to={'/edit/' + props.user.username}>Edit Profile</Link></li>
+                    <div className="dropdown-divider"></div>
+                    <li><VpnKeyIcon style={{ marginRight: '15px' }} /><span onClick={() => LogOut(userToken)}>Log out</span></li>
+                </ul>
             </div>
         </div>
     );

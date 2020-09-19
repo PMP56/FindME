@@ -7,6 +7,7 @@ import { getData, getAllData } from '../../utils/database';
 
 import NavBar from './home/navbar';
 import ProfileCard from './home/profileCard';
+import './home/styles/home.css';
 
 const Home = () => {
     const [data, setData] = useState({});
@@ -40,28 +41,23 @@ const Home = () => {
     return (
         <Fragment>
             {(!loaded) ? <Fragment /> :
-                <NavBar data={allData} />
+                <NavBar data={allData} user={currentUser} />
             }
-            <div className='p-4 w-100 d-flex flex-row justify-content-between'>
-                <div className="box">
-                    <h1>Hellow, {currentUser.username}. This is userpage</h1><br />
-                    <button className='btn btn-success mr-3'>
-                        <Link to={'/edit/' + currentUser.username}>Edit Profile</Link>
-                    </button>
-                    <button className='btn btn-primary' onClick={() => LogOut(userToken)}>LogOut</button>
+            <div className="main-container">
+                <div className="main-box">
+                    {/* <h3>Hellow, {currentUser.username}. This is userpage</h3><br /> */}
                     <div>
-                        <h2>People who use FindME</h2>
+                        <h2 style={{ color: 'white', textAlign: 'center' }}>People who use FindME</h2>
                         {(!loaded) ? <Fragment /> :
                             (allData).map((data, index) =>
                                 <ProfileCard key={index} data={data} />
                             )}
                     </div>
                 </div>
-                <br />
-                <div>
-                    <h2>DashBoard</h2>
+                <div className="dashboard">
+                    <h2 style={{ color: 'white', textAlign: 'center' }}>DashBoard</h2>
                     {(!loaded) ? <Fragment /> :
-                        <h4>Your portfolio got {data.visit ?? 0} visit.</h4>
+                        <h4 style={{ color: 'white', textAlign: 'center' }}> Your portfolio got {data.visit ?? 0} visit.</h4>
                     }
                 </div>
             </div>

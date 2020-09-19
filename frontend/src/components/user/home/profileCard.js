@@ -4,17 +4,19 @@ import { Redirect, Link, NavLink } from 'react-router-dom';
 
 const styles = makeStyles({
     cardBody: {
+        width: '100%',
         margin: '15px 0px',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#eee',
-        borderRadius: '10px',
-        boxShadow: '4px 4px 2px #aaaaaa',
+        borderRadius: '0px 20px 0px 20px',
+        boxShadow: '4px 4px 2px #666',
         transitionDuration: '0.1s',
+        overflowX: 'scroll',
         '&:hover': {
             zIndex: 10,
-            boxShadow: '10px 10px 5px #aaaaaa',
+            boxShadow: '10px 10px 5px #666',
         }
     },
 
@@ -27,20 +29,56 @@ const styles = makeStyles({
     },
 
     profilePicture: {
-        height: '100px',
-        width: '100px',
+        height: '125px',
+        width: '125px',
         objectFit: 'cover',
         objectPosition: '50%',
     },
+
+    header: {
+        fontSize: '24px'
+    },
+
+    subheader: {
+        fontSize: '18px'
+    },
+
     skillBox: {
-        display: 'flex'
+        display: 'flex',
     },
     skill: {
+        width: '100px',
         margin: '5px',
         padding: '5px 10px',
         backgroundColor: '#eee',
         border: '1px solid #444',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        overflow: 'hidden'
+    },
+    "@media (max-width:720px)": {
+        left: {
+            margin: '10px',
+        },
+        right: {
+            margin: '10px',
+        },
+        header: {
+            fontSize: '18px'
+        },
+        subheader: {
+            fontSize: '12px'
+        },
+        profilePicture: {
+            height: '100px',
+            width: '100px',
+        },
+        skill: {
+            width: '75px',
+            margin: '3px',
+            padding: '3px 8px',
+            backgroundColor: '#eee',
+            fontSize: '12px'
+        },
     }
 });
 
@@ -55,12 +93,12 @@ const ProfileCard = (props) => {
             </div>
             <div className={classes.right}>
                 <NavLink to={`/${props.data.userName}`}>
-                    <h3>{props.data.userName}</h3>
+                    <h3 className={classes.header}>{props.data.userName}</h3>
                 </NavLink>
-                <p>{props.data.shadowText}</p>
+                <p className={classes.subheader}>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {
-                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
+                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill.substring(0, 8)}</p></div>)
                     }
                 </div>
             </div>
