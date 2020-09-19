@@ -47,13 +47,6 @@ const styles = makeStyles({
 const ProfileCard = (props) => {
     const classes = styles();
 
-    const cardClick = (username) => {
-        console.log(username);
-        // return (
-        //     <Link to={`/${username}`} />
-        // );
-    }
-
     return (
 
         <div className={classes.cardBody}>

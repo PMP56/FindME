@@ -39,7 +39,9 @@ const Home = () => {
 
     return (
         <Fragment>
-            <NavBar data={allData} />
+            {(!loaded) ? <Fragment /> :
+                <NavBar data={allData} />
+            }
             <div className='p-4 w-100 d-flex flex-row justify-content-between'>
                 <div className="box">
                     <h1>Hellow, {currentUser.username}. This is userpage</h1><br />
