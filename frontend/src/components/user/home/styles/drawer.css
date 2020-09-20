@@ -1,0 +1,53 @@
+.drawer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 6%;
+    background: #0f0f0f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.icon-box{
+    text-decoration: none;
+    margin: 10px;
+    padding: 20px;
+    transition-duration: 0.3s;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    letter-spacing: 0.25px;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.icon-box:hover{
+    background-color: teal;
+    color: black;
+}
+
+.active-icon-box{
+    background-color: cyan;
+    color: black;
+}
+
+
+@media (max-width: 1080px){
+    .drawer{
+        width: 10%;
+    }
+}
+
+@media (max-width: 450px){
+    .drawer{
+        width: 20%;
+    }
+}

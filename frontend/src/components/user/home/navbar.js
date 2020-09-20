@@ -23,24 +23,30 @@ const NavBar = (props) => {
             <div className="search-result-box">
                 {(alldata).map((data, index) =>
                     (data.userName.includes(searchText)) ?
-                        <Link style={{ textDecoration: 'none' }} to={`/${data.userName}`}>
+                        <Link style={{ textDecoration: 'none' }} to={`/${data.userName}`} key={index}>
                             <SearchResultTile data={data} key={index} />
                         </Link>
                         :
-                        <Fragment key={index} />)
-                }
+                        <Fragment key={index} />
+                )}
             </div>
         );
     }
 
     const SearchResultTile = (props) => {
+        let len = searchText.length;
+        let index = props.data.userName.indexOf(searchText);
         return (
             <div className="search-result-tile">
                 <div className="frontTile">
                     <SearchIcon style={{ margin: "5px 10px 5px 5px" }} />
                 </div>
                 <div className="backTile">
-                    {props.data.userName}
+                    <div style={{ display: "flex", fontFamily: 'Calibri', fontSize: '16px' }}>
+                        {props.data.userName.slice(0, index)}
+                        <b style={{ fontWeight: '900', color: 'black' }}> {props.data.userName.slice(index, index + len)} </b>
+                        {props.data.userName.slice(index + len, props.data.userName.length)}
+                    </div>
                     <div style={{ display: "flex" }}>
                         {(props.data.skills).map((skill, index) => <h6 style={{ margin: '5px 8px 0px 0px' }} key={index}>{skill}</h6>)}
                     </div>
@@ -51,7 +57,6 @@ const NavBar = (props) => {
 
     const fieldChange = (e) => {
         setSearchText(e.target.value.toLowerCase());
-        console.log(searchText);
     }
 
     const focusChange = () => {

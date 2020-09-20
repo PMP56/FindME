@@ -10,10 +10,10 @@ const styles = makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#eee',
-        borderRadius: '0px 20px 0px 20px',
+        borderRadius: '20px',
         boxShadow: '4px 4px 2px #666',
         transitionDuration: '0.1s',
-        overflowX: 'scroll',
+        overflowX: 'hidden',
         '&:hover': {
             zIndex: 10,
             boxShadow: '10px 10px 5px #666',
@@ -56,6 +56,9 @@ const styles = makeStyles({
         overflow: 'hidden'
     },
     "@media (max-width:720px)": {
+        cardBody: {
+            overflowX: 'scroll'
+        },
         left: {
             margin: '10px',
         },

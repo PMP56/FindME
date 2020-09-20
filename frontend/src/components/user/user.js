@@ -5,6 +5,7 @@ import Home from './home';
 import GetStarted from './get_started/get_started';
 import Profile from './profile';
 import NonEditProfile from './nonEditProfile';
+import Dashboard from './home/dashboard';
 
 
 const UserPage = () => {
@@ -12,6 +13,7 @@ const UserPage = () => {
         <Fragment>
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/get_started" component={GetStarted} />
                 <Route exact path="/edit/:username">
                     <Profile edit={true} />

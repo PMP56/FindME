@@ -1,12 +1,15 @@
 import React, { Component, Fragment, useContext, useState, useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import { AuthContext } from '../../utils/userContext';
 import { LogOut } from '../../utils/auth';
 
 import { getData, getAllData } from '../../utils/database';
 
+import HomeBody from './home/homeBody';
 import NavBar from './home/navbar';
+import Drawer from './home/drawer';
 import ProfileCard from './home/profileCard';
+import DashBoard from './home/dashboard';
 import './home/styles/home.css';
 
 const Home = () => {
@@ -41,26 +44,19 @@ const Home = () => {
     return (
         <Fragment>
             {(!loaded) ? <Fragment /> :
-                <NavBar data={allData} user={currentUser} />
-            }
-            <div className="main-container">
-                <div className="main-box">
-                    {/* <h3>Hellow, {currentUser.username}. This is userpage</h3><br /> */}
-                    <div>
-                        <h2 style={{ color: 'white', textAlign: 'center' }}>People who use FindME</h2>
-                        {(!loaded) ? <Fragment /> :
-                            (allData).map((data, index) =>
-                                <ProfileCard key={index} data={data} />
-                            )}
+                <Fragment>
+                    <NavBar data={allData} user={currentUser} />
+                    <Drawer />
+                    <div className="home-body">
+                        <Route path='/'>
+                            <HomeBody data={allData} />
+                        </Route>
+                        <Route exact path='/home/dashboard'>
+                            <DashBoard data={allData} />
+                        </Route>
                     </div>
-                </div>
-                <div className="dashboard">
-                    <h2 style={{ color: 'white', textAlign: 'center' }}>DashBoard</h2>
-                    {(!loaded) ? <Fragment /> :
-                        <h4 style={{ color: 'white', textAlign: 'center' }}> Your portfolio got {data.visit ?? 0} visit.</h4>
-                    }
-                </div>
-            </div>
+                </Fragment>
+            }
         </Fragment>
     );
 }
