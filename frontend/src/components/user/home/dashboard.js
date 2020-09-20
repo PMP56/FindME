@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 const DashBoard = () => {
     return (
-        <h1>Dashboard</h1>
+        <div style={{ margin: "200px" }}>
+            <h1 style={{ color: 'balck' }}>Dashboard</h1>
+        </div>
     );
 }
 

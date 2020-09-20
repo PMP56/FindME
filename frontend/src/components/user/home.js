@@ -5,6 +5,9 @@ import { LogOut } from '../../utils/auth';
 
 import { getData, getAllData } from '../../utils/database';
 
+import Profile from './profile';
+import NonEditProfile from './nonEditProfile';
+
 import HomeBody from './home/homeBody';
 import NavBar from './home/navbar';
 import Drawer from './home/drawer';
@@ -45,15 +48,35 @@ const Home = () => {
         <Fragment>
             {(!loaded) ? <Fragment /> :
                 <Fragment>
-                    <NavBar data={allData} user={currentUser} />
-                    <Drawer />
                     <div className="home-body">
-                        <Route path='/'>
+                        <Route exact path='/'>
+                            <NavBar data={allData} user={currentUser} />
+                            <Drawer />
                             <HomeBody data={allData} />
                         </Route>
-                        <Route exact path='/home/dashboard'>
-                            <DashBoard data={allData} />
-                        </Route>
+                        <Switch>
+                            <Route exact path='/dashboard'>
+                                <NavBar data={allData} user={currentUser} />
+                                <Drawer />
+                                <DashBoard data={allData} />
+                            </Route>
+                            <Route exact path='/notification'>
+                                <NavBar data={allData} user={currentUser} />
+                                <Drawer />
+                                <DashBoard data={allData} />
+                            </Route>
+                            <Route exact path='/messages'>
+                                <NavBar data={allData} user={currentUser} />
+                                <Drawer />
+                                <DashBoard data={allData} />
+                            </Route>
+                            <Route path="/edit/:username">
+                                <Profile edit={true} />
+                            </Route>
+                            <Route path="/:username">
+                                <NonEditProfile edit={false} />
+                            </Route>
+                        </Switch>
                     </div>
                 </Fragment>
             }

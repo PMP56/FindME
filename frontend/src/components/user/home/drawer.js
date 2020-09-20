@@ -11,24 +11,22 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 const Drawer = () => {
     return (
         <div className="drawer">
-            <NavLink to='/' className="icon-box" activeClassName="active-icon-box">
+            <NavLink exact to='/' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
                 <HouseIcon style={{ fontSize: '28px' }} />
                 <p>Home</p>
             </NavLink>
-            <NavLink to='/dashboard'>
-                <div className="icon-box">
-                    <DashboardIcon style={{ fontSize: '28px' }} />
-                    <p>Panel</p>
-                </div>
+            <NavLink exact to='/dashboard' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
+                <DashboardIcon style={{ fontSize: '28px' }} />
+                <p>Panel</p>
             </NavLink>
-            <div className="icon-box">
+            <NavLink exact to='/notification' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
                 <NewReleasesIcon style={{ fontSize: '28px' }} />
                 <p>Infos</p>
-            </div>
-            <div className="icon-box">
+            </NavLink>
+            <NavLink exact to='/messages' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
                 <MmsIcon style={{ fontSize: '28px' }} />
                 <p>Email</p>
-            </div>
+            </NavLink>
         </div>
     );
 }

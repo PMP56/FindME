@@ -30,12 +30,15 @@
 }
 
 .icon-box:hover{
-    background-color: teal;
-    color: black;
+    color: #03cea2;
 }
 
 .active-icon-box{
-    background-color: cyan;
+    background-color: #03cea2;
+    color: black;
+}
+
+.active-icon-box:hover{
     color: black;
 }
 

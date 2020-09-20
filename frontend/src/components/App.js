@@ -7,14 +7,14 @@ import regeneratorRuntime from "regenerator-runtime";
 import "regenerator-runtime/runtime";
 
 import LandingPage from './layouts/landing';
-import UserPage from '../components/user/user';
+import HomePage from '../components/user/home';
 import PrivateRoute from '../routes/PrivateRoutes';
 import NonEditProfile from './user/nonEditProfile';
 const App = () => {
     return (
         <AuthProvider>
             <Router>
-                <PrivateRoute path="/" component={UserPage} />
+                <PrivateRoute path="/" component={HomePage} />
                 <LandingPage />
             </Router>
         </AuthProvider>
