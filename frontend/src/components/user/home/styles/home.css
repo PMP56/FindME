@@ -7,21 +7,24 @@
 }
 
 .main-box{
-    width: 100%;
-    margin-right: 25px;
+    width: 80%;
+    margin-left: 8%;
 }
 
 .dashboard{
     display: none;
 }
 
-@media (min-width: 820px){
-    .dashboard{
-        display: block;
-    }
-
+@media (max-width: 1080px){
     .main-box{
-        width: 80%;
-        margin-left: 8%;
+        width: 90%;
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 450px){
+    .main-box{
+        width: 85%;
+        margin-left: 15%;
     }
 }

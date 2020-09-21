@@ -58,7 +58,7 @@ const Home = () => {
                             <Route exact path='/dashboard'>
                                 <NavBar data={allData} user={currentUser} />
                                 <Drawer />
-                                <DashBoard data={allData} />
+                                <DashBoard data={data} />
                             </Route>
                             <Route exact path='/notification'>
                                 <NavBar data={allData} user={currentUser} />

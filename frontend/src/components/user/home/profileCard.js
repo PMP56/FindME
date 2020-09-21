@@ -7,18 +7,18 @@ import StarIcon from '@material-ui/icons/Star';
 const styles = makeStyles({
     cardBody: {
         width: '100%',
-        margin: '15px 0px',
+        margin: '30px 0px',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#eee',
         borderRadius: '20px',
-        boxShadow: '4px 4px 2px #666',
+        boxShadow: '4px 4px 2px #444',
         transitionDuration: '0.1s',
         overflowX: 'hidden',
         '&:hover': {
             zIndex: 10,
-            boxShadow: '10px 10px 5px #666',
+            boxShadow: '10px 10px 5px #333',
         }
     },
 
@@ -46,6 +46,7 @@ const styles = makeStyles({
     },
 
     skillBox: {
+        marginTop: 0,
         display: 'flex',
     },
     skill: {
@@ -84,6 +85,36 @@ const styles = makeStyles({
             backgroundColor: '#eee',
             fontSize: '12px'
         },
+    },
+    "@media (max-width:450px)": {
+        cardBody: {
+            borderRadius: '10px',
+            margin: '25px 0px',
+            overflowX: 'scroll'
+        },
+        left: {
+            margin: '8px',
+        },
+        right: {
+            margin: '8px',
+        },
+        header: {
+            fontSize: '15px'
+        },
+        subheader: {
+            fontSize: '10px'
+        },
+        profilePicture: {
+            height: '75px',
+            width: '75px',
+        },
+        skill: {
+            width: '60px',
+            margin: '3px',
+            padding: '3px 6px',
+            backgroundColor: '#eee',
+            fontSize: '8px'
+        },
     }
 });
 
@@ -101,17 +132,17 @@ const ProfileCard = (props) => {
                     <h3 className={classes.header}>{props.data.userName}</h3>
                 </NavLink>
                 <div style={{ display: "flex", alignItems: 'flex-start' }}>
-                    <StarIcon style={{ color: (props.data.rating >= 1) ? "#edba11" : "#141414" }} />
-                    <StarIcon style={{ color: (props.data.rating >= 2) ? "#edba11" : "#141414" }} />
-                    <StarIcon style={{ color: (props.data.rating >= 3) ? "#edba11" : "#141414" }} />
-                    <StarIcon style={{ color: (props.data.rating >= 4) ? "#edba11" : "#141414" }} />
-                    <StarIcon style={{ color: (props.data.rating >= 5) ? "#edba11" : "#141414" }} />
-                    <h5 style={{ color: '#141414', margin: '5px 10px' }}>{` / ${props.data.totalRating}`}</h5>
+                    <StarIcon style={{ color: (props.data.rating >= 1) ? "#edba11" : "#141414", fontSize: '18px' }} />
+                    <StarIcon style={{ color: (props.data.rating >= 2) ? "#edba11" : "#141414", fontSize: '18px' }} />
+                    <StarIcon style={{ color: (props.data.rating >= 3) ? "#edba11" : "#141414", fontSize: '18px' }} />
+                    <StarIcon style={{ color: (props.data.rating >= 4) ? "#edba11" : "#141414", fontSize: '18px' }} />
+                    <StarIcon style={{ color: (props.data.rating >= 5) ? "#edba11" : "#141414", fontSize: '18px' }} />
+                    <h5 style={{ color: '#141414', margin: '2px 10px' }}>{` / ${props.data.totalRating}`}</h5>
                 </div>
                 <p className={classes.subheader}>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {
-                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill.substring(0, 8)}</p></div>)
+                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
                     }
                 </div>
             </div>

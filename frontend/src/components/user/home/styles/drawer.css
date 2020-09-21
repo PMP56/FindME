@@ -47,10 +47,19 @@
     .drawer{
         width: 10%;
     }
+    .icon-box{
+        margin: 10px 0px;
+        padding: 20px 10px;
+    }
 }
 
 @media (max-width: 450px){
     .drawer{
-        width: 20%;
+        width: 15%;
+    }
+
+    .icon-box{
+        margin: 10px 0px;
+        padding: 15px 10px;
     }
 }
