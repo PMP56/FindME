@@ -30,11 +30,11 @@
 }
 
 .icon-box:hover{
-    color: #03cea2;
+    color: #04ddae;
 }
 
 .active-icon-box{
-    background-color: #03cea2;
+    background-color: #04ddae;
     color: black;
 }
 

@@ -222,6 +222,15 @@ const styles = makeStyles({
         justifyContent: 'center',
         height: '0px'
     },
+
+    starBox: {
+        color: 'var(--mainText)',
+        cursor: "pointer",
+        '&:hover': {
+            color: '#edba11'
+        }
+    },
+
     themedot: {
         transitionDuration: '0.4s',
         height: '30px',

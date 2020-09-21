@@ -35,6 +35,8 @@ const Profile = (props) => {
                     socialLinks: [],
                     projects: [["Title", `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`, "Description", "Link"]],
                     visits: 0,
+                    rating: 0,
+                    totalRating: 0,
                 });
                 setLoaded(true);
             }

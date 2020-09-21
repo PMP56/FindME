@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Redirect, Link, NavLink } from 'react-router-dom';
 
+import StarIcon from '@material-ui/icons/Star';
+
 const styles = makeStyles({
     cardBody: {
         width: '100%',
@@ -98,6 +100,14 @@ const ProfileCard = (props) => {
                 <NavLink to={`/${props.data.userName}`}>
                     <h3 className={classes.header}>{props.data.userName}</h3>
                 </NavLink>
+                <div style={{ display: "flex", alignItems: 'flex-start' }}>
+                    <StarIcon style={{ color: (props.data.rating >= 1) ? "#edba11" : "#141414" }} />
+                    <StarIcon style={{ color: (props.data.rating >= 2) ? "#edba11" : "#141414" }} />
+                    <StarIcon style={{ color: (props.data.rating >= 3) ? "#edba11" : "#141414" }} />
+                    <StarIcon style={{ color: (props.data.rating >= 4) ? "#edba11" : "#141414" }} />
+                    <StarIcon style={{ color: (props.data.rating >= 5) ? "#edba11" : "#141414" }} />
+                    <h5 style={{ color: '#141414', margin: '5px 10px' }}>{` / ${props.data.totalRating}`}</h5>
+                </div>
                 <p className={classes.subheader}>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {

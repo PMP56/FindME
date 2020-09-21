@@ -4,6 +4,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import StarIcon from '@material-ui/icons/Star';
 
 import { uploadPicture } from '../../../utils/firebase_storage';
 
@@ -20,11 +21,14 @@ import { CircularProgress } from '@material-ui/core';
 const Template1 = (props) => {
     const classes = styles();
     const hiddenFileInput = useRef(null);
-    //const user = props.username;
-    //const id = currentUser.id;
     const editable = props.edit;
     const { currentUser } = useContext(AuthContext);
     const [database, setDatabase] = useState(props.data);
+
+    const [rating, setRating] = useState(database.rating);
+    const [hoverRating, setHoverRating] = useState(0);
+    const [totalRating, setTotalRating] = useState(database.totalRating);
+    const [rated, setRated] = useState(false);
     const visit = database.visit + 1;
 
     const [saving, setSaving] = useState(false);
@@ -116,6 +120,16 @@ const Template1 = (props) => {
             }
         });
         console.log(database);
+    }
+
+    const changeRating = (rate) => {
+        let newRating = Math.round(((rating * totalRating) + rate) / (totalRating + 1));
+        console.log(newRating);
+        updateData(database.userName, { ...database, rating: newRating, totalRating: totalRating + 1 });
+        setRated(true);
+    }
+    const changeHoverRating = (rating) => {
+        setHoverRating(rating);
     }
 
     const changeSocialLinks = (data) => {
@@ -299,7 +313,35 @@ const Template1 = (props) => {
                                 }
                             </div>
                             {!editable ?
-                                <Fragment /> :
+                                (rated) ? <Fragment>
+                                    <h5 style={{ textAlign: 'center', marginTop: '10px' }} className={classes.mainText}>
+                                        Thank you for rating
+                                    </h5>
+                                </Fragment> :
+                                    <Fragment >
+                                        <div className={classes.themeOptionWrapper}>
+                                            <div className={classes.starBox}>
+                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 1) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(1)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(1)} />
+                                            </div>
+                                            <div className={classes.starBox}>
+                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 2) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(2)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(2)} />
+                                            </div>
+                                            <div className={classes.starBox}>
+                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 3) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(3)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(3)} />
+                                            </div>
+                                            <div className={classes.starBox}>
+                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 4) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(4)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(4)} />
+                                            </div>
+                                            <div className={classes.starBox}>
+                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 5) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(5)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(5)} />
+                                            </div>
+
+                                        </div>
+                                        <h5 style={{ textAlign: 'center', marginTop: '10px' }} className={classes.mainText}>
+                                            Rate this portfolio
+                                    </h5>
+                                    </Fragment>
+                                :
                                 <Fragment>
                                     <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
                                         Personalize Theme

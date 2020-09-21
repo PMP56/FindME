@@ -32,6 +32,8 @@ class UserData(models.Model):
         blank=True
     )
     visit = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
+    totalRating = models.IntegerField(default=0)
 
     def __str__(self):
         return self.userName
