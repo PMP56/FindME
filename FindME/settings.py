@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'FindME',
         'USER': 'postgres',
-        'PASSWORD': 'dbms123',
+        'PASSWORD': 'pmanip12345',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -144,4 +144,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend'),  # update the STATICFILES_DIRS
 )
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
