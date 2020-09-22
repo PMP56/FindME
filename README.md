@@ -48,5 +48,10 @@ DATABASES = {
   
   ```
     python manage.py runserver 0:8001
+
+
+
+### add this to settings.py
+AUTH_USER_MODEL = 'accounts.User'
   ```
   

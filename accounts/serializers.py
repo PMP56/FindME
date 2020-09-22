@@ -1,14 +1,20 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import authenticate
 
 # User Serializer
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = '__all__'
+
+
+class UserTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email','is_employee','is_employer','is_admin')
+    
 
 # Register Serializer
 
@@ -16,12 +22,17 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password','is_employee','is_employer')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            validated_data['username'], validated_data['email'], validated_data['password'])
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            is_employee=validated_data['is_employee'],
+            is_employer=validated_data['is_employer']
+            )
         return user
 
 # Login Serializer
