@@ -24,7 +24,7 @@ Running site at: https://find--me.herokuapp.com/
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FindME',
+        'NAME': 'findme',
         'USER': 'postgres',
         'PASSWORD': '<postgres-password>',
         'HOST': '127.0.0.1',

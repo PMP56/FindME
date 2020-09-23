@@ -12,8 +12,6 @@ db.sqlite3-journal
 media
 pyvenv.cfg
 bin
-FindME/settings.py
-.gitignore
 package.json
 lib
 latest.dump
