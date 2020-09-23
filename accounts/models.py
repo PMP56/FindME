@@ -3,5 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    class Meta:
-        db_table = 'auth_user'
+        is_employer = models.BooleanField('employer_status', default=False)
+        is_employee = models.BooleanField('employee_status', default=False)
+        is_admin = models.BooleanField('admin_status', default=False)
