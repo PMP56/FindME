@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'employer',
-    'skills'
+    'skills',
+    'drf_yasg'
 ]
 
 REST_FRAMEWORK = {

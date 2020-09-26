@@ -57,6 +57,6 @@ class UserData(models.Model):
     rating = models.IntegerField(default=0)
     totalRating = models.IntegerField(default=0)
     is_available = models.BooleanField(default = True)
-
+ 
     def __str__(self):
         return self.userName
