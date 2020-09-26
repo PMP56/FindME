@@ -74,6 +74,9 @@ export const RegisterUser = (creds) => {
             if (err.response.data['email']) {
                 alert(err.response.data['email'][0]);
             }
+            else {
+                console.log(err.response.data)
+            }
         }
     );
 }

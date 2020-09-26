@@ -10,6 +10,7 @@ import { getData } from '../../utils/database';
 
 const Profile = (props) => {
     const { currentUser } = useContext(AuthContext);
+    const date = new Date();
     let { username } = useParams();
     const [loaded, setLoaded] = useState(false);
     const [database, setDatabase] = useState({});
@@ -37,6 +38,7 @@ const Profile = (props) => {
                     visits: 0,
                     rating: 0,
                     totalRating: 0,
+                    visitTimeline: [[0, 0]]
                 });
                 setLoaded(true);
             }
