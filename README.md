@@ -53,5 +53,8 @@ DATABASES = {
 
 ### add this to settings.py
 AUTH_USER_MODEL = 'accounts.User'
+
+# for swagger
+pip install -U drf-yasg[validation]
   ```
   
