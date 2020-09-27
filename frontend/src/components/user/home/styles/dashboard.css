@@ -76,4 +76,10 @@
         width: 60vw;
         margin: 25px 0px;
     }
+
+    .rating-image{
+        bottom: 25px;
+        right: 100px;
+    }
+
 }
