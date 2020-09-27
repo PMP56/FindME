@@ -15,6 +15,7 @@ psycopg2 = "*"
 django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
+drf_yasg = "*"
 
 [requires]
 python_version = "3.8"
