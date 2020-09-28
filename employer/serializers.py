@@ -6,6 +6,7 @@ class EmployerDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployerData
         fields = '__all__'
+        lookup_field = 'userName'
 
 class JobsSerializer(serializers.ModelSerializer):
     class Meta:

@@ -14,7 +14,7 @@ class DatabaseAPI(viewsets.ModelViewSet):
     def get_queryset(self):
         username = self.request.query_params.get('username', None)
         try:
-            if user is not None:
+            if username is not None:
                 queryset = self.queryset.filter(userName = username)
             else:
                 queryset = self.queryset.all()
