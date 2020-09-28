@@ -11,6 +11,7 @@ class EmployerAPI(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = EmployerDataSerializer
+    lookup_field = 'userName'
 
 
 class JobsAPI(viewsets.ModelViewSet):
