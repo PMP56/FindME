@@ -16,4 +16,4 @@ package.json
 lib
 latest.dump
 requirement.txt
-FindME/settings.py
+FindME/local_settings.py

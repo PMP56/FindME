@@ -9,3 +9,17 @@ class DatabaseAPI(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = UserDataSerializer
+    lookup_field = 'userName'
+
+    def get_queryset(self):
+        username = self.request.query_params.get('username', None)
+        try:
+            if user is not None:
+                queryset = self.queryset.filter(userName = username)
+            else:
+                queryset = self.queryset.all()
+        except:
+            queryset = []
+
+        return queryset
+
