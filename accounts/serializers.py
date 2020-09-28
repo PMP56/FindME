@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import User
+from database.models import UserData
+from employer.models import EmployerData
 from django.contrib.auth import authenticate
 
 # User Serializer
@@ -33,10 +35,25 @@ class RegisterSerializer(serializers.ModelSerializer):
             is_employee=validated_data['is_employee'],
             is_employer=validated_data['is_employer']
             )
+        is_employee = validated_data['is_employee']
+        is_employer=validated_data['is_employer']
+        if is_employee:
+            employee = UserData.objects.create(
+                id = user.id,
+                user = user,
+                userName = user.username,
+            )
+        elif is_employer:
+            employer = EmployerData.objects.create(
+                id = user.id,
+                user = user,
+                userName = user.username,
+            )
+        else:
+            pass
         return user
 
 # Login Serializer
-
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()

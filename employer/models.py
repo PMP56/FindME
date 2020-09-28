@@ -5,6 +5,7 @@ from skills.models import WorkField, Skill
 
 # Create your models here.
 class EmployerData(models.Model):
+    id = models.IntegerField( default = 0)
     userName = models.CharField(max_length=100, unique=True)
     user = models.OneToOneField(
         User,
@@ -19,11 +20,15 @@ class EmployerData(models.Model):
     secondIntro = models.CharField(max_length=250)
     skills = ArrayField(
         models.CharField(max_length=50, blank=True),
-        default = list 
+        default = list,
+        blank = True,
+        null = True 
     )
     skills_opt = ArrayField(
         models.IntegerField(),
-        default = list
+        default = list,
+        blank = True,
+        null = True 
     )
     # skill_opt = models.ForeignKey(
     #     Skill,
@@ -33,16 +38,20 @@ class EmployerData(models.Model):
     projects = ArrayField(
         ArrayField(
             models.CharField(max_length=250, blank=True),
-            blank=True
+            blank=True,
+            null = True
         ),
-        blank=True
+        blank=True,
+        null = True
     )
     socialLinks = ArrayField(
         ArrayField(
             models.CharField(max_length=150, blank=True),
-            blank=True
+            blank=True,
+            null = True
         ),
-        blank=True
+        blank=True,
+        null = True
     )
     visit = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -63,7 +72,9 @@ class Jobs(models.Model):
     description = models.CharField(max_length= 350)
     skills_opt = ArrayField(
         models.IntegerField(),
-        default = list
+        default = list,
+        blank = True,
+        null = True
     )
     # skill_opt = models.ForeignKey(
     #     Skill,
@@ -77,6 +88,7 @@ class Jobs(models.Model):
     salary_low = models.IntegerField()
     experience = models.IntegerField()
     is_available = models.BooleanField(default = True)
+    views = models.IntegerField(default = 0)
     
 
 

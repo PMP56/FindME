@@ -15,3 +15,5 @@ bin
 package.json
 lib
 latest.dump
+requirement.txt
+FindME/settings.py

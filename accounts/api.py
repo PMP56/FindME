@@ -17,6 +17,7 @@ class RegisterAPI(generics.GenericAPIView):
             "user": UserTokenSerializer(user, context=self.get_serializer_context).data,
             "token": AuthToken.objects.create(user)[1]
         })
+    
 
 # loginAPI
 
