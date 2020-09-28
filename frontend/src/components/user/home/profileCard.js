@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Redirect, Link, NavLink } from 'react-router-dom';
 
@@ -121,6 +121,10 @@ const styles = makeStyles({
 const ProfileCard = (props) => {
     const classes = styles();
 
+    useEffect(() => {
+        console.log(props.data)
+    }, [])
+
     return (
 
         <div className={classes.cardBody}>
@@ -142,7 +146,7 @@ const ProfileCard = (props) => {
                 <p className={classes.subheader}>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {
-                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
+                        (!props.data.skills) ? <Fragment /> : (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
                     }
                 </div>
             </div>

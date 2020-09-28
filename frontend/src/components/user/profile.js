@@ -20,10 +20,10 @@ const Profile = (props) => {
             if (result != null) {
                 setDatabase(result.data);
                 setLoaded(true);
-
                 //console.log(result.data);
             } else {
                 setDatabase({
+                    user: currentUser.id,
                     id: currentUser.id,
                     userName: currentUser.username,
                     userHeader: `Hi I'm ${currentUser.username}`,
