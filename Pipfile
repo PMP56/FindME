@@ -15,7 +15,11 @@ psycopg2 = "*"
 django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
+<<<<<<< HEAD
 drf_yasg = "*"
+=======
+drf-yasg = {extras = ["validation"], version = "*"}
+>>>>>>> f2d9685de78a6932ba37707d61ab662418aa8aae
 
 [requires]
 python_version = "3.8"

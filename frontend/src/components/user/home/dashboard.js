@@ -38,7 +38,7 @@ const DashBoard = (props) => {
                     <div style={{ margin: '30px', zIndex: 10 }}>
                         <h5 style={{ color: 'white', fontSize: '16px', textTransform: 'capitalize' }}>{`Average Rating: \t  ${props.data.rating}`}</h5>
                         <h5 style={{ color: 'white', fontSize: '16px', textTransform: 'capitalize' }}>{`Total Ratings:  ${props.data.totalRating}`}</h5>
-                        <h5 style={{ color: 'white', fontSize: '16px', textTransform: 'capitalize' }}>{`Rating per visit:  ${props.data.totalRating / props.data.visit * 100}%`}</h5>
+                        <h5 style={{ color: 'white', fontSize: '16px', textTransform: 'capitalize' }}>{`Rating per visit:  ${(props.data.totalRating / props.data.visit * 100).toFixed(2)}%`}</h5>
                     </div>
                     <img className="rating-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Hand_Gesture_-_Raising_a_Trophy_Vector.svg/1280px-Hand_Gesture_-_Raising_a_Trophy_Vector.svg.png"></img>
                 </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { Redirect, Link, NavLink } from 'react-router-dom';
 
@@ -12,13 +12,13 @@ const styles = makeStyles({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#eee',
+        boxShadow: '0 3px 6px -2px rgba(250,250,250,0.2)',
         borderRadius: '20px',
-        boxShadow: '4px 4px 2px #444',
-        transitionDuration: '0.1s',
+        transitionDuration: '0.2s',
         overflowX: 'hidden',
         '&:hover': {
             zIndex: 10,
-            boxShadow: '10px 10px 5px #333',
+            boxShadow: '0 14px 15px -5px rgba(250,250,250,0.2)'
         }
     },
 
@@ -121,6 +121,10 @@ const styles = makeStyles({
 const ProfileCard = (props) => {
     const classes = styles();
 
+    useEffect(() => {
+        console.log(props.data)
+    }, [])
+
     return (
 
         <div className={classes.cardBody}>
@@ -142,7 +146,7 @@ const ProfileCard = (props) => {
                 <p className={classes.subheader}>{props.data.shadowText}</p>
                 <div className={classes.skillBox}>
                     {
-                        (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
+                        (!props.data.skills) ? <Fragment /> : (props.data.skills).map((skill, index) => <div className={classes.skill} key={index}><p style={{ margin: 0 }}>{skill}</p></div>)
                     }
                 </div>
             </div>

@@ -6,7 +6,7 @@ import CircularProgress from './templates/utils/circularProgress';
 
 import Template from './templates/template1';
 
-import { getData } from '../../utils/database';
+import { getData, getEmployerData } from '../../utils/database';
 
 const Profile = (props) => {
     const { currentUser } = useContext(AuthContext);
@@ -15,38 +15,36 @@ const Profile = (props) => {
     const [database, setDatabase] = useState({});
 
     const fetchData = async () => {
-        await getData(username).then(result => {
-            if (result != null) {
-                setDatabase(result.data);
-                setLoaded(true);
-
-                //console.log(result.data);
-            } else {
-                setDatabase({
-                    id: currentUser.id,
-                    userName: currentUser.username,
-                    userHeader: `Hi I'm ${currentUser.username}`,
-                    shadowText: 'I am a student/ professional/ designer/ ..................',
-                    firstIntro: 'Short Introduction \n ###########################',
-                    secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
-                    skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
-                    theme: 'white',
-                    profilePicture: '/static/frontend/user.png',
-                    socialLinks: [],
-                    projects: [["Title", `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`, "Description", "Link"]],
-                    visits: 0,
-                    rating: 0,
-                    totalRating: 0,
-                });
-                setLoaded(true);
-            }
-        });
+        if (props.data != null) {
+            setDatabase(props.data);
+            setLoaded(true);
+        } else {
+            setDatabase({
+                user: currentUser.id,
+                id: currentUser.id,
+                userName: currentUser.username,
+                userHeader: `Hi I'm ${currentUser.username}`,
+                shadowText: 'I am a student/ professional/ designer/ ..................',
+                firstIntro: 'Short Introduction \n ###########################',
+                secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
+                skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
+                theme: 'white',
+                profilePicture: '/static/frontend/user.png',
+                socialLinks: [],
+                projects: [["Title", `/static/frontend/project${Math.floor(Math.random() * Math.floor(3))}.png`, "Description", "Link"]],
+                visits: 0,
+                rating: 0,
+                totalRating: 0,
+                visitTimeline: [[0, 0]]
+            });
+            setLoaded(true);
+        }
     }
 
     useEffect(() => {
-
+        console.log(currentUser.is_employee)
         fetchData();
-        console.log("Edit = ", props.edit)
+        //console.log("Edit = ", props.edit)
     }, []);
 
     return (

@@ -14,6 +14,19 @@ export const updateData = async (username, data) => {
         ).catch(err => console.log(err.response.data))
 }
 
+export const updateEmployerData = async (username, data) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    const body = JSON.stringify(data);
+    return axios.put(`/api/employer/${username}/`, body, config)
+        .then(
+            (result) => { console.log('Data updated'); /*console.clear()*/ }
+        ).catch(err => console.log(err.response.data))
+}
+
 const deleteData = (username) => {
     const config = {
         headers: {
@@ -74,6 +87,23 @@ export const getData = async (username) => {
         });
 }
 
+export const getEmployerData = async (username) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    return await axios.get(`/api/employer/${username}`, config)
+        .then((result) => result)
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+
+            }
+        });
+}
+
 export const getAllData = async () => {
     const config = {
         headers: {
@@ -81,6 +111,22 @@ export const getAllData = async () => {
         }
     };
     return await axios.get(`/api/database/`, config)
+        .then((result) => result)
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+            }
+        });
+}
+
+export const getAllEmployerData = async () => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    return await axios.get(`/api/employer/`, config)
         .then((result) => result)
         .catch(err => {
             if (err.response.data['detail'] = "Not found.") {
