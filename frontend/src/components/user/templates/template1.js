@@ -9,7 +9,7 @@ import StarIcon from '@material-ui/icons/Star';
 import { uploadPicture } from '../../../utils/firebase_storage';
 
 import { styles } from './utils/styles';
-import { addData, getData, updateData } from '../../../utils/database';
+import { addData, getData, updateData, updateEmployerData } from '../../../utils/database';
 import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import Projects from './utils/projectCard';
@@ -55,7 +55,12 @@ const Template1 = (props) => {
     });
 
     const publish = (database) => {
-        updateData(database.userName, database);
+        if (currentUser.is_employee) {
+            updateData(database.userName, database);
+        } else {
+            console.log('false')
+            updateEmployerData(database.userName, database);
+        }
         setSaving(true);
         setInterval(() => { setSaving(false); location.reload(); }, 2000);
     }

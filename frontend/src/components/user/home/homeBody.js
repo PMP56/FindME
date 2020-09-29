@@ -7,9 +7,9 @@ import './styles/home.css';
 
 const HomeBody = (props) => {
     const [data, setData] = useState({});
-    const [allData, setAllData] = useState(props.data);
+    const [allEmployeeData, setAllEmployeeData] = useState(props.employeeData);
+    const [allEmployerData, setAllEmployerData] = useState(props.employerData);
     const { currentUser } = useContext(AuthContext);
-    let userToken = localStorage.getItem('currentUserToken');
 
     return (
         <Fragment>
@@ -17,17 +17,17 @@ const HomeBody = (props) => {
                 <div className="main-box">
                     <div>
                         <h2 style={{ color: 'white', textAlign: 'center' }}>People who use FindME</h2>
-                        {(allData.length != 0) ? (allData).map((data, index) =>
+                        {(allEmployeeData.length != 0) ? (allEmployeeData).map((data, index) =>
+                            <ProfileCard key={index} data={data} />
+                        ) : <Fragment />}
+                    </div>
+                    <div>
+                        <h2 style={{ color: 'white', textAlign: 'center' }}>Employers on FindME</h2>
+                        {(allEmployerData.length != 0) ? (allEmployerData).map((data, index) =>
                             <ProfileCard key={index} data={data} />
                         ) : <Fragment />}
                     </div>
                 </div>
-                {/* <div className="dashboard">
-                    <h2 style={{ color: 'white', textAlign: 'center' }}>DashBoard</h2>
-                    {(!loaded) ? <Fragment /> :
-                        <h4 style={{ color: 'white', textAlign: 'center' }}> Your portfolio got {data.visit ?? 0} visit.</h4>
-                    }
-                </div> */}
             </div>
         </Fragment>
     );

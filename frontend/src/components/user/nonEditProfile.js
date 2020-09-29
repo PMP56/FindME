@@ -16,20 +16,14 @@ const NonEditProfile = (props) => {
     const [database, setDatabase] = useState({});
 
     const fetchData = async () => {
-        await getData(username).then(result => {
-
-            if (result != null) {
-                //changeTheme(result.data.theme);
-                setDatabase(result.data);
-                setFound(true);
-                setLoaded(true);
-
-            } else {
-                setFound(false);
-                setLoaded(true);
-            }
-        });
-
+        if (props.data.theme != "") {
+            setDatabase(props.data);
+            setFound(true);
+            setLoaded(true);
+        } else {
+            setFound(found);
+            setLoaded(true);
+        }
     }
 
     useEffect(() => {

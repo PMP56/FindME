@@ -222,7 +222,7 @@ const SocialLink = (props) => {
 
     return (
         <Fragment>
-            {(props.data == null) ?
+            {(props.data.length == 0) ?
                 <NoLinks />
                 :
                 (props.data).map((link, index) => <Links key={index} icon={link[0]} val={link[1]} />)

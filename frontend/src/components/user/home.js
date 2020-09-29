@@ -3,7 +3,7 @@ import { Route, Link, Switch } from 'react-router-dom';
 import { AuthContext } from '../../utils/userContext';
 import { LogOut } from '../../utils/auth';
 
-import { getData, getAllData } from '../../utils/database';
+import { getData, getEmployerData, getAllData, getAllEmployerData } from '../../utils/database';
 
 import Profile from './profile';
 import NonEditProfile from './nonEditProfile';
@@ -17,26 +17,45 @@ import './home/styles/home.css';
 
 const Home = () => {
     const [data, setData] = useState({});
-    const [allData, setAllData] = useState({});
+    const [allEmployeeData, setAllEmployeeData] = useState({});
+    const [allEmployerData, setAllEmployerData] = useState({});
     const [loaded, setLoaded] = useState(false);
     const { currentUser } = useContext(AuthContext);
     let userToken = localStorage.getItem('currentUserToken');
 
     const fetchData = async () => {
-        await getData(currentUser.username).then(result => {
-            if (result != null) {
-                //changeTheme(result.data.theme);
-                setData(result.data);
-            }
-            //setLoaded(true);
-        });
         await getAllData().then(result => {
             if (result != null) {
                 //changeTheme(result.data.theme);
-                setAllData(result.data);
+                setAllEmployeeData(result.data);
             }
-            setLoaded(true);
         });
+        await getAllEmployerData().then(result => {
+            if (result != null) {
+                //changeTheme(result.data.theme);
+                setAllEmployerData(result.data);
+            }
+        });
+        if (currentUser.is_employee) {
+            await getData(currentUser.username).then(result => {
+                if (result.theme != "") {
+                    setData(result.data);
+                    setLoaded(true);
+                    //console.log(result.data);
+                } else {
+                    setLoaded(true);
+                }
+            });
+        } else {
+            await getEmployerData(currentUser.username).then(result => {
+                if (result.theme != "") {
+                    setData(result.data);
+                    setLoaded(true);
+                } else {
+                    setLoaded(true);
+                }
+            });
+        }
 
     }
 
@@ -50,31 +69,31 @@ const Home = () => {
                 <Fragment>
                     <div className="home-body">
                         <Route exact path='/'>
-                            <NavBar data={allData} user={currentUser} />
+                            <NavBar data={allEmployeeData} user={currentUser} />
                             <Drawer />
-                            <HomeBody data={allData} />
+                            <HomeBody employeeData={allEmployeeData} employerData={allEmployerData} />
                         </Route>
                         <Switch>
                             <Route exact path='/dashboard'>
-                                <NavBar data={allData} user={currentUser} />
+                                <NavBar data={allEmployeeData} user={currentUser} />
                                 <Drawer />
                                 <DashBoard data={data} />
                             </Route>
                             <Route exact path='/notification'>
-                                <NavBar data={allData} user={currentUser} />
+                                <NavBar data={allEmployeeData} user={currentUser} />
                                 <Drawer />
-                                <DashBoard data={allData} />
+                                <DashBoard data={allEmployeeData} />
                             </Route>
                             <Route exact path='/messages'>
-                                <NavBar data={allData} user={currentUser} />
+                                <NavBar data={allEmployeeData} user={currentUser} />
                                 <Drawer />
-                                <DashBoard data={allData} />
+                                <DashBoard data={allEmployeeData} />
                             </Route>
                             <Route path="/edit/:username">
-                                <Profile edit={true} />
+                                <Profile data={data} edit={true} />
                             </Route>
                             <Route path="/:username">
-                                <NonEditProfile edit={false} />
+                                <NonEditProfile data={data} edit={false} />
                             </Route>
                         </Switch>
                     </div>
