@@ -55,7 +55,7 @@ const Template1 = (props) => {
     });
 
     const publish = (database) => {
-        addData(database);
+        updateData(database.userName, database);
         setSaving(true);
         setInterval(() => { setSaving(false); location.reload(); }, 2000);
     }

@@ -17,9 +17,9 @@ const HomeBody = (props) => {
                 <div className="main-box">
                     <div>
                         <h2 style={{ color: 'white', textAlign: 'center' }}>People who use FindME</h2>
-                        {(allData).map((data, index) =>
+                        {(allData.length != 0) ? (allData).map((data, index) =>
                             <ProfileCard key={index} data={data} />
-                        )}
+                        ) : <Fragment />}
                     </div>
                 </div>
                 {/* <div className="dashboard">
