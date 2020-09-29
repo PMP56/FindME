@@ -287,7 +287,7 @@ const ProjectCard = (props) => {
     const ProjectGrid = () => {
         return (
             <div className={classes.gridContainer}>
-                {(props.data).map((data, index) => <Tile key={index} data={data} index={index} />)}
+                {(props.data == null) ? <Fragment /> : (props.data).map((data, index) => <Tile key={index} data={data} index={index} />)}
                 {(!props.edit) ? <Fragment /> :
 
                     <div className={`${classes.gridTiles} d-flex justify-content-center`} onClick={handleAddClickOpen}>

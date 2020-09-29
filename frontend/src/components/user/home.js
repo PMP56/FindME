@@ -38,17 +38,16 @@ const Home = () => {
         });
         if (currentUser.is_employee) {
             await getData(currentUser.username).then(result => {
-                if (result.theme != "") {
+                if (result != null) {
                     setData(result.data);
                     setLoaded(true);
-                    //console.log(result.data);
                 } else {
                     setLoaded(true);
                 }
             });
         } else {
             await getEmployerData(currentUser.username).then(result => {
-                if (result.theme != "") {
+                if (result != null) {
                     setData(result.data);
                     setLoaded(true);
                 } else {

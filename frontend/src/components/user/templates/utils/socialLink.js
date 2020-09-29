@@ -149,7 +149,7 @@ const SocialLink = (props) => {
     const NoLinks = () => {
         return (
             <div>
-                <h4>Add social links</h4>
+                <h4 style={{ color: 'var(--mainText)' }}>Add social links</h4>
             </div>
         );
     }
@@ -222,7 +222,7 @@ const SocialLink = (props) => {
 
     return (
         <Fragment>
-            {(props.data.length == 0) ?
+            {(props.data == null) ?
                 <NoLinks />
                 :
                 (props.data).map((link, index) => <Links key={index} icon={link[0]} val={link[1]} />)
@@ -244,7 +244,7 @@ const SocialLink = (props) => {
                     <IconButtons />
                     <EditableTile />
                     <hr />
-                    {(tempData).map((link, index) => <Tile key={index} icon={link[0]} val={link[1]} index={index} style={{ marginBottom: '5px' }} />)}
+                    {(tempData == null) ? <Fragment /> : (tempData).map((link, index) => <Tile key={index} icon={link[0]} val={link[1]} index={index} style={{ marginBottom: '5px' }} />)}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

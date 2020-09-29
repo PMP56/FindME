@@ -5,7 +5,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import CircularProgress from './templates/utils/circularProgress';
 
 import Template from './templates/template1';
-import { getData, updateData } from '../../utils/database';
+import { getData, updateData, getAllEmployerData, getEmployerData } from '../../utils/database';
 
 
 const NonEditProfile = (props) => {
@@ -16,14 +16,27 @@ const NonEditProfile = (props) => {
     const [database, setDatabase] = useState({});
 
     const fetchData = async () => {
-        if (props.data.theme != "") {
-            setDatabase(props.data);
-            setFound(true);
-            setLoaded(true);
-        } else {
-            setFound(found);
-            setLoaded(true);
-        }
+        await getData(username).then(async (result) => {
+            if (result != null) {
+                //changeTheme(result.data.theme);
+                setDatabase(result.data);
+                setFound(true);
+                setLoaded(true);
+
+            } else {
+                await getEmployerData(username).then(result => {
+                    if (result != null) {
+                        setDatabase(result.data);
+                        setFound(true);
+                        setLoaded(true);
+                    } else {
+                        setFound(false);
+                        setLoaded(true);
+                    }
+                })
+            }
+        });
+
     }
 
     useEffect(() => {

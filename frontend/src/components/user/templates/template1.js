@@ -412,7 +412,7 @@ const Template1 = (props) => {
 
                             <div className={classes.skills} name='skills' onBlur={update} contentEditable={editable} suppressContentEditableWarning>
                                 <div className={classes.secondaryText} >
-                                    {database.skills.map((skill, index) => <li key={index}>{skill}</li>)}
+                                    {(database.skills == null) ? <Fragment /> : database.skills.map((skill, index) => <li key={index}>{skill}</li>)}
                                 </div>
                             </div>
                         </div>

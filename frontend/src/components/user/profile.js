@@ -15,7 +15,7 @@ const Profile = (props) => {
     const [database, setDatabase] = useState({});
 
     const fetchData = async () => {
-        if (props.data.theme != "") {
+        if (props.data != null) {
             setDatabase(props.data);
             setLoaded(true);
         } else {

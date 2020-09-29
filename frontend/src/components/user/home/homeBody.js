@@ -6,7 +6,7 @@ import ProfileCard from './profileCard';
 import './styles/home.css';
 
 const HomeBody = (props) => {
-    const [data, setData] = useState({});
+    //const [data, setData] = useState({});
     const [allEmployeeData, setAllEmployeeData] = useState(props.employeeData);
     const [allEmployerData, setAllEmployerData] = useState(props.employerData);
     const { currentUser } = useContext(AuthContext);
