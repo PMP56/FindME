@@ -13,12 +13,12 @@ class UserData(models.Model):
         on_delete= models.CASCADE,
         primary_key = True
     )
-    userHeader = models.CharField(max_length=100)
-    theme = models.CharField(max_length=10, blank=True)
-    profilePicture = models.CharField(max_length=250)
-    shadowText = models.CharField(max_length=100)
-    firstIntro = models.CharField(max_length=125)
-    secondIntro = models.CharField(max_length=250)
+    userHeader = models.CharField(max_length=100, default = 'Welcome to my portfolio.')
+    theme = models.CharField(max_length=10, default ='white')
+    profilePicture = models.CharField(max_length=250, default = '/static/frontend/user.png')
+    shadowText = models.CharField(max_length=100, default = 'I am a student/ professional/ designer/ ..................')
+    firstIntro = models.CharField(max_length=125, default = '## Short Introduction about me ##')
+    secondIntro = models.CharField(max_length=250, default = 'Know about my skills, interest and projects here.')
     skills = ArrayField(
         models.CharField(max_length=50, blank=True),
         blank = True,
