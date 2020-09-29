@@ -20,19 +20,49 @@ class LeadViewSet(viewsets.ModelViewSet):
         message_to = self.request.query_params.get('message_to', None)
         message_from = self.request.query_params.get('message_from', None)
         try:
-            if inbox is not None:
-                queryset = self.queryset.filter(sent_to = inbox)
-            elif outbox is not None:
-                queryset = self.queryset.filter(sent_by = outbox)
-            elif message_to is not None and message_from is not None:
-                queryset = self.queryset.filter(Q(sent_to = message_to) & Q(sent_by = message_from)) | ( Q(sent_to = message_from) & Q(sent_by = message_to) )    
-            elif message_to is not None and message_from is None:
-                raise exceptions.PermissionDenied()
-            elif message_to is None and message_from is not None:
-                raise exceptions.PermissionDenied()
-            else:
-                queryset = self.queryset.all()
+            inbox = int(inbox)
         except:
-            queryset = []
+            pass
+        try:
+            outbox = int(outbox)
+        except:
+            pass
+        try:
+            message_to = int(message_to)
+        except:
+            pass
+        try:
+            message_from = int(message_from)
+        except:
+            pass
+        if inbox is not None:
+            queryset = self.queryset.filter(sent_to = inbox)
+        elif outbox is not None:
+            queryset = self.queryset.filter(sent_by = outbox)
+        elif message_to is not None and message_from is not None:
+            queryset = self.queryset.filter((Q(sent_to = message_to) & Q(sent_by = message_from)) | (Q(sent_to = message_from) & Q(sent_by = message_to)))    
+        elif message_to is not None and message_from is None:
+            raise exceptions.PermissionDenied()
+        elif message_from is not None and message_to is None:
+            raise exceptions.PermissionDenied()
+        else:
+            queryset = self.queryset.all()
 
         return queryset
+
+    def create(self, request, *args, **kwargs):
+        user=request.user
+        if user.is_authenticated:
+            sent_by=request.POST.get('sent_by', None)
+            try:
+                sent_by = int(sent_by)
+            except:
+                pass
+            if sent_by == user.id:
+                return super().create(request, *args, **kwargs)
+            else:
+                raise exceptions.PermissionDenied()
+        else:
+            raise exceptions.PermissionDenied()
+
+        
