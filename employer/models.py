@@ -66,6 +66,7 @@ class Jobs(models.Model):
         User,
         on_delete= models.CASCADE,
     )
+    title = models.CharField(max_length = 50, default = '')
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now = True)
     expire_date = models.DateField()
