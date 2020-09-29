@@ -13,6 +13,7 @@ class DatabaseAPI(viewsets.ModelViewSet):
 
     def get_queryset(self):                             #employees recommend list for jobs page.
         username = self.request.query_params.get('username', None)
+        
         if username is not None:
             queryset = self.queryset.filter(userName = username)
             return queryset
@@ -46,17 +47,17 @@ class DatabaseAPI(viewsets.ModelViewSet):
             pass
         if job_field is not None:
             queryset = queryset.filter(interest_field__overlap= [job_field])
-        if skill1 is not None and skill2 is not None and skill3 is not None and skill4 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3,skill4])
-        elif skill1 is not None and skill2 is not None and skill3 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3])
-        elif skill1 is not None and skill2 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2])  
-        elif skill1 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1])
-        else:
-            pass
+            if skill1 is not None and skill2 is not None and skill3 is not None and skill4 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3,skill4])
+            elif skill1 is not None and skill2 is not None and skill3 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3])
+            elif skill1 is not None and skill2 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2])  
+            elif skill1 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1])
+            else:
+                pass
 
-        queryset = queryset.order_by('-visit')[:10]
+            queryset = queryset.order_by('-visit')[:10]
         return queryset
 

@@ -51,19 +51,19 @@ class JobsAPI(viewsets.ModelViewSet):
         queryset = self.queryset.all()
         if work_field is not None:
             queryset = queryset.filter(job_field = work_field)
-        if skill1 is not None and skill2 is not None and skill3 is not None and skill4 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3,skill4])
-        elif skill1 is not None and skill2 is not None and skill3 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3])
-            # queryset = queryset.filter(Q(skills_opt __contains = [skill1]) | Q(skills_opt __contains = [skill2]) | Q(skills_opt __contains = [skill3]))
-        elif skill1 is not None and skill2 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1,skill2])  
-        elif skill1 is not None:
-            queryset = queryset.filter(skills_opt__overlap=[skill1])
-        else:
-            pass
+            if skill1 is not None and skill2 is not None and skill3 is not None and skill4 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3,skill4])
+            elif skill1 is not None and skill2 is not None and skill3 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2,skill3])
+                # queryset = queryset.filter(Q(skills_opt __contains = [skill1]) | Q(skills_opt __contains = [skill2]) | Q(skills_opt __contains = [skill3]))
+            elif skill1 is not None and skill2 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1,skill2])  
+            elif skill1 is not None:
+                queryset = queryset.filter(skills_opt__overlap=[skill1])
+            else:
+                pass
 
-        queryset = queryset.order_by('-views')[:10]
+            queryset = queryset.order_by('-views')[:10]
         return queryset
         
 

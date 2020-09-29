@@ -12,12 +12,12 @@ class EmployerData(models.Model):
         on_delete= models.CASCADE,
         primary_key=True,
     )
-    userHeader = models.CharField(max_length=100)
-    theme = models.CharField(max_length=10, blank=True)
-    profilePicture = models.CharField(max_length=250)
-    shadowText = models.CharField(max_length=100)
-    firstIntro = models.CharField(max_length=125)
-    secondIntro = models.CharField(max_length=250)
+    userHeader = models.CharField(max_length=100, default = 'Welcome to our official page.')
+    theme = models.CharField(max_length=10, blank=True, default ='white')
+    profilePicture = models.CharField(max_length=250, default = '/static/frontend/user.png')
+    shadowText = models.CharField(max_length=100, default = 'We are well established company/ new startups/..............')
+    firstIntro = models.CharField(max_length=125, default = '## Know more about us. ##')
+    secondIntro = models.CharField(max_length=250, default = '## Look at our projects and jobs we provide. ##')
     skills = ArrayField(
         models.CharField(max_length=50, blank=True),
         default = list,
