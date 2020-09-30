@@ -7,6 +7,7 @@ import HouseIcon from '@material-ui/icons/House';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import MmsIcon from '@material-ui/icons/Mms';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import WorkIcon from '@material-ui/icons/Work';
 
 const Drawer = () => {
     return (
@@ -19,9 +20,9 @@ const Drawer = () => {
                 <DashboardIcon style={{ fontSize: '28px' }} />
                 <p>Panel</p>
             </NavLink>
-            <NavLink exact to='/notification' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
-                <NewReleasesIcon style={{ fontSize: '28px' }} />
-                <p>Infos</p>
+            <NavLink exact to='/jobs' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
+                <WorkIcon style={{ fontSize: '28px' }} />
+                <p>Jobs</p>
             </NavLink>
             <NavLink exact to='/messages' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
                 <MmsIcon style={{ fontSize: '28px' }} />

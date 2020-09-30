@@ -72,11 +72,9 @@ const NavBar = (props) => {
                 <SearchIcon style={{ color: "black" }} />
             </div>
             <div className="right-buttons">
-                <div className="right-nav-button">
-                    <NewReleasesIcon />
-                </div>
                 <div className="right-nav-button dropdown-toggle" data-toggle="dropdown">
                     <PersonIcon />
+                    <h4 className="nav-text">{props.user.username.toUpperCase()}</h4>
                 </div>
                 <ul className="dropdown-menu">
                     <li><VisibilityIcon style={{ marginRight: '15px' }} /><Link to={'/' + props.user.username}>{props.user.username.toUpperCase()}</Link></li>

@@ -84,10 +84,23 @@
     border-radius: 20px;
     cursor: pointer;
     transition-duration: 0.3s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-text{
+    font-size: 16px;
+    color: white;
+    margin: 5px;
 }
 
 .right-nav-button:hover{
     background-color: white;
+    color: black !important;
+}
+
+.right-nav-button:hover .nav-text{
     color: black;
 }
 

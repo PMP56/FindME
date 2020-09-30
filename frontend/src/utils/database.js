@@ -136,6 +136,23 @@ export const getAllEmployerData = async () => {
         });
 }
 
+//get all jobs
+export const getAllJobs = async () => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    return await axios.get(`/api/jobs/`, config)
+        .then((result) => result)
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+            }
+        });
+}
+
 
 //Get all skills
 export const getAllSkills = async () => {
@@ -162,6 +179,23 @@ export const getAllWorkfields = async () => {
         }
     };
     return await axios.get(`/api/workfield/`, config)
+        .then((result) => result)
+        .catch(err => {
+            if (err.response.data['detail'] = "Not found.") {
+                //console.log('Not found');
+                return null;
+            }
+        });
+}
+
+//get particular workfield
+export const getWorkfield = async (id) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    return await axios.get(`/api/workfield/${id}`, config)
         .then((result) => result)
         .catch(err => {
             if (err.response.data['detail'] = "Not found.") {

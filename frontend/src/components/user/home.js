@@ -3,7 +3,7 @@ import { Route, Link, Switch } from 'react-router-dom';
 import { AuthContext } from '../../utils/userContext';
 import { LogOut } from '../../utils/auth';
 
-import { getData, getEmployerData, getAllData, getAllEmployerData } from '../../utils/database';
+import { getData, getEmployerData, getAllData, getAllEmployerData, getAllJobs } from '../../utils/database';
 
 import Profile from './profile';
 import NonEditProfile from './nonEditProfile';
@@ -13,12 +13,14 @@ import NavBar from './home/navbar';
 import Drawer from './home/drawer';
 import ProfileCard from './home/profileCard';
 import DashBoard from './home/dashboard';
+import Jobs from './home/jobs';
 import './home/styles/home.css';
 
 const Home = () => {
     const [data, setData] = useState({});
     const [allEmployeeData, setAllEmployeeData] = useState({});
     const [allEmployerData, setAllEmployerData] = useState({});
+    const [allJobs, setAllJobs] = useState({});
     const [loaded, setLoaded] = useState(false);
     const { currentUser } = useContext(AuthContext);
     let userToken = localStorage.getItem('currentUserToken');
@@ -34,6 +36,12 @@ const Home = () => {
             if (result != null) {
                 //changeTheme(result.data.theme);
                 setAllEmployerData(result.data);
+            }
+        });
+        await getAllJobs().then(result => {
+            if (result != null) {
+                //changeTheme(result.data.theme);
+                setAllJobs(result.data);
             }
         });
         if (currentUser.is_employee) {
@@ -78,10 +86,10 @@ const Home = () => {
                                 <Drawer />
                                 <DashBoard data={data} />
                             </Route>
-                            <Route exact path='/notification'>
+                            <Route exact path='/jobs'>
                                 <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
                                 <Drawer />
-                                <DashBoard data={allEmployeeData} />
+                                <Jobs data={allJobs} />
                             </Route>
                             <Route exact path='/messages'>
                                 <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
