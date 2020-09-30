@@ -305,6 +305,8 @@ contentEditable {
       transform: translateX(0px);
     }
   }
+
+  /* contact CSS */
   .contact {
     padding-top: 20%;
     text-align: center;
@@ -320,7 +322,7 @@ contentEditable {
     text-align: center;
   }
   .devText {
-    padding-top: 25px;
+    padding-top: 20px;
     font-size: 32px;
   }
 
@@ -344,5 +346,26 @@ contentEditable {
       padding-top: 25px;
       font-size: 42px;
     }
+  }
+
+  /* About CSS */
+  .about {
+    padding-top: 15%;
+    text-align: center;
+    color: black;
+    height: 100vh;
+    width: auto;
+    background-image: url("download.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .text-container {
+    position: center;
+    word-wrap: break-word;
+    transform: scale(0.95, 0.95);
+    font-size: 28px;
+    text-align: center;
   }
 }
