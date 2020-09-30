@@ -8,7 +8,7 @@ const DashBoard = (props) => {
         <div className="dashboard-body">
             <div className="dash-top">
                 <h1 style={{ color: "white" }}>DashBoard</h1>
-                <h5 style={{ color: "white" }}>See how many people have reached upto you</h5>
+                <h5 className="dash-subheader" style={{ color: "white" }}>See how your profile did</h5>
             </div>
             <div className="card-container">
                 <div className="dash-card card-1">
@@ -17,11 +17,11 @@ const DashBoard = (props) => {
                 <div className="dash-card card-2">
                     <h3 className="card-legend">Rating</h3>
                     <div style={{ display: "flex", justifyContent: 'center', margin: '20px 0px 10px 0px' }}>
-                        <StarIcon style={{ color: (props.data.rating >= 1) ? "#edba11" : "white", fontSize: '36px' }} />
-                        <StarIcon style={{ color: (props.data.rating >= 2) ? "#edba11" : "white", fontSize: '36px' }} />
-                        <StarIcon style={{ color: (props.data.rating >= 3) ? "#edba11" : "white", fontSize: '36px' }} />
-                        <StarIcon style={{ color: (props.data.rating >= 4) ? "#edba11" : "white", fontSize: '36px' }} />
-                        <StarIcon style={{ color: (props.data.rating >= 5) ? "#edba11" : "white", fontSize: '36px' }} />
+                        <StarIcon style={{ color: (props.data.rating >= 1) ? "#edba11" : "white", fontSize: '32px' }} />
+                        <StarIcon style={{ color: (props.data.rating >= 2) ? "#edba11" : "white", fontSize: '32px' }} />
+                        <StarIcon style={{ color: (props.data.rating >= 3) ? "#edba11" : "white", fontSize: '32px' }} />
+                        <StarIcon style={{ color: (props.data.rating >= 4) ? "#edba11" : "white", fontSize: '32px' }} />
+                        <StarIcon style={{ color: (props.data.rating >= 5) ? "#edba11" : "white", fontSize: '32px' }} />
                     </div>
                     {(props.data.rating == 5) ?
                         <h5 style={{ color: 'white', textAlign: 'center', fontWeight: '800', fontSize: '20px' }}>Excellent</h5> :
