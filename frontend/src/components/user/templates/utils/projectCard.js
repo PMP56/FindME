@@ -265,7 +265,6 @@ const ProjectCard = (props) => {
     }
 
     const deleteTile = (index) => {
-        console.log(index);
         props.data.splice(index, 1);
         handleDeleteClose();
     }

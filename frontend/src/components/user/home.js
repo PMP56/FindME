@@ -76,13 +76,13 @@ const Home = () => {
                 <Fragment>
                     <div className="home-body">
                         <Route exact path='/'>
-                            <NavBar data={allEmployeeData} user={currentUser} />
+                            <NavBar data={[...allEmployeeData, ...allEmployerData]} user={currentUser} />
                             <Drawer />
                             <HomeBody employeeData={allEmployeeData} employerData={allEmployerData} />
                         </Route>
                         <Switch>
                             <Route exact path='/dashboard'>
-                                <NavBar data={allEmployeeData} user={currentUser} />
+                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
                                 <Drawer />
                                 <DashBoard data={data} />
                             </Route>
@@ -92,7 +92,7 @@ const Home = () => {
                                 <Jobs data={allJobs} />
                             </Route>
                             <Route exact path='/messages'>
-                                <NavBar data={allEmployeeData} user={currentUser} />
+                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
                                 <Drawer />
                                 <DashBoard data={allEmployeeData} />
                             </Route>
