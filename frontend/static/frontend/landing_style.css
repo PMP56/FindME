@@ -1,309 +1,348 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
-contentEditable{
-    padding: 10px 5px;
-    margin: 10px 5px;
+contentEditable {
+  padding: 10px 5px;
+  margin: 10px 5px;
 }
 
-.navbar{
-    background-color: rgba(0, 0, 0, 0.8) !important;
-    padding: 1rem 1rem;
+.navbar {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  padding: 1rem 1rem;
 }
 
-
-.landing-top{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
+.landing-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.landing-image{
-    transform: translateX(300px) scale(1, 1);
-    height: 100vh;
-    top: 0%;
+.landing-image {
+  transform: translateX(300px) scale(1, 1);
+  height: 100vh;
+  top: 0%;
+  right: 0;
+  position: absolute;
+  opacity: 1;
+}
+
+.landing-background {
+  display: none;
+}
+
+.landing-image-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.8)
+  );
+}
+
+.landing-header {
+  position: absolute;
+  text-align: center;
+  top: 20%;
+  color: white;
+  font-size: 64px;
+  font-weight: 600;
+  font-family: "Tangerine";
+  line-height: 3.5rem;
+  text-shadow: 2px 2px 5px #000000;
+  --delay: 0.5s;
+  animation-name: textSlide;
+  animation-duration: var(--delay, 0s);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.landing-subheader {
+  position: absolute;
+  top: 40%;
+  color: white;
+  font-size: 18px;
+  font-family: "Montserrat";
+  line-height: 2.5rem;
+}
+
+.landing-subheader li {
+  animation-name: textSlide;
+  animation-duration: var(--delay, 0s);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.li1 {
+  --delay: 0.4s;
+}
+.li2 {
+  --delay: 0.6s;
+}
+.li3 {
+  --delay: 0.8s;
+}
+
+.landing-button {
+  position: absolute;
+  padding: 5px 40px;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+  color: rgba(0, 90, 90, 1);
+  font-size: 14px;
+  font-weight: 600;
+  top: 65%;
+  left: 7%;
+  transition-duration: 0.4s;
+  outline: none !important;
+  --delay: 1s;
+  animation-name: textSlide;
+  animation-duration: var(--delay, 0s);
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.landing-button:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.landingMiddle {
+  background-color: rgb(253, 222, 222);
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.description {
+  overflow: hidden;
+  margin-bottom: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 95%;
+  height: 25vh;
+  box-shadow: 20px 20px 15px #8a8a8a;
+}
+
+#viewed {
+  animation-name: slide;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.d1,
+.d3 {
+  --slide-small: -300px;
+  --slide-large: -900px;
+  margin-right: 5%;
+  background-color: #262730;
+  border-radius: 0px 50px 50px 0px;
+}
+.d2 {
+  --slide-small: 300px;
+  --slide-large: 900px;
+  margin-left: 5%;
+  border-radius: 50px 0px 0px 50px;
+  background-color: #6b6f85;
+}
+
+.description p {
+  display: none;
+  font-size: 10px;
+  color: white;
+  text-align: justify;
+  margin: 5px 5px;
+}
+
+.description h2 {
+  font-size: 15px;
+  color: white;
+  margin: 0px 20px;
+}
+.description img {
+  border-radius: 25px;
+  height: 60%;
+}
+
+.footer {
+  padding: 15px;
+  background-color: #262730;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer h3 {
+  color: white;
+  font-size: 20px;
+}
+
+.footer-links a {
+  padding: 0px 15px;
+  color: white;
+}
+
+.bg-common {
+  background-color: rgb(24, 24, 24);
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(var(--slide-small, 100px));
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes textSlide {
+  from {
+    transform: translate(-500px, 50px);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+
+@media (min-width: 560px) {
+  .landing-image {
+    transform: scale(-1, 1);
+    height: 100%;
     right: 0;
+    top: 0;
     position: absolute;
     opacity: 1;
-}
+  }
 
-.landing-background{
-    display: none;
-}
+  .landing-background {
+    transform: scale(1, 1);
+    height: 100vh;
+    display: block;
+  }
 
-.landing-image-overlay{
-    
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
-}
-
-.landing-header{
-    position: absolute;
-    text-align: center;
-    top: 20%;
-    color: white;
-    font-size: 64px;
-    font-weight: 600;
-    font-family: 'Tangerine';
+  .landing-header {
     line-height: 3.5rem;
-    text-shadow: 2px 2px 5px #000000;
-    --delay: 0.5s;
-    animation-name: textSlide;
-    animation-duration: var(--delay, 0s);
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-}
-
-.landing-subheader{
-    
-    position: absolute;
-    top: 40%;
-    color: white;
-    font-size: 18px;
-    font-family: 'Montserrat';
-    line-height: 2.5rem;
-}
-
-.landing-subheader li{
-    animation-name: textSlide;
-    animation-duration: var(--delay, 0s);
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-}
-
-.li1{
-    --delay: 0.4s;
-}
-.li2{
-    --delay: 0.6s;
-}
-.li3{
-    --delay: 0.8s;
-}
-
-.landing-button{
-    position: absolute;
-    padding: 5px 40px;
-    background-color: white;
-    border: 2px solid white;
-    border-radius: 25px;
-    color: rgba(0, 90, 90, 1);
-    font-size: 14px;
-    font-weight: 600;
-    top: 65%;
     left: 7%;
-    transition-duration: 0.4s;
-    outline: none !important;
-    --delay: 1s;
-    animation-name: textSlide;
-    animation-duration: var(--delay, 0s);
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-}
+    top: 30%;
+    color: #0b0b0e;
+    text-shadow: 0px 0px 0px #303030;
+    font-size: 112px;
+    font-family: "Tangerine";
+  }
 
-.landing-button:hover{
-    
-    background-color: transparent;
-    color: white;
-}
+  .landing-subheader {
+    left: 7%;
+    top: 42%;
+    color: black;
+    font-size: 24px;
+    line-height: 3rem;
+  }
 
-.landingMiddle{
-    background-color: rgb(253, 222, 222);
-    padding-top: 45px;
-    padding-bottom: 45px;
-}
-
-.description{
-    overflow: hidden;
-    margin-bottom: 45px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 95%;
-    height: 25vh;
-    box-shadow: 20px 20px 15px #8a8a8a;
-}
-
-#viewed{
-    animation-name: slide;
-    animation-duration: 0.6s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-}
-
-.d1, .d3{
-    --slide-small: -300px;
-    --slide-large: -900px;
-    margin-right: 5%;
-    background-color: #262730;
-    border-radius: 0px 50px 50px 0px;
-}
-.d2{
-    --slide-small: 300px;
-    --slide-large: 900px;
-    margin-left: 5%;
-    border-radius: 50px 0px 0px 50px;
-    background-color: #6b6f85;
-}
-
-.description p{
-    display: none;
-    font-size: 10px;
-    color: white;
-    text-align: justify;
-    margin: 5px 5px;
-}
-
-.description h2{
-    font-size: 15px;
-    color: white;
-    margin: 0px 20px;
-    
-}
-.description img{
+  .landing-button {
+    padding: 5px 70px;
     border-radius: 25px;
-    height: 60%;
-}
-
-.footer{
-    padding: 15px;
+    font-size: 18px;
+    font-family: "Montserrat";
+    letter-spacing: 1px;
+    left: 7%;
+    top: 70%;
+    border-color: #262730;
     background-color: #262730;
+    color: white;
+    font-weight: 400;
+  }
+
+  .landing-button:hover {
+    color: #262730;
+    font-weight: 600;
+  }
+
+  .description {
+    margin-bottom: 45px;
+    height: 50vh;
+    width: 90%;
+  }
+
+  .d1,
+  .d3 {
+    margin-right: 10%;
+    border-radius: 0px 100px 100px 0px;
+  }
+  .d2 {
+    margin-left: 10%;
+    border-radius: 100px 0px 0px 100px;
+  }
+  .description p {
+    display: block;
+    font-size: 16px;
+    color: white;
+  }
+
+  .description h2 {
+    font-size: 30px;
+    color: white;
+  }
+  .description img {
+    border-radius: 25px;
+    height: 80%;
+  }
+
+  @keyframes slide {
+    from {
+      transform: translateX(var(--slide-large, 100px));
+    }
+    to {
+      transform: translateX(0px);
+    }
+  }
+  .contact {
+    padding-top: 20%;
+    text-align: center;
+    color: white;
+    height: 100vh;
+    width: auto;
+    background-image: url("download.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .contact.li {
+    text-align: center;
+  }
+  .devText {
+    padding-top: 25px;
+    font-size: 32px;
+  }
+
+  .infobox {
+    transform: scale(0.7, 0.7);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+    padding-top: 5px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
 
-.footer h3{
-    color: white;
-    font-size: 20px;
-}
-
-.footer-links a{
-    padding: 0px 15px;
-    color: white;
-}
-
-.bg-common{
-    background-color: rgb(24, 24, 24);
-}
-
-@keyframes slide{
-    from{
-        transform: translateX(var(--slide-small, 100px));
+  @media (min-width: 921px) {
+    .contact {
+      padding-top: 10%;
     }
-    to{
-        transform: translateX(0px);
+    .infobox {
+      transform: scale(1, 1);
+      padding-top: 15px;
     }
-}
-
-@keyframes textSlide{
-    from{
-        transform: translate(-500px, 50px);
+    .devText {
+      padding-top: 25px;
+      font-size: 42px;
     }
-    to{
-        transform: translate(0px, 0px);
-    }
-}
-
-@media(min-width: 560px){
-    .landing-image{
-        transform:scale(-1, 1);
-        height: 100%;
-        right: 0;
-        top: 0;
-        position: absolute;
-        opacity: 1;
-    }
-
-    .landing-background{
-        transform: scale(1, 1);
-        height: 100vh;
-        display: block;
-    }
-
-    .landing-header{
-        line-height: 3.5rem;
-        left: 7%;
-        top: 30%;
-        color: #0b0b0e;
-        text-shadow: 0px 0px 0px #303030;
-        font-size: 112px;
-        font-family: 'Tangerine';
-    }
-    
-    .landing-subheader{
-        left: 7%;
-        top: 42%;
-        color: black;
-        font-size: 24px;
-        line-height: 3rem;
-    }
-
-    .landing-button{
-        padding: 5px 70px;
-        border-radius: 25px;
-        font-size: 18px;
-        font-family: 'Montserrat';
-        letter-spacing: 1px;
-        left: 7%;
-        top: 70%;
-        border-color: #262730;
-        background-color: #262730;
-        color: white;
-        font-weight: 400;
-    }
-
-    .landing-button:hover{
-        color: #262730;
-        font-weight: 600;
-    }
-
-    .description{
-        margin-bottom: 45px;
-        height: 50vh;
-        width: 90%;
-    }
-
-    .d1, .d3{
-        margin-right: 10%;
-        border-radius: 0px 100px 100px 0px;
-    }
-    .d2{
-        margin-left: 10%;
-        border-radius: 100px 0px 0px 100px;
-    }
-    .description p{
-        display: block;
-        font-size: 16px;
-        color: white;
-    }
-    
-    .description h2{
-        font-size: 30px;
-        color: white;
-        
-    }
-    .description img{
-        border-radius: 25px;
-        height: 80%;
-    }
-
-    @keyframes slide{
-        from{
-            transform: translateX(var(--slide-large, 100px));
-        }
-        to{
-            transform: translateX(0px);
-        }
-    }
-    
+  }
 }
