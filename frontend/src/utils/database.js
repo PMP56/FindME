@@ -1,5 +1,26 @@
 import axios from 'axios';
 
+export const tokenConfig = async() => {
+	const token = localStorage.getItem('currentUserToken');
+
+	if (token) {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            },
+        };
+    }
+    else{
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+    }
+
+	return config;
+}
 
 export const updateData = async (username, data) => {
     const config = {
@@ -76,6 +97,7 @@ export const getData = async (username) => {
             'Content-Type': 'application/json',
         }
     };
+    // console.log("get User using id")
     return await axios.get(`/api/database/${username}`, config)
         .then((result) => result)
         .catch(err => {
@@ -105,12 +127,16 @@ export const getEmployerData = async (username) => {
 }
 
 export const getAllData = async () => {
+    const token = localStorage.getItem('currentUserToken');
+    // console.log("token 1 user")
     const config = {
         headers: {
             'Content-Type': 'application/json',
-        }
+            'Authorization': `Token ${token}`
+        },
     };
-    return await axios.get(`/api/database/`, config)
+    // console.log("token 2 user")
+    return await axios.get(`/api/database/`, config )
         .then((result) => result)
         .catch(err => {
             if (err.response.data['detail'] = "Not found.") {
@@ -121,11 +147,15 @@ export const getAllData = async () => {
 }
 
 export const getAllEmployerData = async () => {
+    const token = localStorage.getItem('currentUserToken');
+    // console.log("token 1")
     const config = {
         headers: {
             'Content-Type': 'application/json',
-        }
+            Authorization: `Token ${token}`
+        },
     };
+    // console.log("token 2")
     return await axios.get(`/api/employer/`, config)
         .then((result) => result)
         .catch(err => {

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+#import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'FindME.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'FindME',
+        'NAME': 'findme',
         'USER': 'postgres',
-        'PASSWORD': 'pmanip12345',
+        'PASSWORD': 'dbms123',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -147,4 +147,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend'),  # update the STATICFILES_DIRS
 )
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

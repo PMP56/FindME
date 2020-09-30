@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets, permissions
 from .serializers import UserDataSerializer
 from .models import UserData
 from django.core import exceptions
-
+from rest_framework.response import Response
 
 class DatabaseAPI(viewsets.ModelViewSet):
     queryset = UserData.objects.all()
@@ -78,3 +78,18 @@ class DatabaseAPI(viewsets.ModelViewSet):
             # return super().partial_update(request, *args, **kwargs)
             raise exceptions.PermissionDenied()
 
+    def list(self, request, *args, **kwargs):
+        user = request.user
+        queryset = self.filter_queryset(self.get_queryset())
+        try:
+            if user is not user.is_admin:
+                queryset = queryset.exclude(user = user)
+        except:
+            pass
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)

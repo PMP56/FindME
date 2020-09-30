@@ -25,7 +25,7 @@ const Profile = (props) => {
                 userName: currentUser.username,
                 userHeader: `Hi I'm ${currentUser.username}`,
                 shadowText: 'I am a student/ professional/ designer/ ..................',
-                firstIntro: 'Short Introduction \n ###########################',
+                firstIntro: '## Short Introduction \n ###########',
                 secondIntro: 'Another Line of Introduction \n ############################ \n ############################',
                 skills: ['Skills 1', 'Skills 2', 'Skills 3', 'Skills 4',],
                 theme: 'white',
