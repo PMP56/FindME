@@ -14,7 +14,7 @@ export const authStateChange = (token, loginType) => {
         then(
             result => {
                 //console.log("Logged in with", result.data);
-                // localStorage.setItem('currentUserToken', token);
+                localStorage.setItem('currentUserToken', token);
                 localStorage.setItem('currentUserInfo', JSON.stringify(result.data));
                 if (loginType == 'register') {
                     location.replace('/');
