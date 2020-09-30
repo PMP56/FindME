@@ -7,14 +7,34 @@
 
 .dash-top{
     background-color: #1a1818;
-    padding: 80px 120px;
+    padding: 80px 60px 80px 120px;
     width: 100vw;
     height: 250px;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dash-subheader{
     font-size: 18px;
+}
+
+.job-post{
+    padding: 10px 20px;
+    height: max-content;
+    border-radius: 3px;
+    background-color: rgb(62, 167, 209);
+    color: white;
+    right: 5px;
+    border-style: none;
+    transition-duration: 0.3s;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.job-post:hover{
+    background-color:  rgb(5, 150, 207);
 }
 
 .card-container{
@@ -62,6 +82,26 @@
     right: -25px;
     filter: saturate(2);
     opacity: 0.7;
+}
+
+.salary-box{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.experience-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.salary-text-box{
+    margin: 15px;
+    width: 65px;
+    height: 25px;
 }
 
 @media (max-width: 1080px){

@@ -16,10 +16,6 @@ const NavBar = (props) => {
     const [searchText, setSearchText] = useState(null);
     const [alldata, setAllData] = useState(props.data);
 
-    useEffect(() => {
-        console.log(alldata)
-    }, [])
-
     let userToken = localStorage.getItem('currentUserToken');
 
     const SearchResult = () => {
