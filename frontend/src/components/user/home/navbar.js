@@ -1,4 +1,4 @@
-import React, { Component, useState, Fragment } from 'react';
+import React, { Component, useState, Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { LogOut } from '../../../utils/auth';
@@ -16,12 +16,16 @@ const NavBar = (props) => {
     const [searchText, setSearchText] = useState(null);
     const [alldata, setAllData] = useState(props.data);
 
+    useEffect(() => {
+        console.log(alldata)
+    }, [])
+
     let userToken = localStorage.getItem('currentUserToken');
 
     const SearchResult = () => {
         return (
             <div className="search-result-box">
-                {(alldata).map((data, index) =>
+                {(alldata.length == 0) ? <Fragment /> : (alldata).map((data, index) =>
                     (data.userName.includes(searchText)) ?
                         <Link style={{ textDecoration: 'none' }} to={`/${data.userName}`} key={index}>
                             <SearchResultTile data={data} key={index} />
@@ -48,7 +52,7 @@ const NavBar = (props) => {
                         {props.data.userName.slice(index + len, props.data.userName.length)}
                     </div>
                     <div style={{ display: "flex" }}>
-                        {(props.data.skills).map((skill, index) => <h6 style={{ margin: '5px 8px 0px 0px' }} key={index}>{skill}</h6>)}
+                        {(props.data.skills == null) ? <Fragment /> : (props.data.skills).map((skill, index) => <h6 style={{ margin: '5px 8px 0px 0px' }} key={index}>{skill}</h6>)}
                     </div>
                 </div>
             </div >
