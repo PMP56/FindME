@@ -63,7 +63,7 @@ class UserData(models.Model):
         null = True
     )
     visit = models.IntegerField(default=0)
-    rating = models.FloatField(default=0)
+    rating = models.IntegerField(default=0)
     totalRating = models.IntegerField(default=0)
     is_available = models.BooleanField(default = True)
  

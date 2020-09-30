@@ -2,7 +2,6 @@ from django.shortcuts import render
 from rest_framework import generics, viewsets, permissions
 from .serializers import EmployerDataSerializer, JobsSerializer
 from django.db.models import Q
-from django.core import exceptions
 from .models import EmployerData, Jobs
 
 # Create your views here.
@@ -14,22 +13,6 @@ class EmployerAPI(viewsets.ModelViewSet):
     ]
     serializer_class = EmployerDataSerializer
     lookup_field = 'userName'
-    
-    def partial_update(self, request, *args, **kwargs):
-        user=request.user
-        rating=request.POST.get('rating', None)
-        try:
-            rating = float(rating)
-        except:
-            pass
-        if user.is_authenticated and rating is not None: 
-            if user.is_employee:
-                return super().partial_update(request, *args, **kwargs)
-            else:
-                raise exceptions.PermissionDenied()
-        else:
-            # return super().partial_update(request, *args, **kwargs)
-            raise exceptions.PermissionDenied()
 
 
 class JobsAPI(viewsets.ModelViewSet):
@@ -82,5 +65,6 @@ class JobsAPI(viewsets.ModelViewSet):
 
             queryset = queryset.order_by('-views')[:10]
         return queryset
-    
-   
+        
+
+
