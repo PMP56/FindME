@@ -121,10 +121,6 @@ const styles = makeStyles({
 const ProfileCard = (props) => {
     const classes = styles();
 
-    useEffect(() => {
-        console.log(props.data)
-    }, [])
-
     return (
 
         <div className={classes.cardBody}>

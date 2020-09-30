@@ -1,6 +1,7 @@
 from rest_framework import generics, viewsets, permissions
 from .serializers import UserDataSerializer
 from .models import UserData
+from django.core import exceptions
 
 
 class DatabaseAPI(viewsets.ModelViewSet):
@@ -60,4 +61,20 @@ class DatabaseAPI(viewsets.ModelViewSet):
 
             queryset = queryset.order_by('-visit')[:10]
         return queryset
+
+    def partial_update(self, request, *args, **kwargs):
+        user=request.user
+        rating=request.POST.get('rating', None)
+        try:
+            rating = float(rating)
+        except:
+            pass
+        if user.is_authenticated and rating is not None:
+            if user.is_employer:
+                return super().partial_update(request, *args, **kwargs)
+            else:
+                raise exceptions.PermissionDenied()
+        else:
+            # return super().partial_update(request, *args, **kwargs)
+            raise exceptions.PermissionDenied()
 
