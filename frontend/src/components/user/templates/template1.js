@@ -9,7 +9,7 @@ import StarIcon from '@material-ui/icons/Star';
 import { uploadPicture } from '../../../utils/firebase_storage';
 
 import { styles } from './utils/styles';
-import { addData, getData, updateData, updateEmployerData, } from '../../../utils/database';
+import { addData, getData, updateData, updateEmployerData, userRating, employerRating } from '../../../utils/database';
 import { AuthContext } from '../../../utils/userContext';
 import ThemeChanger from './utils/themeChanger';
 import Projects from './utils/projectCard';
@@ -128,29 +128,34 @@ const Template1 = (props) => {
         console.log(database);
     }
 
-    const changeRating = (rate) => {
+    const changeRating = async (rate) => {
         let newRating = Math.round(((rating * totalRating) + rate) / (totalRating + 1));
+        let body = { ...database, rating: newRating, totalRating: totalRating + 1 };
         console.log(newRating);
-        // if (currentUser.is_employee) {
-        //     await employerRating(database.userName, { ...database, rating: newRating, totalRating: totalRating + 1 })
-        //         .then(
-        //             ((result) => {
-        //                 setrateMessage("Thank you for rating.");
-        //             })
-        //         ).catch(err => {
-        //             setrateMessage("Sorry, you can't rate this portfolio.");
-        //         })
-        // }
-        // else {
-        //     await userRating(database.userName, { ...database, rating: newRating, totalRating: totalRating + 1 })
-        //         .then(
-        //             ((result) => {
-        //                 setrateMessage("Thank you for rating.");
-        //             })
-        //         ).catch(err => {
-        //             setrateMessage("Sorry, you can't rate this employer.");
-        //         })
-        // }
+        if (currentUser.is_employee) {
+            await employerRating(database.userName, body)
+                .then(
+                    ((result) => {
+                        if (result != null) {
+                            setrateMessage("Thank you for rating.");
+                        } else {
+                            setrateMessage("Sorry, you can't rate this portfolio.");
+                        }
+                    })
+                )
+        }
+        else {
+            await userRating(database.userName, body)
+                .then(
+                    ((result) => {
+                        if (result != null) {
+                            setrateMessage("Thank you for rating.");
+                        } else {
+                            setrateMessage("Sorry, you can't rate this portfolio.");
+                        };
+                    })
+                )
+        }
         setRated(true);
     }
     const changeHoverRating = (rating) => {
