@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //Auth State
 export const authStateChange = (token, loginType) => {
-    //console.log(token);
+
     const config = {
         headers: {
             'Authorization': `Token ${token}`,
@@ -42,6 +42,7 @@ export const LoginUser = (creds) => {
             (result) => {
                 let token = result.data.token;
                 //console.log(token);
+                localStorage.setItem('currentUserToken', token)
                 authStateChange(result.data.token, 'login');
             }
         ).catch(
@@ -64,6 +65,7 @@ export const RegisterUser = (creds) => {
     axios.post('/api/auth/register', body, config).then(
         result => {
             let token = result.data.token;
+            localStorage.setItem('currentUserToken', token)
             authStateChange(result.data.token, 'register');
         }
     ).catch(
