@@ -150,8 +150,8 @@ const Template1 = (props) => {
             ).catch(err => {
                 setrateMessage("Sorry, you can't rate another employer.");
                 })
-            setRated(true);
             }
+        setRated(true);
     }
     const changeHoverRating = (rating) => {
         setHoverRating(rating);
