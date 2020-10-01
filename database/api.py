@@ -63,7 +63,9 @@ class DatabaseAPI(viewsets.ModelViewSet):
         return queryset
 
     def partial_update(self, request, *args, **kwargs):
+        # print(**kwargs)
         user=request.user
+        qs = self.queryset.all()
         rating=request.POST.get('rating', None)
         try:
             rating = float(rating)
@@ -71,7 +73,15 @@ class DatabaseAPI(viewsets.ModelViewSet):
             pass
         if user.is_authenticated and rating is not None:
             if user.is_employer:
-                return super().partial_update(request, *args, **kwargs)
+                rated = qs.filter(ratedUsers__contains=[user.id])
+                if rated:
+                    raise exceptions.PermissionDenied()
+                else:
+                    obj= self.get_object()
+                    current = obj.ratedUsers
+                    current.append(user.id)
+                    UserData.objects.filter(id=obj.id).update(ratedUsers=current)
+                    return super().partial_update(request, *args, **kwargs)
             else:
                 raise exceptions.PermissionDenied()
         else:

@@ -66,6 +66,12 @@ class UserData(models.Model):
     rating = models.FloatField(default=0)
     totalRating = models.IntegerField(default=0)
     is_available = models.BooleanField(default = True)
+    ratedUsers = ArrayField(
+        models.IntegerField(),
+        default = list,
+        blank = True,
+        null = True 
+    )
  
     def __str__(self):
         return self.userName

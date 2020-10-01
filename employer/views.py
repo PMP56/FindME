@@ -18,18 +18,27 @@ class EmployerAPI(viewsets.ModelViewSet):
     
     def partial_update(self, request, *args, **kwargs):
         user=request.user
+        qs = self.queryset.all()
         rating=request.POST.get('rating', None)
         try:
             rating = float(rating)
         except:
             pass
-        if user.is_authenticated and rating is not None: 
+        if user.is_authenticated and rating is not None:   
             if user.is_employee:
-                return super().partial_update(request, *args, **kwargs)
+                rated = qs.filter(ratedUsers__contains=[user.id])
+                if rated:
+                    raise exceptions.PermissionDenied()
+                else:
+                    obj= self.get_object()
+                    current = obj.ratedUsers
+                    current.append(user.id)
+                    EmployerData.objects.filter(id=obj.id).update(ratedUsers=current)
+                    return super().partial_update(request, *args, **kwargs)
             else:
                 raise exceptions.PermissionDenied()
+                # return super().partial_update(request, *args, **kwargs)
         else:
-            # return super().partial_update(request, *args, **kwargs)
             raise exceptions.PermissionDenied()
 
     def list(self, request, *args, **kwargs):
