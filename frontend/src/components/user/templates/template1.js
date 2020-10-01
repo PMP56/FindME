@@ -138,7 +138,7 @@ const Template1 = (props) => {
                     setrateMessage("Thank you for rating.");
                 })
             ).catch(err => {
-                setrateMessage("Sorry, you can't rate another employee.");
+                setrateMessage("Sorry, you can't rate this portfolio.");
                 })
         }
         else {
@@ -148,7 +148,7 @@ const Template1 = (props) => {
                     setrateMessage("Thank you for rating.");
                 })
             ).catch(err => {
-                setrateMessage("Sorry, you can't rate another employer.");
+                setrateMessage("Sorry, you can't rate this employer.");
                 })
             }
         setRated(true);

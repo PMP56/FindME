@@ -56,6 +56,12 @@ class EmployerData(models.Model):
     visit = models.IntegerField(default=0)
     rating = models.FloatField(default=0)
     totalRating = models.IntegerField(default=0)
+    ratedUsers = ArrayField(
+        models.IntegerField(),
+        default = list,
+        blank = True,
+        null = True 
+    )
    
 
     def __str__(self):
