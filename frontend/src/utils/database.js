@@ -248,3 +248,54 @@ export const addJob = async (data) => {
             (result) => { console.log('Data updated'); /*console.clear()*/ }
         ).catch(err => console.log(err.response.data))
 }
+
+//rate employee
+export const employeeRating = async (rating, totalRating) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+    };
+    const body = JSON.stringify({rating:rating, totalRating:totalRating});
+    return axios.patch(`/api/database/`, body, config)
+        .then(
+            ((result) => result)
+        ).catch(err => console.log(err.response.data))
+}
+//rate employee
+export const userRating = async (username, rating, totalRating) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+    };
+    const body = JSON.stringify({rating:rating, totalRating:totalRating});
+    return await axios.patch(`/api/database/${username}`, body, config)
+        .then(
+            ((result) => result)
+        ).catch(err => {
+            if (err.response.data['detail'] = "You do not have permission to perform this action.") {
+                return null;
+            }
+        });
+}
+//rate employer
+export const employerRating = async (username, rating, totalRating) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        },
+    };
+    const body = JSON.stringify({rating:rating, totalRating:totalRating});
+    return await axios.patch(`/api/employer/${username}`, body, config)
+        .then(
+            ((result) => result)
+        ).catch(err => {
+            if (err.response.data['detail'] = "You do not have permission to perform this action.") {
+                return null;
+            }
+        });
+}
