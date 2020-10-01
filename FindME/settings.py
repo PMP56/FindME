@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'FindME.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'findme',
+        'NAME': 'FindME',
         'USER': 'postgres',
-        'PASSWORD': 'jailbreakios92',
+        'PASSWORD': 'pmanip12345',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
