@@ -137,20 +137,32 @@ export const getAllEmployerData = async () => {
 }
 
 //get all jobs
-export const getAllJobs = async () => {
+export const getAllJobs = async (id) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
-    return await axios.get(`/api/jobs/`, config)
-        .then((result) => result)
-        .catch(err => {
-            if (err.response.data['detail'] = "Not found.") {
-                //console.log('Not found');
-                return null;
-            }
-        });
+    if (id) {
+        return await axios.get(`/api/jobs/?work_field=${id}`, config)
+            .then((result) => result)
+            .catch(err => {
+                if (err.response.data['detail'] = "Not found.") {
+                    //console.log('Not found');
+                    return null;
+                }
+            });
+    } else {
+        return await axios.get(`/api/jobs/`, config)
+            .then((result) => result)
+            .catch(err => {
+                if (err.response.data['detail'] = "Not found.") {
+                    //console.log('Not found');
+                    return null;
+                }
+            });
+    }
+
 }
 
 
