@@ -196,6 +196,29 @@ contentEditable{
     background-color: rgb(24, 24, 24);
 }
 
+.contact {
+    padding-top: 20%;
+    text-align: center;
+    color: white;
+    height: 100vh;
+    width: auto;
+  }
+  .contact.li {
+    text-align: center;
+  }
+  .devText {
+    padding-top: 25px;
+    font-size: 32px;
+  }
+
+  .infobox {
+    transform: scale(0.7, 0.7);
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
 @keyframes slide{
     from{
         transform: translateX(var(--slide-small, 100px));
