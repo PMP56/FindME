@@ -199,8 +199,14 @@ const SocialLink = (props) => {
 
     //Add option
     const addLink = (key) => {
+        console.log(tempData)
         if (currentValue != "http://" || currentValue != null) {
-            setTempData([...tempData, [currentIcon, currentValue]]);
+            if (tempData == null) {
+                setTempData([[currentIcon, currentValue]]);
+            } else {
+                setTempData([...tempData, [currentIcon, currentValue]]);
+
+            }
             setCurrentValue("http://");
         }
     }

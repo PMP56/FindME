@@ -252,7 +252,12 @@ const ProjectCard = (props) => {
             project = [newProject.title, newProject.imageLink, newProject.description, newProject.link];
         }
         if (project[0].length != 0) {
-            props.changeProjects([...props.data, project]);
+            if (props.data == null) {
+                props.changeProjects([project]);
+            } else {
+                props.changeProjects([...props.data, project]);
+
+            }
 
             handleAddClose();
             setNewProject({

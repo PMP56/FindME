@@ -343,34 +343,35 @@ const Template1 = (props) => {
                                 }
                             </div>
                             {!editable ?
-                                (rated) ? <Fragment>
-                                    <h5 style={{ textAlign: 'center', marginTop: '10px' }} className={classes.mainText}>
-                                        {rateMessage}
-                                    </h5>
-                                </Fragment> :
-                                    <Fragment >
-                                        <div className={classes.themeOptionWrapper}>
-                                            <div className={classes.starBox}>
-                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 1) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(1)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(1)} />
-                                            </div>
-                                            <div className={classes.starBox}>
-                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 2) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(2)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(2)} />
-                                            </div>
-                                            <div className={classes.starBox}>
-                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 3) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(3)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(3)} />
-                                            </div>
-                                            <div className={classes.starBox}>
-                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 4) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(4)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(4)} />
-                                            </div>
-                                            <div className={classes.starBox}>
-                                                <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 5) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(5)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(5)} />
-                                            </div>
-
-                                        </div>
+                                (currentUser.username == database.userName) ? <Fragment /> :
+                                    (rated) ? <Fragment>
                                         <h5 style={{ textAlign: 'center', marginTop: '10px' }} className={classes.mainText}>
-                                            Rate this portfolio
+                                            {rateMessage}
+                                        </h5>
+                                    </Fragment> :
+                                        <Fragment >
+                                            <div className={classes.themeOptionWrapper}>
+                                                <div className={classes.starBox}>
+                                                    <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 1) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(1)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(1)} />
+                                                </div>
+                                                <div className={classes.starBox}>
+                                                    <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 2) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(2)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(2)} />
+                                                </div>
+                                                <div className={classes.starBox}>
+                                                    <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 3) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(3)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(3)} />
+                                                </div>
+                                                <div className={classes.starBox}>
+                                                    <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 4) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(4)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(4)} />
+                                                </div>
+                                                <div className={classes.starBox}>
+                                                    <StarIcon style={{ fontSize: '36px', color: (hoverRating >= 5) ? "#edba11" : "var(--mainText)" }} onMouseOver={() => changeHoverRating(5)} onMouseOut={() => changeHoverRating(0)} onClick={() => changeRating(5)} />
+                                                </div>
+
+                                            </div>
+                                            <h5 style={{ textAlign: 'center', marginTop: '10px' }} className={classes.mainText}>
+                                                Rate this portfolio
                                     </h5>
-                                    </Fragment>
+                                        </Fragment>
                                 :
                                 <Fragment>
                                     <h5 style={{ textAlign: 'center' }} className={classes.mainText}>
