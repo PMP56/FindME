@@ -18,3 +18,4 @@ latest.dump
 requirement.txt
 FindME/local_settings.py
 FindME/heroku_settings.py
+FindME/settings.py
