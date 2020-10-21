@@ -73,7 +73,11 @@ const Register = () => {
             <div className='pt-5 vh-100' style={{ backgroundColor: 'rgb(10, 10, 10)' }}>
                 <div className='col-md-4 m-auto' style={{ backgroundColor: 'rgb(20, 20, 20)' }}>
                     <div className='card card-body mt-5 text-white' style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
-                        <h2 className='text-center text-white'>Register</h2><br />
+                        <div className="d-flex flex-row align-items-center justify-around">
+                            <h2 className='text-center text-white'>Register</h2><br />
+                            <h5 style={{ color: 'white' }}>{cred.is_employee ? `: as Employee` : `: as Employer`}</h5>
+                        </div>
+
                         <form onSubmit={formSubmit}>
                             <div className='form-group pt-2'>
                                 <label>Username</label>

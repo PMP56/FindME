@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const tokenConfig = async() => {
-	const token = localStorage.getItem('currentUserToken');
+export const tokenConfig = async () => {
+    const token = localStorage.getItem('currentUserToken');
 
-	if (token) {
+    if (token) {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export const tokenConfig = async() => {
             },
         };
     }
-    else{
+    else {
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const tokenConfig = async() => {
         };
     }
 
-	return config;
+    return config;
 }
 
 export const updateData = async (username, data) => {
@@ -136,7 +136,7 @@ export const getAllData = async () => {
         },
     };
     // console.log("token 2 user")
-    return await axios.get(`/api/database/`, config )
+    return await axios.get(`/api/database/`, config)
         .then((result) => result)
         .catch(err => {
             if (err.response.data['detail'] = "Not found.") {
@@ -167,20 +167,32 @@ export const getAllEmployerData = async () => {
 }
 
 //get all jobs
-export const getAllJobs = async () => {
+export const getAllJobs = async (id) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         }
     };
-    return await axios.get(`/api/jobs/`, config)
-        .then((result) => result)
-        .catch(err => {
-            if (err.response.data['detail'] = "Not found.") {
-                //console.log('Not found');
-                return null;
-            }
-        });
+    if (id) {
+        return await axios.get(`/api/jobs/?work_field=${id}`, config)
+            .then((result) => result)
+            .catch(err => {
+                if (err.response.data['detail'] = "Not found.") {
+                    //console.log('Not found');
+                    return null;
+                }
+            });
+    } else {
+        return await axios.get(`/api/jobs/`, config)
+            .then((result) => result)
+            .catch(err => {
+                if (err.response.data['detail'] = "Not found.") {
+                    //console.log('Not found');
+                    return null;
+                }
+            });
+    }
+
 }
 
 
@@ -250,7 +262,22 @@ export const addJob = async (data) => {
 }
 
 //rate employee
-export const userRating = async (username, rating, totalRating) => {
+// export const employeeRating = async (username, rating, totalRating) => {
+//     const config = {
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Token ${token}`
+//         },
+//     };
+//     const body = JSON.stringify({ rating: rating, totalRating: totalRating });
+//     return axios.patch(`/api/database/${username}`, body, config)
+//         .then(
+//             ((result) => result)
+//         ).catch(err => console.log(err.response.data))
+// }
+
+//rate employee
+export const userRating = async (username, bodyVal) => {
     const token = localStorage.getItem('currentUserToken');
     const config = {
         headers: {
@@ -258,18 +285,20 @@ export const userRating = async (username, rating, totalRating) => {
             'Authorization': `Token ${token}`
         },
     };
-    const body = JSON.stringify({rating:rating, totalRating:totalRating});
-    return await axios.patch(`/api/database/${username}`, body, config)
+    const body = JSON.stringify(bodyVal);
+    return await axios.put(`/api/database/${username}/`, body, config)
         .then(
             ((result) => result)
         ).catch(err => {
+            console.log(err.response.data)
             if (err.response.data['detail'] = "You do not have permission to perform this action.") {
                 return null;
             }
         });
 }
+
 //rate employer
-export const employerRating = async (username, rating, totalRating) => {
+export const employerRating = async (username, bodyVal) => {
     const token = localStorage.getItem('currentUserToken');
     const config = {
         headers: {
@@ -277,11 +306,12 @@ export const employerRating = async (username, rating, totalRating) => {
             'Authorization': `Token ${token}`
         },
     };
-    const body = JSON.stringify({rating:rating, totalRating:totalRating});
-    return await axios.patch(`/api/employer/${username}`, body, config)
+    const body = JSON.stringify(bodyVal);
+    return await axios.put(`/api/employer/${username}/`, body, config)
         .then(
             ((result) => result)
         ).catch(err => {
+            console.log(err.response.data)
             if (err.response.data['detail'] = "You do not have permission to perform this action.") {
                 return null;
             }

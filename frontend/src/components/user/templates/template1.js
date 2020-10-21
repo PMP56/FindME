@@ -128,30 +128,35 @@ const Template1 = (props) => {
         console.log(database);
     }
 
-    const changeRating = (rate) => {
+    const changeRating = async (rate) => {
         let newRating = Math.round(((rating * totalRating) + rate) / (totalRating + 1));
+        let body = { ...database, rating: newRating, totalRating: totalRating + 1 };
         console.log(newRating);
-        if (currentUser.is_employee){
-            await employerRating(database.userName, { ...database, rating: newRating, totalRating: totalRating + 1 })
-            .then(
-                ((result) => { 
-                    setrateMessage("Thank you for rating.");
-                })
-            ).catch(err => {
-                setrateMessage("Sorry, you can't rate another employee.");
-                })
+        if (currentUser.is_employee) {
+            await employerRating(database.userName, body)
+                .then(
+                    ((result) => {
+                        if (result != null) {
+                            setrateMessage("Thank you for rating.");
+                        } else {
+                            setrateMessage("Sorry, you can't rate this portfolio.");
+                        }
+                    })
+                )
         }
         else {
-            await userRating(database.userName, { ...database, rating: newRating, totalRating: totalRating + 1 })
-            .then(
-                ((result) => { 
-                    setrateMessage("Thank you for rating.");
-                })
-            ).catch(err => {
-                setrateMessage("Sorry, you can't rate another employer.");
-                })
-            setRated(true);
-            }
+            await userRating(database.userName, body)
+                .then(
+                    ((result) => {
+                        if (result != null) {
+                            setrateMessage("Thank you for rating.");
+                        } else {
+                            setrateMessage("Sorry, you can't rate this portfolio.");
+                        };
+                    })
+                )
+        }
+        setRated(true);
     }
     const changeHoverRating = (rating) => {
         setHoverRating(rating);
