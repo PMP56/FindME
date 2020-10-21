@@ -49,8 +49,9 @@ const styles = makeStyles({
         marginTop: 0,
         display: 'flex',
     },
+
     skill: {
-        width: '100px',
+        width: '120px',
         margin: '5px',
         padding: '5px 10px',
         backgroundColor: '#eee',

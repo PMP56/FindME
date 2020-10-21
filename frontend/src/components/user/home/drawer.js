@@ -24,10 +24,6 @@ const Drawer = () => {
                 <WorkIcon style={{ fontSize: '28px' }} />
                 <p>Jobs</p>
             </NavLink>
-            <NavLink exact to='/messages' className="icon-box" activeClassName="active-icon-box" style={{ textDecoration: 'none' }}>
-                <MmsIcon style={{ fontSize: '28px' }} />
-                <p>Email</p>
-            </NavLink>
         </div>
     );
 }

@@ -97,7 +97,16 @@ const DashBoard = (props) => {
             </div>
             <div className="card-container">
                 <div className="dash-card card-1">
-                    <img className="graph" src="https://user-images.githubusercontent.com/2003804/28792313-152e0acc-7627-11e7-895b-8bfb9b818bce.png" />
+                    <h3 className="card-legend">Visits</h3>
+                    <div className="d-flex flex-column justify-center align-items-center mt-3">
+                        <h2 style={{ color: 'white', fontSize: '24px' }}>{`Your portfolio has`}</h2>
+                        <div className="d-flex flex-column align-items-center">
+                            <h2 style={{ color: 'white', fontSize: '96px', fontWeight: '800', fontFamily: "Russo One" }}>{props.data.visit}</h2>
+                            <h4 style={{ color: 'white', marginLeft: '25px', }}>visits</h4>
+                        </div>
+                        <h2 style={{ color: 'white' }}>{`till now`}</h2>
+
+                    </div>
                 </div>
                 <div className="dash-card card-2">
                     <h3 className="card-legend">Rating</h3>

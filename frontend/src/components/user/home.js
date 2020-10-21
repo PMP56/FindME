@@ -18,6 +18,7 @@ import './home/styles/home.css';
 
 const Home = () => {
     const [data, setData] = useState({});
+    const [currentUserField, setCurrentUserField] = useState({});
     const [allEmployeeData, setAllEmployeeData] = useState({});
     const [allEmployerData, setAllEmployerData] = useState({});
     const [allJobs, setAllJobs] = useState({});
@@ -36,6 +37,13 @@ const Home = () => {
             if (result != null) {
                 //changeTheme(result.data.theme);
                 setAllEmployerData(result.data);
+            }
+        });
+        await getData(currentUser.username).then((result) => {
+            if (result != null) {
+                //changeTheme(result.data.theme);
+                setCurrentUserField(result.data.interest_field);
+
             }
         });
         await getAllJobs().then(result => {
@@ -76,25 +84,20 @@ const Home = () => {
                 <Fragment>
                     <div className="home-body">
                         <Route exact path='/'>
-                            <NavBar data={[...allEmployeeData, ...allEmployerData]} user={currentUser} />
+                            <NavBar data={[...allEmployeeData, ...allEmployerData]} dataType={"user"} user={currentUser} />
                             <Drawer />
                             <HomeBody employeeData={allEmployeeData} employerData={allEmployerData} />
                         </Route>
                         <Switch>
                             <Route exact path='/dashboard'>
-                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
+                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} dataType={"user"} user={currentUser} />
                                 <Drawer />
                                 <DashBoard data={data} />
                             </Route>
                             <Route exact path='/jobs'>
-                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
+                                <NavBar data={allJobs} dataType={"jobs"} user={currentUser} />
                                 <Drawer />
-                                <Jobs data={allJobs} />
-                            </Route>
-                            <Route exact path='/messages'>
-                                <NavBar data={{ ...allEmployeeData, ...allEmployerData }} user={currentUser} />
-                                <Drawer />
-                                <DashBoard data={allEmployeeData} />
+                                <Jobs userField={currentUserField} />
                             </Route>
                             <Route path="/edit/:username">
                                 <Profile data={data} edit={true} />
